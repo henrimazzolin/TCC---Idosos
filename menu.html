@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Menu Principal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
+    <style>
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-quarta: #EF4444;
+            --cor-quinta: #8B5CF6;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 15px rgba(37, 99, 235, 0.1);
+            --sombra-hover: 0 8px 25px rgba(37, 99, 235, 0.2);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.1);
+        }
+
+        .tts-btn:focus {
+            outline: 4px solid var(--cor-secundaria);
+            outline-offset: 2px;
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #10B981;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn:focus {
+            outline: 4px solid var(--cor-primaria);
+            outline-offset: 2px;
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+            display: inline;
+        }
+
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .welcome p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 20px;
+            background: var(--cor-fundo-card);
+            border: 3px solid transparent;
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .menu-btn:focus {
+            outline: 4px solid var(--cor-primaria);
+            outline-offset: 4px;
+        }
+
+        .menu-btn.jogos:hover {
+            border-color: #10B981;
+        }
+
+        .menu-btn.calendario:hover {
+            border-color: #2563EB;
+        }
+
+        .menu-btn.exercicios:hover {
+            border-color: #F59E0B;
+        }
+
+        .menu-btn.seguranca:hover {
+            border-color: #8B5CF6;
+        }
+
+        .menu-btn .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .menu-btn .icon svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .menu-btn .text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        .menu-btn.jogos .icon {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+        }
+        .menu-btn.jogos .icon svg { fill: #10B981; }
+
+        .menu-btn.calendario .icon {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1));
+        }
+        .menu-btn.calendario .icon svg { fill: #2563EB; }
+
+        .menu-btn.exercicios .icon {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+        }
+        .menu-btn.exercicios .icon svg { fill: #F59E0B; }
+
+        .menu-btn.seguranca .icon {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+        }
+        .menu-btn.seguranca .icon svg { fill: #8B5CF6; }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-btn {
+                padding: 28px 20px;
+                flex-direction: row;
+                gap: 16px;
+            }
+            
+            .menu-btn .icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+            }
+            
+            .menu-btn .icon svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="welcome">
+            <div class="titulo-com-tts">
+                <h1>O que você deseja fazer hoje?</h1>
+                <button class="tts-btn" onclick="toggleLeitura('O que você deseja fazer hoje? Escolha uma opção abaixo.', this)" aria-label="Ouvir texto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+            <p>Escolha uma opção abaixo</p>
+        </div>
+
+        <div class="menu-grid">
+            <a href="grupo-moderado.html" class="menu-btn jogos">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    </svg>
+                </div>
+                <span class="text">Jogos</span>
+            </a>
+
+            <a href="calendario.html" class="menu-btn calendario">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                </div>
+                <span class="text">Calendário</span>
+            </a>
+
+            <a href="exercicios.html" class="menu-btn exercicios">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/>
+                    </svg>
+                </div>
+                <span class="text">Exercícios</span>
+            </a>
+
+            <a href="seguranca.html" class="menu-btn seguranca">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                    </svg>
+                </div>
+                <span class="text">Segurança</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+</body>
+</html>

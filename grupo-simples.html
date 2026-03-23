@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Nível Simples</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
+    <style>
+        :root {
+            --cor-primaria: #10B981;
+            --cor-secundaria: #2563EB;
+            --cor-terceira: #F59E0B;
+            --cor-quarta: #EF4444;
+            --cor-quinta: #8B5CF6;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(16, 185, 129, 0.15);
+            --sombra-hover: 0 8px 30px rgba(16, 185, 129, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #059669;
+            transform: scale(1.1);
+        }
+
+        .tts-btn:focus {
+            outline: 4px solid var(--cor-secundaria);
+            outline-offset: 2px;
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #2563EB;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .game-card {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 28px 24px;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 3px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--cor-primaria);
+        }
+
+        .game-card:focus {
+            outline: 4px solid var(--cor-primaria);
+            outline-offset: 4px;
+        }
+
+        .game-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .game-icon svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .game-card:nth-child(1) .game-icon { background: rgba(16, 185, 129, 0.15); }
+        .game-card:nth-child(1) .game-icon svg { fill: #10B981; }
+        .game-card:nth-child(1):hover { border-color: #10B981; }
+
+        .game-card:nth-child(2) .game-icon { background: rgba(239, 68, 68, 0.15); }
+        .game-card:nth-child(2) .game-icon svg { fill: #EF4444; }
+        .game-card:nth-child(2):hover { border-color: #EF4444; }
+
+        .game-card:nth-child(3) .game-icon { background: rgba(245, 158, 11, 0.15); }
+        .game-card:nth-child(3) .game-icon svg { fill: #F59E0B; }
+        .game-card:nth-child(3):hover { border-color: #F59E0B; }
+
+        .game-card:nth-child(4) .game-icon { background: rgba(37, 99, 235, 0.15); }
+        .game-card:nth-child(4) .game-icon svg { fill: #2563EB; }
+        .game-card:nth-child(4):hover { border-color: #2563EB; }
+
+        .game-card:nth-child(5) .game-icon { background: rgba(139, 92, 246, 0.15); }
+        .game-card:nth-child(5) .game-icon svg { fill: #8B5CF6; }
+        .game-card:nth-child(5):hover { border-color: #8B5CF6; }
+
+        .game-card:nth-child(6) .game-icon { background: rgba(236, 72, 153, 0.15); }
+        .game-card:nth-child(6) .game-icon svg { fill: #EC4899; }
+        .game-card:nth-child(6):hover { border-color: #EC4899; }
+
+        .game-card:nth-child(7) .game-icon { background: rgba(6, 182, 212, 0.15); }
+        .game-card:nth-child(7) .game-icon svg { fill: #06B6D4; }
+        .game-card:nth-child(7):hover { border-color: #06B6D4; }
+
+        .game-card:nth-child(8) .game-icon { background: rgba(234, 179, 8, 0.15); }
+        .game-card:nth-child(8) .game-icon svg { fill: #EAB308; }
+        .game-card:nth-child(8):hover { border-color: #EAB308; }
+
+        .game-card:nth-child(9) .game-icon { background: rgba(34, 197, 94, 0.15); }
+        .game-card:nth-child(9) .game-icon svg { fill: #22C55E; }
+        .game-card:nth-child(9):hover { border-color: #22C55E; }
+
+        .game-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 6px;
+        }
+
+        .game-desc {
+            font-size: 15px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .jogar-btn {
+            margin-top: 14px;
+            padding: 10px 24px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .game-card:hover .jogar-btn {
+            background: #059669;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="jogos.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <div class="titulo-com-tts">
+                <h1>Nível Simples</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Nível Simples. Jogos para jogar com ajuda de um acompanhante.', this)" aria-label="Ouvir texto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+            <p>Jogos para jogar com ajuda de um acompanhante</p>
+        </div>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                </div>
+                <h2 class="game-title">Reconhecimento de Imagens</h2>
+                <p class="game-desc">Identifique as figuras</p>
+                <a href="jogo-reconhecimento.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                </div>
+                <h2 class="game-title">Jogo de Cores</h2>
+                <p class="game-desc">Identifique as cores</p>
+                <a href="jogo-cores.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-2H3v2zm0-4h8v-2H3v2z"/></svg>
+                </div>
+                <h2 class="game-title">Objeto e Função</h2>
+                <p class="game-desc">Conecte objeto à função</p>
+                <a href="jogo-objeto-funcao.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </div>
+                <h2 class="game-title">Repetição de Palavras</h2>
+                <p class="game-desc">Repita as palavras ouvidas</p>
+                <a href="jogo-repeticao.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/></svg>
+                </div>
+                <h2 class="game-title">Música e Memória</h2>
+                <p class="game-desc">Relembre músicas conhecidas</p>
+                <a href="jogo-musica.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <h2 class="game-title">Completar Frases</h2>
+                <p class="game-desc">Complete as frases</p>
+                <a href="jogo-frases.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.21 0-.59-.34-1.11-.84-1.35z"/></svg>
+                </div>
+                <h2 class="game-title">Jogo de Toque</h2>
+                <p class="game-desc">Toque nos elementos certos</p>
+                <a href="jogo-toque.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <h2 class="game-title">Sequência Simples</h2>
+                <p class="game-desc">Complete a sequência</p>
+                <a href="jogo-sequencia-simples.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <h2 class="game-title">Escolha entre Opções</h2>
+                <p class="game-desc">Escolha a resposta correta</p>
+                <a href="jogo-escolha.html"><button class="jogar-btn">Jogar</button></a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+</body>
+</html>

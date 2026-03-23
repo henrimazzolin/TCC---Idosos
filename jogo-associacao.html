@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Associação de Palavras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: var(--cor-fundo-card);
+            padding: 12px 24px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .game-area {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .word-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .word-card {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-texto);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .word-card:hover:not(.selected):not(.matched) {
+            transform: scale(1.05);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .word-card.selected {
+            border-color: var(--cor-primaria);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .word-card.matched {
+            border-color: var(--cor-secundaria);
+            background: rgba(16, 185, 129, 0.15);
+            cursor: default;
+        }
+
+        .connection-line {
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--cor-texto-claro);
+        }
+
+        .instruction {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            margin-bottom: 30px;
+        }
+
+        .instruction p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--cor-fundo-card);
+            padding: 40px 60px;
+            border-radius: var(--borda-radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .feedback-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-icon.success {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .feedback-icon.success svg {
+            fill: #10B981;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback-icon.error {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback-icon.error svg {
+            fill: #EF4444;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 10px;
+        }
+
+        .feedback p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+
+            .game-area {
+                flex-direction: column;
+            }
+
+            .connection-line {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+
+            .word-card {
+                font-size: 18px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="grupo-moderado.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <h1>Associação de Palavras</h1>
+            <p>Conecte as palavras que têm relação entre si</p>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">Acertos</div>
+                <div class="info-value" id="correct">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Pares</div>
+                <div class="info-value" id="pairs">0/4</div>
+            </div>
+        </div>
+
+        <div class="instruction">
+            <p>Toque em uma palavra da esquerda e depois na palavra relacionada da direita</p>
+        </div>
+
+        <div class="game-area">
+            <div class="word-column">
+                <div class="column-title">Palavras</div>
+                <div id="leftWords"></div>
+            </div>
+            <div class="connection-line">↔</div>
+            <div class="word-column">
+                <div class="column-title">Associações</div>
+                <div id="rightWords"></div>
+            </div>
+        </div>
+
+        <button class="btn" id="restartBtn" onclick="initGame()">Reiniciar Jogo</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <div class="feedback-icon" id="feedbackIcon"></div>
+        <h2 id="feedbackTitle">Parabéns!</h2>
+        <p id="feedbackText">Você completou todas as associações!</p>
+        <button class="btn" id="feedbackBtn" onclick="restartGame()">Jogar Novamente</button>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+
+    <script>
+        const wordPairs = [
+            { left: 'Sol', right: 'Calor' },
+            { left: 'Noite', right: 'Lua' },
+            { left: 'Água', right: 'Sede' },
+            { left: 'Pão', right: 'Fome' },
+            { left: 'Cama', right: 'Sono' },
+            { left: 'Chuva', right: 'Guarda-chuva' },
+            { left: 'Dor', right: 'Médico' },
+            { left: 'Escola', right: 'Professora' },
+            { left: 'Natal', right: 'Presente' },
+            { left: 'Fogo', right: 'Queimado' },
+            { left: 'Cão', right: 'Latido' },
+            { left: 'Gato', right: 'Miado' }
+        ];
+
+        let currentPairs = [];
+        let selectedLeft = null;
+        let matchedPairs = 0;
+        let correctCount = 0;
+        let isLocked = false;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initGame() {
+            currentPairs = shuffleArray(wordPairs).slice(0, 4);
+            selectedLeft = null;
+            matchedPairs = 0;
+            correctCount = 0;
+            isLocked = false;
+            
+            document.getElementById('correct').textContent = '0';
+            document.getElementById('pairs').textContent = '0/4';
+            
+            const leftContainer = document.getElementById('leftWords');
+            const rightContainer = document.getElementById('rightWords');
+            
+            leftContainer.innerHTML = '';
+            rightContainer.innerHTML = '';
+            
+            const leftWords = currentPairs.map(p => p.left);
+            const rightWords = shuffleArray(currentPairs.map(p => p.right));
+            
+            leftWords.forEach(word => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.textContent = word;
+                card.onclick = () => selectLeft(card, word);
+                leftContainer.appendChild(card);
+            });
+            
+            rightWords.forEach(word => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.textContent = word;
+                card.onclick = () => selectRight(card, word);
+                rightContainer.appendChild(card);
+            });
+        }
+
+        function selectLeft(card, word) {
+            if (isLocked || card.classList.contains('matched')) return;
+            
+            const allLeft = document.querySelectorAll('#leftWords .word-card');
+            allLeft.forEach(c => c.classList.remove('selected'));
+            
+            card.classList.add('selected');
+            selectedLeft = word;
+        }
+
+        function selectRight(card, word) {
+            if (isLocked || card.classList.contains('matched') || !selectedLeft) return;
+            
+            isLocked = true;
+            
+            const pair = currentPairs.find(p => p.left === selectedLeft);
+            
+            if (pair && pair.right === word) {
+                correctCount++;
+                matchedPairs++;
+                document.getElementById('correct').textContent = correctCount;
+                document.getElementById('pairs').textContent = `${matchedPairs}/4`;
+                
+                const leftCard = document.querySelector(`#leftWords .word-card:contains('${selectedLeft}')`);
+                document.querySelectorAll('#leftWords .word-card').forEach(c => {
+                    if (c.textContent === selectedLeft) {
+                        c.classList.remove('selected');
+                        c.classList.add('matched');
+                    }
+                });
+                card.classList.add('matched');
+                
+                showFeedback(true, 'Muito bem!', 'Você encontrou uma associação!');
+                
+                if (matchedPairs === 4) {
+                    setTimeout(() => {
+                        document.getElementById('feedbackTitle').textContent = 'Parabéns!';
+                        document.getElementById('feedbackText').textContent = 'Você completou todas as associações!';
+                        document.getElementById('overlay').classList.add('show');
+                        document.getElementById('feedback').classList.add('show');
+                    }, 1000);
+                }
+            } else {
+                showFeedback(false, 'Quase lá!', 'Essas palavras não estão relacionadas');
+                document.querySelectorAll('#leftWords .word-card').forEach(c => {
+                    if (c.textContent === selectedLeft) {
+                        c.classList.remove('selected');
+                    }
+                });
+            }
+            
+            selectedLeft = null;
+            setTimeout(() => { isLocked = false; }, 500);
+        }
+
+        function showFeedback(success, title, text) {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            
+            feedbackIcon.className = 'feedback-icon ' + (success ? 'success' : 'error');
+            feedbackIcon.innerHTML = success 
+                ? '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
+                : '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+            
+            document.getElementById('feedbackTitle').textContent = title;
+            document.getElementById('feedbackText').textContent = text;
+            
+            if (success && matchedPairs < 4) {
+                setTimeout(() => {
+                    overlay.classList.remove('show');
+                    feedback.classList.remove('show');
+                }, 800);
+            }
+        }
+
+        function restartGame() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show');
+            initGame();
+        }
+
+        initGame();
+    </script>
+</body>
+</html>

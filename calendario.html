@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Calendário</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
+    <script src="js/calendario.js" defer></script>
+    <style>
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.1);
+        }
+
+        .tts-btn:focus {
+            outline: 4px solid var(--cor-secundaria);
+            outline-offset: 2px;
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #10B981;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-title p {
+            font-size: 16px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .calendar-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .page-title p {
+            font-size: 16px;
+            color: var(--cor-texto-claro);
+        }
+
+        .calendar {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 24px;
+            box-shadow: var(--sombra);
+            margin-bottom: 30px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .calendar-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        .month-nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .month-nav button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background: var(--cor-fundo);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .month-nav button:hover {
+            background: var(--cor-primaria);
+        }
+
+        .month-nav button:hover svg {
+            fill: white;
+        }
+
+        .month-nav button svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--cor-texto);
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .weekdays span {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--cor-texto-claro);
+            padding: 8px 0;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .day:hover {
+            background: var(--cor-fundo);
+        }
+
+        .day.empty {
+            cursor: default;
+        }
+
+        .day.today {
+            background: var(--cor-primaria);
+            color: white;
+            font-weight: 700;
+        }
+
+        .day.has-event {
+            position: relative;
+        }
+
+        .day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 6px;
+            height: 6px;
+            background: #EF4444;
+            border-radius: 50%;
+        }
+
+        .day.today.has-event::after {
+            background: white;
+        }
+
+        .day.selected {
+            background: var(--cor-secundaria);
+            color: white;
+            font-weight: 700;
+        }
+
+        .event-types {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .event-type {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+        }
+
+        .event-type .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .event-type .dot.medic { background: #EF4444; }
+        .event-type .dot.medical { background: #2563EB; }
+        .event-type .dot.activity { background: #10B981; }
+
+        .events-list {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 24px;
+            box-shadow: var(--sombra);
+        }
+
+        .events-list h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 20px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--cor-fundo);
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
+
+        .event-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .event-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .event-icon.medic { background: rgba(239, 68, 68, 0.15); }
+        .event-icon.medic svg { fill: #EF4444; }
+        
+        .event-icon.medical { background: rgba(37, 99, 235, 0.15); }
+        .event-icon.medical svg { fill: #2563EB; }
+        
+        .event-icon.activity { background: rgba(16, 185, 129, 0.15); }
+        .event-icon.activity svg { fill: #10B981; }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 4px;
+        }
+
+        .event-time {
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 30px;
+            color: var(--cor-texto-claro);
+        }
+
+        .no-events p {
+            font-size: 16px;
+        }
+
+        .add-event-btn {
+            width: 100%;
+            padding: 16px 24px;
+            margin-top: 20px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-event-btn:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+        }
+
+        .add-event-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 32px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--sombra-hover);
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            font-weight: 500;
+            color: var(--cor-texto);
+            background: var(--cor-fundo);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.cancel {
+            background: #E2E8F0;
+            color: var(--cor-texto-claro);
+        }
+
+        .modal-btn.cancel:hover {
+            background: #CBD5E1;
+        }
+
+        .modal-btn.save {
+            background: var(--cor-secundaria);
+            color: white;
+        }
+
+        .modal-btn.save:hover {
+            background: #059669;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+            
+            .calendar {
+                padding: 16px;
+            }
+            
+            .day {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="menu.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <div class="titulo-com-tts">
+                <h1>Calendário</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Calendário de Março de 2026. Organize seus compromissos e eventos.', this)" aria-label="Ouvir texto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+            <p>Março 2026</p>
+        </div>
+
+        <div class="calendar">
+            <div class="calendar-header">
+                <h2>Março 2026</h2>
+                <div class="month-nav">
+                    <button onclick="mudarMes(-1)">
+                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                    </button>
+                    <button onclick="mudarMes(1)">
+                        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="weekdays">
+                <span>Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sáb</span>
+            </div>
+
+            <div class="days">
+            </div>
+        </div>
+
+        <div class="event-types">
+            <div class="event-type">
+                <span class="dot medic"></span>
+                <span>Remédio</span>
+            </div>
+            <div class="event-type">
+                <span class="dot medical"></span>
+                <span>Consulta</span>
+            </div>
+            <div class="event-type">
+                <span class="dot activity"></span>
+                <span>Atividade</span>
+            </div>
+        </div>
+
+        <div class="events-list">
+        </div>
+
+        <button class="add-event-btn" onclick="abrirModal()">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Adicionar Evento
+        </button>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="fecharModalCliqueFora(event)">
+        <div class="modal">
+            <h2>Novo Evento</h2>
+            <div class="form-group">
+                <label for="eventTitle">Nome do Evento</label>
+                <input type="text" id="eventTitle" placeholder="Ex: Tomar remédio">
+            </div>
+            <div class="form-group">
+                <label for="eventType">Tipo de Evento</label>
+                <select id="eventType">
+                    <option value="medic">Remédio</option>
+                    <option value="medical">Consulta</option>
+                    <option value="activity">Atividade</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="eventTime">Horário</label>
+                <input type="time" id="eventTime" value="09:00">
+            </div>
+            <div class="form-group">
+                <label for="eventPeriod">Descrição</label>
+                <input type="text" id="eventPeriod" placeholder="Ex: Manhã, Parque, Dr. João">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="modal-btn save" onclick="salvarEvento()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+</body>
+</html>

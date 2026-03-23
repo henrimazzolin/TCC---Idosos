@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Jogos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
+    <style>
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.1);
+        }
+
+        .tts-btn:focus {
+            outline: 4px solid var(--cor-secundaria);
+            outline-offset: 2px;
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #10B981;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .game-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .game-desc {
+            font-size: 16px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .game-card {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            padding: 32px 24px;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 3px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .game-card.verde:hover { border-color: #10B981; }
+        .game-card.azul:hover { border-color: #2563EB; }
+        .game-card.laranja:hover { border-color: #F59E0B; }
+        .game-card.roxo:hover { border-color: #8B5CF6; }
+
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .game-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .game-card.verde .game-icon {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1));
+        }
+        .game-card.verde .game-icon svg { fill: #10B981; }
+
+        .game-card.azul .game-icon {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0.1));
+        }
+        .game-card.azul .game-icon svg { fill: #2563EB; }
+
+        .game-card.laranja .game-icon {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.1));
+        }
+        .game-card.laranja .game-icon svg { fill: #F59E0B; }
+
+        .game-card.roxo .game-icon {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.1));
+        }
+        .game-card.roxo .game-icon svg { fill: #8B5CF6; }
+
+        .game-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .game-desc {
+            font-size: 16px;
+            color: var(--cor-texto-claro);
+            line-height: 1.5;
+        }
+
+        .jogar-btn {
+            margin-top: 16px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .game-card.verde .jogar-btn { background: #10B981; }
+        .game-card.verde .jogar-btn:hover { background: #059669; }
+
+        .game-card.azul .jogar-btn { background: #2563EB; }
+        .game-card.azul .jogar-btn:hover { background: #1D4ED8; }
+
+        .game-card.laranja .jogar-btn { background: #F59E0B; }
+        .game-card.laranja .jogar-btn:hover { background: #D97706; }
+
+        .game-card.roxo .jogar-btn { background: #8B5CF6; }
+        .game-card.roxo .jogar-btn:hover { background: #7C3AED; }
+
+        .game-card.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .game-card.disabled .jogar-btn {
+            background: var(--cor-texto-claro);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <div class="titulo-com-tts">
+                <h1>Jogos com Ajuda</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Jogos com ajuda. Escolha um jogo para jogar com seu acompanhante.', this)" aria-label="Ouvir texto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+            <p>Escolha um jogo para jogar com seu acompanhante</p>
+        </div>
+
+        <div class="games-grid">
+            <a href="grupo-simples.html" class="game-card verde">
+                <div class="game-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h2 class="game-title">Jogos Simples</h2>
+                <p class="game-desc">Jogos com instruções simples para fazer com ajuda</p>
+                <button class="jogar-btn">Ver Jogos</button>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+</body>
+</html>

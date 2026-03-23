@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Jogo de Cores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #EF4444;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(239, 68, 68, 0.15);
+            --sombra-hover: 0 8px 30px rgba(239, 68, 68, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: var(--cor-fundo-card);
+            padding: 12px 24px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .color-display {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .color-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .option-btn {
+            background: var(--cor-fundo-card);
+            border: 3px solid var(--cor-primaria);
+            border-radius: var(--borda-radius);
+            padding: 24px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra);
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .option-btn.correct {
+            background: var(--cor-secundaria);
+            border-color: var(--cor-secundaria);
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: #EF4444;
+            border-color: #EF4444;
+            color: white;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background: #DC2626;
+            transform: scale(1.05);
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--cor-fundo-card);
+            padding: 40px 60px;
+            border-radius: var(--borda-radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .feedback-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-icon.success {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .feedback-icon.success svg {
+            fill: #10B981;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback-icon.error {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback-icon.error svg {
+            fill: #EF4444;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 10px;
+        }
+
+        .feedback p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-circle {
+                width: 140px;
+                height: 140px;
+                font-size: 22px;
+            }
+
+            .color-display {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="grupo-simples.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <h1>Jogo de Cores</h1>
+            <p>Qual é a cor deste círculo?</p>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">Acertos</div>
+                <div class="info-value" id="correct">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Questão</div>
+                <div class="info-value" id="question">1/5</div>
+            </div>
+        </div>
+
+        <div class="color-display">
+            <div class="color-circle" id="colorCircle">AZUL</div>
+            <p class="question">Qual é esta cor?</p>
+        </div>
+
+        <div class="options-grid" id="optionsGrid"></div>
+
+        <button class="btn" id="nextBtn" style="display: none;" onclick="nextQuestion()">Próxima Cor</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <div class="feedback-icon" id="feedbackIcon"></div>
+        <h2 id="feedbackTitle">Muito bem!</h2>
+        <p id="feedbackText">Você acertou!</p>
+        <button class="btn" id="feedbackBtn" onclick="handleFeedback()">Continuar</button>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+
+    <script>
+        const colors = [
+            { name: 'Vermelho', hex: '#EF4444' },
+            { name: 'Azul', hex: '#3B82F6' },
+            { name: 'Verde', hex: '#10B981' },
+            { name: 'Amarelo', hex: '#F59E0B' },
+            { name: 'Roxo', hex: '#8B5CF6' },
+            { name: 'Laranja', hex: '#F97316' },
+            { name: 'Rosa', hex: '#EC4899' },
+            { name: 'Marrom', hex: '#92400E' },
+            { name: 'Cinza', hex: '#6B7280' },
+            { name: 'Preto', hex: '#1F2937' }
+        ];
+
+        let currentColors = [];
+        let currentIndex = 0;
+        let correctCount = 0;
+        let isComplete = false;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initGame() {
+            currentColors = shuffleArray(colors).slice(0, 5);
+            currentIndex = 0;
+            correctCount = 0;
+            isComplete = false;
+            
+            document.getElementById('correct').textContent = '0';
+            document.getElementById('question').textContent = '1/5';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const color = currentColors[currentIndex];
+            
+            const colorCircle = document.getElementById('colorCircle');
+            colorCircle.style.backgroundColor = color.hex;
+            colorCircle.textContent = color.name.toUpperCase();
+            
+            if (color.name === 'Preto' || color.name === 'Marrom' || color.name === 'Roxo' || color.name === 'Cinza') {
+                colorCircle.style.color = 'white';
+            } else {
+                colorCircle.style.color = 'white';
+            }
+            
+            const optionsGrid = document.getElementById('optionsGrid');
+            optionsGrid.innerHTML = '';
+            
+            const otherColors = colors.filter(c => c.name !== color.name);
+            const wrongOptions = shuffleArray(otherColors).slice(0, 3);
+            const options = shuffleArray([color, ...wrongOptions]);
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt.name;
+                btn.onclick = () => checkAnswer(opt.name, btn, color.name);
+                optionsGrid.appendChild(btn);
+            });
+            
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function checkAnswer(answer, btn, correct) {
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(b => b.disabled = true);
+            
+            if (answer === correct) {
+                btn.classList.add('correct');
+                correctCount++;
+                document.getElementById('correct').textContent = correctCount;
+                
+                showFeedback(true, 'Muito bem!', 'Você acertou a cor!');
+            } else {
+                btn.classList.add('wrong');
+                buttons.forEach(b => {
+                    if (b.textContent === correct) {
+                        b.classList.add('correct');
+                    }
+                });
+                
+                showFeedback(false, 'Quase lá!', 'A cor era ' + correct);
+            }
+            
+            document.getElementById('nextBtn').style.display = 'block';
+            
+            if (currentIndex === currentColors.length - 1) {
+                isComplete = true;
+                document.getElementById('nextBtn').textContent = 'Ver Resultado';
+                document.getElementById('nextBtn').onclick = showResult;
+            }
+        }
+
+        function nextQuestion() {
+            if (isComplete) {
+                showResult();
+                return;
+            }
+            
+            currentIndex++;
+            document.getElementById('question').textContent = `${currentIndex + 1}/5`;
+            loadQuestion();
+        }
+
+        function showResult() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const feedbackBtn = document.getElementById('feedbackBtn');
+            
+            feedbackIcon.className = 'feedback-icon success';
+            feedbackIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
+            
+            feedbackTitle.textContent = 'Parabéns!';
+            feedbackText.textContent = `Você acertou ${correctCount} de ${currentColors.length} cores!`;
+            
+            feedbackBtn.textContent = 'Jogar Novamente';
+            feedbackBtn.onclick = () => {
+                overlay.classList.remove('show');
+                feedback.classList.remove('show');
+                document.getElementById('nextBtn').textContent = 'Próxima Cor';
+                document.getElementById('nextBtn').onclick = nextQuestion;
+                initGame();
+            };
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function handleFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            overlay.classList.remove('show');
+            feedback.classList.remove('show');
+        }
+
+        document.getElementById('overlay').addEventListener('click', handleFeedback);
+
+        initGame();
+    </script>
+</body>
+</html>

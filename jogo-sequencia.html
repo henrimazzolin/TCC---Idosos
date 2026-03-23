@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Sequência Lógica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: var(--cor-fundo-card);
+            padding: 12px 24px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .sequence-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .sequence-item {
+            width: 70px;
+            height: 70px;
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .sequence-item.question {
+            background: linear-gradient(135deg, var(--cor-terceira), #FCD34D);
+            color: white;
+            font-size: 32px;
+        }
+
+        .sequence-item.correct {
+            background: var(--cor-secundaria);
+            color: white;
+        }
+
+        .sequence-item.wrong {
+            background: #EF4444;
+            color: white;
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: var(--cor-texto-claro);
+            font-weight: 700;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .option-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--cor-fundo-card);
+            border: 3px solid var(--cor-primaria);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--sombra-hover);
+            background: var(--cor-primaria);
+            color: white;
+        }
+
+        .option-btn.correct {
+            background: var(--cor-secundaria);
+            border-color: var(--cor-secundaria);
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: #EF4444;
+            border-color: #EF4444;
+            color: white;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--cor-fundo-card);
+            padding: 40px 60px;
+            border-radius: var(--borda-radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .feedback-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-icon.success {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .feedback-icon.success svg {
+            fill: #10B981;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback-icon.error {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback-icon.error svg {
+            fill: #EF4444;
+            width: 50px;
+            height: 50px;
+        }
+
+        .feedback h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 10px;
+        }
+
+        .feedback p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                width: 100%;
+                justify-content: center;
+                margin-top: 12px;
+            }
+
+            .sequence-item {
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+
+            .option-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="grupo-moderado.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <h1>Sequência Lógica</h1>
+            <p>Complete a sequência encontrando o número que falta</p>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">Acertos</div>
+                <div class="info-value" id="correct">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Nível</div>
+                <div class="info-value" id="level">1</div>
+            </div>
+        </div>
+
+        <div class="sequence-display" id="sequenceDisplay"></div>
+
+        <div class="options-container" id="optionsContainer"></div>
+
+        <div style="text-align: center;">
+            <button class="btn" id="nextBtn" style="display: none;" onclick="nextSequence()">Próxima Sequência</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <div class="feedback-icon" id="feedbackIcon"></div>
+        <h2 id="feedbackTitle">Muito bem!</h2>
+        <p id="feedbackText">Você acertou!</p>
+        <button class="btn" id="feedbackBtn" onclick="closeFeedback()">Continuar</button>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+
+    <script>
+        let currentSequence = [];
+        let correctAnswer = 0;
+        let options = [];
+        let correctCount = 0;
+        let level = 1;
+
+        const sequences = [
+            { start: 2, diff: 2, length: 4 },
+            { start: 5, diff: 5, length: 4 },
+            { start: 10, diff: 10, length: 4 },
+            { start: 3, diff: 3, length: 4 },
+            { start: 4, diff: 4, length: 4 },
+            { start: 1, diff: 2, length: 5 },
+            { start: 2, diff: 4, length: 4 },
+            { start: 5, diff: 3, length: 4 },
+            { start: 1, diff: 5, length: 4 },
+            { start: 10, diff: -2, length: 4 }
+        ];
+
+        function generateSequence() {
+            const seq = sequences[Math.floor(Math.random() * sequences.length)];
+            currentSequence = [];
+            
+            for (let i = 0; i < seq.length; i++) {
+                currentSequence.push(seq.start + (i * seq.diff));
+            }
+            
+            correctAnswer = currentSequence[currentSequence.length - 1];
+            
+            const questionIndex = Math.floor(currentSequence.length / 2);
+            currentSequence[questionIndex] = '?';
+            
+            options = [];
+            options.push(correctAnswer);
+            
+            while (options.length < 4) {
+                const wrongAnswer = correctAnswer + (Math.floor(Math.random() * 10) - 5);
+                if (wrongAnswer !== correctAnswer && wrongAnswer > 0 && !options.includes(wrongAnswer)) {
+                    options.push(wrongAnswer);
+                }
+            }
+            
+            options = options.sort(() => Math.random() - 0.5);
+            
+            renderSequence();
+            renderOptions();
+            
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function renderSequence() {
+            const display = document.getElementById('sequenceDisplay');
+            display.innerHTML = '';
+            
+            currentSequence.forEach((item, index) => {
+                const span = document.createElement('span');
+                span.className = 'sequence-item';
+                
+                if (item === '?') {
+                    span.className += ' question';
+                    span.textContent = '?';
+                } else {
+                    span.textContent = item;
+                }
+                
+                display.appendChild(span);
+                
+                if (index < currentSequence.length - 1) {
+                    const arrow = document.createElement('span');
+                    arrow.className = 'arrow';
+                    arrow.textContent = '→';
+                    display.appendChild(arrow);
+                }
+            });
+        }
+
+        function renderOptions() {
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(answer, btn) {
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+            
+            if (answer === correctAnswer) {
+                btn.classList.add('correct');
+                correctCount++;
+                document.getElementById('correct').textContent = correctCount;
+                
+                const questionElement = document.querySelector('.sequence-item.question');
+                questionElement.classList.add('correct');
+                questionElement.textContent = correctAnswer;
+                
+                showFeedback(true, 'Muito bem!', 'Você acertou a sequência!');
+                
+                if (correctCount % 3 === 0) {
+                    level++;
+                    document.getElementById('level').textContent = level;
+                }
+                
+                document.getElementById('nextBtn').style.display = 'inline-block';
+            } else {
+                btn.classList.add('wrong');
+                
+                const questionElement = document.querySelector('.sequence-item.question');
+                questionElement.classList.add('wrong');
+                questionElement.textContent = correctAnswer;
+                
+                showFeedback(false, 'Quase lá!', 'A resposta correta era ' + correctAnswer);
+                document.getElementById('nextBtn').style.display = 'inline-block';
+            }
+        }
+
+        function nextSequence() {
+            closeFeedback();
+            generateSequence();
+        }
+
+        function showFeedback(success, title, text) {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            
+            feedbackIcon.className = 'feedback-icon ' + (success ? 'success' : 'error');
+            feedbackIcon.innerHTML = success 
+                ? '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
+                : '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+            
+            document.getElementById('feedbackTitle').textContent = title;
+            document.getElementById('feedbackText').textContent = text;
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function closeFeedback() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('feedback').classList.remove('show');
+        }
+
+        document.getElementById('overlay').addEventListener('click', closeFeedback);
+
+        generateSequence();
+    </script>
+</body>
+</html>
