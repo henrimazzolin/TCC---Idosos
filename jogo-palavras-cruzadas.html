@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Jogo Protótipo</title>
+    <title>MindCare - Palavras Cruzadas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,8 +16,11 @@
             --cor-fundo-card: #FFFFFF;
             --cor-texto: #000000;
             --cor-texto-claro: #1E293B;
+            --cor-bloqueada: #1E293B;
+            --cor-bloqueada-escura: #0F172A;
+            --cor-destaque: #DBEAFE;
+            --cor-correto: #86EFAC;
             --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
-            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
             --borda-radius: 20px;
         }
 
@@ -33,19 +36,19 @@
             color: var(--cor-texto);
             min-height: 100vh;
             font-weight: 500;
+            padding: 20px;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 30px 20px;
         }
 
         .header {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .back-btn {
@@ -65,7 +68,6 @@
 
         .back-btn:hover {
             transform: translateX(-4px);
-            box-shadow: var(--sombra-hover);
         }
 
         .back-btn svg {
@@ -104,88 +106,189 @@
 
         .page-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .page-title h1 {
-            font-size: clamp(24px, 4vw, 32px);
+            font-size: 32px;
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 8px;
         }
 
-        .page-title p {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
+        .game-level {
+            display: inline-block;
+            background: var(--cor-terceira);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
-        .game-area {
+        .game-container {
             background: var(--cor-fundo-card);
             border-radius: var(--borda-radius);
             box-shadow: var(--sombra);
-            padding: 40px;
-            margin-bottom: 30px;
-            text-align: center;
+            padding: 30px;
         }
 
-        .game-icon {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 30px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(16, 185, 129, 0.15));
-            border-radius: 50%;
+        .game-content {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
             justify-content: center;
+            align-items: flex-start;
         }
 
-        .game-icon svg {
-            width: 60px;
-            height: 60px;
-            fill: var(--cor-primaria);
+        .grid-section {
+            flex: 0 0 auto;
         }
 
-        .game-description {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            line-height: 1.7;
-            margin-bottom: 30px;
+        .crossword-grid {
+            display: grid;
+            gap: 3px;
+            background: var(--cor-bloqueada);
+            padding: 3px;
+            border-radius: 8px;
+            border: 3px solid var(--cor-bloqueada);
         }
 
-        .game-steps {
-            text-align: left;
-            background: var(--cor-fundo);
-            border-radius: 14px;
-            padding: 24px;
-            margin-bottom: 30px;
+        .cell {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            background: white;
         }
 
-        .game-steps h3 {
-            font-size: 20px;
+        .cell.blocked {
+            background: var(--cor-bloqueada-escura);
+        }
+
+        .cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            color: var(--cor-texto);
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .cell input:focus {
+            background: var(--cor-destaque);
+        }
+
+        .cell input.correct {
+            background: var(--cor-correto);
+            color: #065F46;
+        }
+
+        .cell input.active-row {
+            background: #FEF3C7;
+        }
+
+        .cell input.active-col {
+            background: #FEF3C7;
+        }
+
+        .cell .cell-number {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            line-height: 1;
+        }
+
+        .hints-section {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+        }
+
+        .hints-title {
+            font-size: 22px;
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 16px;
+            text-align: center;
         }
 
-        .game-steps ol {
-            padding-left: 24px;
+        .hints-group {
+            margin-bottom: 24px;
         }
 
-        .game-steps li {
+        .hints-group h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--cor-destaque);
+        }
+
+        .hint-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: var(--cor-fundo);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .hint-item:hover {
+            background: var(--cor-destaque);
+        }
+
+        .hint-item.active {
+            background: var(--cor-destaque);
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .hint-item.correct {
+            background: var(--cor-correto);
+        }
+
+        .hint-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            min-width: 28px;
+        }
+
+        .hint-text {
             font-size: 16px;
             color: var(--cor-texto-claro);
-            margin-bottom: 12px;
-            line-height: 1.5;
+            line-height: 1.4;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 16px 48px;
+            padding: 16px 36px;
             background: var(--cor-primaria);
             color: white;
             border: none;
             border-radius: 30px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -199,11 +302,67 @@
 
         .btn-secondary {
             background: var(--cor-terceira);
-            margin-left: 16px;
         }
 
         .btn-secondary:hover {
             background: #D97706;
+        }
+
+        .message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cor-fundo-card);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .message.show {
+            display: block;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .message h2 {
+            font-size: 36px;
+            color: var(--cor-secundaria);
+            margin-bottom: 16px;
+        }
+
+        .message p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            margin-bottom: 24px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
         }
 
         footer {
@@ -214,24 +373,27 @@
         }
 
         @media (max-width: 600px) {
-            .header {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .logo {
-                width: 100%;
-                justify-content: center;
-                margin-top: 12px;
+            .game-content {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .btn {
-                width: 100%;
-                margin-bottom: 12px;
+            .cell {
+                width: 42px;
+                height: 42px;
             }
 
-            .btn-secondary {
-                margin-left: 0;
+            .cell input {
+                font-size: 22px;
+            }
+
+            .hints-section {
+                width: 100%;
+                max-width: none;
+            }
+
+            .page-title h1 {
+                font-size: 26px;
             }
         }
     </style>
@@ -256,36 +418,443 @@
 
         <div class="page-title">
             <h1>Palavras Cruzadas</h1>
-            <p>Jogo em desenvolvimento</p>
+            <div class="game-level" id="gameLevel">Tema: Natureza</div>
         </div>
 
-        <div class="game-area">
-            <div class="game-icon">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 7h2v2H7zm0 4h2v2H7zm4 4h2v2h-2zm0-4h2v2h-2zm4 0h2v2h-2zm0-4h2v2h-2z"/></svg>
+        <div class="game-container">
+            <div class="game-content">
+                <div class="grid-section">
+                    <div class="crossword-grid" id="grid"></div>
+                </div>
+
+                <div class="hints-section">
+                    <div class="hints-group">
+                        <h3>Horizontais</h3>
+                        <div id="hints-h"></div>
+                    </div>
+                    <div class="hints-group">
+                        <h3>Verticais</h3>
+                        <div id="hints-v"></div>
+                    </div>
+                </div>
             </div>
 
-            <p class="game-description">
-                As palavras cruzadas são um clássico dos jogos de raciocínio. 
-                Preencha os espaços com as palavras corretas para completar o desafio!
-            </p>
-
-            <div class="game-steps">
-                <h3>Como jogar:</h3>
-                <ol>
-                    <li>Leia a dica que aparece na horizontal ou vertical</li>
-                    <li>Digite a palavra que corresponde à dica</li>
-                    <li>Use o teclado para inserir as letras</li>
-                    <li>Complete todas as palavras para vencer</li>
-                </ol>
+            <div class="buttons">
+                <button class="btn" onclick="resetGame()">Reiniciar Jogo</button>
+                <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
             </div>
-
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
-            <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
         </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeMessage()"></div>
+    <div class="message" id="message">
+        <h2>Parabéns!</h2>
+        <p>Você completou todas as palavras!</p>
+        <button class="btn" onclick="resetGame()">Jogar Novamente</button>
     </div>
 
     <footer>
         <p>Feito com cuidado para você</p>
     </footer>
+
+    <script>
+        const games = [
+            {
+                id: 1,
+                name: "Tema: Natureza",
+                size: 7,
+                layout: [
+                    ['L', '#', '#', 'A', '#', 'C', '#'],
+                    ['U', '#', '#', 'O', '#', 'S', '#'],
+                    ['M', 'O', 'R', 'A', 'R', 'A', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', '#', 'R', 'O', 'S', 'A', 'M'],
+                    ['#', '#', 'O', '#', '#', '#', 'A'],
+                    ['P', 'A', 'O', '#', '#', '#', 'R']
+                ],
+                words: [
+                    { number: 1, word: 'SOL', direction: 'h', row: 0, col: 0, hint: 'Estrela que ilumina o dia' },
+                    { number: 2, word: 'LUZ', direction: 'v', row: 0, col: 0, hint: 'Oposto de escuridão' },
+                    { number: 3, word: 'MAO', direction: 'v', row: 0, col: 3, hint: 'Parte do corpo com cinco dedos' },
+                    { number: 4, word: 'AMOR', direction: 'h', row: 2, col: 0, hint: 'Sentimento de carinho e afeto' },
+                    { number: 5, word: 'CASA', direction: 'v', row: 0, col: 5, hint: 'Local onde moramos' },
+                    { number: 6, word: 'ROSA', direction: 'h', row: 4, col: 2, hint: 'Flor bonita com espinhos' },
+                    { number: 7, word: 'MAR', direction: 'v', row: 4, col: 5, hint: 'Grande extensão de água salgada' },
+                    { number: 8, word: 'PAO', direction: 'h', row: 6, col: 0, hint: 'Alimento feito de farinha' }
+                ]
+            },
+            {
+                id: 2,
+                name: "Tema: Animais",
+                size: 7,
+                layout: [
+                    ['G', 'A', 'T', 'O', '#', 'P', '#'],
+                    ['#', '#', '#', '#', '#', 'A', '#'],
+                    ['#', 'C', 'A', 'C', 'H', 'O', 'R'],
+                    ['#', '#', '#', '#', '#', 'E', '#'],
+                    ['#', 'P', 'A', 'S', 'S', 'A', 'R'],
+                    ['#', '#', '#', '#', '#', 'R', '#'],
+                    ['#', 'C', 'O', 'E', 'L', 'O', '#']
+                ],
+                words: [
+                    { number: 1, word: 'GATO', direction: 'h', row: 0, col: 0, hint: 'Animal que mia' },
+                    { number: 2, word: 'CACHORRO', direction: 'h', row: 2, col: 1, hint: 'Melhor amigo do homem' },
+                    { number: 3, word: 'PASSARO', direction: 'h', row: 4, col: 1, hint: 'Animal que voa' },
+                    { number: 4, word: 'PATA', direction: 'v', row: 0, col: 5, hint: ' pé do cachorro' },
+                    { number: 5, word: 'PEIXE', direction: 'h', row: 6, col: 1, hint: 'Animal que nada' }
+                ]
+            },
+            {
+                id: 3,
+                name: "Tema: Comida",
+                size: 7,
+                layout: [
+                    ['A', 'R', 'R', 'O', 'Z', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['F', 'R', 'U', 'T', 'A', '#', '#'],
+                    ['#', 'A', '#', 'O', '#', 'A', '#'],
+                    ['#', 'C', 'A', 'V', 'A', 'L', 'O'],
+                    ['#', '#', '#', 'E', '#', '#', '#'],
+                    ['#', 'C', 'A', 'F', 'E', '#', '#']
+                ],
+                words: [
+                    { number: 1, word: 'ARROZ', direction: 'h', row: 0, col: 0, hint: 'Grão branco muito consumido' },
+                    { number: 2, word: 'FRUTA', direction: 'h', row: 2, col: 0, hint: 'Alimento natural doce' },
+                    { number: 3, word: 'CAVALO', direction: 'h', row: 4, col: 1, hint: 'Animal que corre' },
+                    { number: 4, word: 'CAFE', direction: 'h', row: 6, col: 1, hint: 'Bebida quente pela manhã' },
+                    { number: 5, word: 'AVE', direction: 'v', row: 2, col: 2, hint: 'Pássaro em português' },
+                    { number: 6, word: 'Ovo', direction: 'v', row: 2, col: 4, hint: 'Alimento de galinha' }
+                ]
+            }
+        ];
+
+        let currentGame = null;
+        let currentWord = null;
+        let currentHint = null;
+        let lastGameId = -1;
+
+        function selectRandomGame() {
+            let availableGames = games.filter(g => g.id !== lastGameId);
+            if (availableGames.length === 0) {
+                availableGames = games;
+            }
+            const randomIndex = Math.floor(Math.random() * availableGames.length);
+            currentGame = availableGames[randomIndex];
+            lastGameId = currentGame.id;
+            
+            document.getElementById('gameLevel').textContent = currentGame.name;
+        }
+
+        function initGame() {
+            selectRandomGame();
+            
+            const gridEl = document.getElementById('grid');
+            gridEl.innerHTML = '';
+            gridEl.style.gridTemplateColumns = `repeat(${currentGame.size}, 1fr)`;
+
+            for (let row = 0; row < currentGame.size; row++) {
+                for (let col = 0; col < currentGame.size; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    if (currentGame.layout[row][col] === '#') {
+                        cell.classList.add('blocked');
+                    } else {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.maxLength = 1;
+                        input.dataset.row = row;
+                        input.dataset.col = col;
+                        input.addEventListener('input', handleInput);
+                        input.addEventListener('keydown', handleKeydown);
+                        input.addEventListener('focus', handleFocus);
+                        input.addEventListener('blur', handleBlur);
+                        cell.appendChild(input);
+
+                        const wordNum = getWordNumberAt(row, col);
+                        if (wordNum) {
+                            const numEl = document.createElement('span');
+                            numEl.className = 'cell-number';
+                            numEl.textContent = wordNum;
+                            cell.appendChild(numEl);
+                        }
+                    }
+                    gridEl.appendChild(cell);
+                }
+            }
+
+            renderHints();
+        }
+
+        function getWordNumberAt(row, col) {
+            for (const word of currentGame.words) {
+                if (word.direction === 'h') {
+                    if (row === word.row && col === word.col) return word.number;
+                } else {
+                    if (row === word.row && col === word.col) return word.number;
+                }
+            }
+            return null;
+        }
+
+        function getWordAt(row, col) {
+            for (const word of currentGame.words) {
+                if (word.direction === 'h') {
+                    if (row === word.row && col >= word.col && col < word.col + word.word.length) {
+                        return word;
+                    }
+                } else {
+                    if (col === word.col && row >= word.row && row < word.row + word.word.length) {
+                        return word;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function renderHints() {
+            const hintsH = document.getElementById('hints-h');
+            const hintsV = document.getElementById('hints-v');
+            hintsH.innerHTML = '';
+            hintsV.innerHTML = '';
+
+            currentGame.words.filter(w => w.direction === 'h').forEach(word => {
+                const hintEl = createHintElement(word);
+                hintsH.appendChild(hintEl);
+            });
+
+            currentGame.words.filter(w => w.direction === 'v').forEach(word => {
+                const hintEl = createHintElement(word);
+                hintsV.appendChild(hintEl);
+            });
+        }
+
+        function createHintElement(word) {
+            const div = document.createElement('div');
+            div.className = 'hint-item';
+            div.dataset.word = word.number;
+            div.addEventListener('click', () => selectWord(word));
+            div.innerHTML = `
+                <span class="hint-number">${word.number}.</span>
+                <span class="hint-text">${word.hint}</span>
+            `;
+            return div;
+        }
+
+        function selectWord(word) {
+            currentWord = word;
+            document.querySelectorAll('.hint-item').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.hint-item[data-word="${word.number}"]`).classList.add('active');
+
+            const firstCell = document.querySelector(`input[data-row="${word.row}"][data-col="${word.col}"]`);
+            if (firstCell) {
+                firstCell.focus();
+            }
+        }
+
+        function handleFocus(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+            const word = getWordAt(row, col);
+            
+            if (word) {
+                currentWord = word;
+                currentHint = word.number;
+                
+                document.querySelectorAll('.hint-item').forEach(el => el.classList.remove('active'));
+                const hintEl = document.querySelector(`.hint-item[data-word="${word.number}"]`);
+                if (hintEl) {
+                    hintEl.classList.add('active');
+                }
+
+                highlightWordCells(word);
+            }
+        }
+
+        function handleBlur() {
+            document.querySelectorAll('.cell input').forEach(input => {
+                input.classList.remove('active-row');
+                input.classList.remove('active-col');
+            });
+        }
+
+        function highlightWordCells(word) {
+            document.querySelectorAll('.cell input').forEach(input => {
+                input.classList.remove('active-row');
+                input.classList.remove('active-col');
+            });
+
+            for (let i = 0; i < word.word.length; i++) {
+                if (word.direction === 'h') {
+                    const input = document.querySelector(`input[data-row="${word.row}"][data-col="${word.col + i}"]`);
+                    if (input) input.classList.add('active-row');
+                } else {
+                    const input = document.querySelector(`input[data-row="${word.row + i}"][data-col="${word.col}"]`);
+                    if (input) input.classList.add('active-col');
+                }
+            }
+        }
+
+        function handleInput(e) {
+            const value = e.target.value.toUpperCase();
+            e.target.value = value;
+
+            if (value) {
+                const row = parseInt(e.target.dataset.row);
+                const col = parseInt(e.target.dataset.col);
+                moveToNextCell(row, col);
+                checkWord();
+            }
+        }
+
+        function handleKeydown(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+
+            if (e.key === 'Backspace') {
+                if (!e.target.value) {
+                    moveToPrevCell(row, col);
+                }
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                moveCell(row, col + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                moveCell(row, col - 1);
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                moveCell(row + 1, col);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                moveCell(row - 1, col);
+            }
+        }
+
+        function moveToNextCell(row, col) {
+            const word = getWordAt(row, col);
+            if (!word) return;
+
+            if (word.direction === 'h') {
+                if (col < word.col + word.word.length - 1) {
+                    moveCell(row, col + 1);
+                }
+            } else {
+                if (row < word.row + word.word.length - 1) {
+                    moveCell(row + 1, col);
+                }
+            }
+        }
+
+        function moveToPrevCell(row, col) {
+            const word = getWordAt(row, col);
+            if (!word) return;
+
+            if (word.direction === 'h') {
+                if (col > word.col) {
+                    moveCell(row, col - 1);
+                }
+            } else {
+                if (row > word.row) {
+                    moveCell(row - 1, col);
+                }
+            }
+        }
+
+        function moveCell(row, col) {
+            if (row >= 0 && row < currentGame.size && col >= 0 && col < currentGame.size) {
+                const input = document.querySelector(`input[data-row="${row}"][data-col="${col}"]`);
+                if (input && currentGame.layout[row][col] !== '#') {
+                    input.focus();
+                }
+            }
+        }
+
+        function checkWord() {
+            if (!currentWord) return;
+
+            let isCorrect = true;
+            const inputs = [];
+
+            for (let i = 0; i < currentWord.word.length; i++) {
+                let input;
+                if (currentWord.direction === 'h') {
+                    input = document.querySelector(`input[data-row="${currentWord.row}"][data-col="${currentWord.col + i}"]`);
+                } else {
+                    input = document.querySelector(`input[data-row="${currentWord.row + i}"][data-col="${currentWord.col}"]`);
+                }
+                if (input) {
+                    inputs.push(input);
+                    if (input.value.toUpperCase() !== currentWord.word[i]) {
+                        isCorrect = false;
+                    }
+                }
+            }
+
+            if (isCorrect && inputs.every(input => input.value !== '')) {
+                inputs.forEach(input => input.classList.add('correct'));
+                const hintEl = document.querySelector(`.hint-item[data-word="${currentWord.number}"]`);
+                if (hintEl) hintEl.classList.add('correct');
+                checkAllWords();
+            } else {
+                inputs.forEach(input => input.classList.remove('correct'));
+            }
+        }
+
+        function checkAllWords() {
+            let allCorrect = true;
+
+            for (const word of currentGame.words) {
+                let correct = true;
+                for (let i = 0; i < word.word.length; i++) {
+                    let input;
+                    if (word.direction === 'h') {
+                        input = document.querySelector(`input[data-row="${word.row}"][data-col="${word.col + i}"]`);
+                    } else {
+                        input = document.querySelector(`input[data-row="${word.row + i}"][data-col="${word.col}"]`);
+                    }
+                    if (!input || input.value.toUpperCase() !== word.word[i]) {
+                        correct = false;
+                        break;
+                    }
+                }
+                if (!correct) {
+                    allCorrect = false;
+                    break;
+                }
+            }
+
+            if (allCorrect) {
+                setTimeout(() => {
+                    document.getElementById('overlay').classList.add('show');
+                    document.getElementById('message').classList.add('show');
+                }, 500);
+            }
+        }
+
+        function resetGame() {
+            closeMessage();
+            document.querySelectorAll('.cell input').forEach(input => {
+                input.value = '';
+                input.classList.remove('correct');
+                input.classList.remove('active-row');
+                input.classList.remove('active-col');
+            });
+            document.querySelectorAll('.hint-item').forEach(el => {
+                el.classList.remove('correct');
+                el.classList.remove('active');
+            });
+            currentWord = null;
+            currentHint = null;
+        }
+
+        function closeMessage() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('message').classList.remove('show');
+        }
+
+        initGame();
+    </script>
 </body>
 </html>

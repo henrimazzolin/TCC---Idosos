@@ -3,48 +3,473 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Treino Cerebral</title>
+    <title>MindCare - Teste de Reação</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cor-primaria: #2563EB; --cor-secundaria: #10B981; --cor-fundo: #F0F9FF; --cor-fundo-card: #FFFFFF; --cor-texto: #000000; --cor-texto-claro: #1E293B; --sombra: 0 4px 20px rgba(37, 99, 235, 0.15); --borda-radius: 20px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--cor-fundo); color: var(--cor-texto); min-height: 100vh; font-weight: 500; }
-        .container { max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--cor-fundo-card); border: none; border-radius: 14px; cursor: pointer; box-shadow: var(--sombra); transition: all 0.3s ease; text-decoration: none; }
-        .back-btn:hover { transform: translateX(-4px); }
-        .back-btn svg { width: 24px; height: 24px; fill: var(--cor-texto); }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 26px; height: 26px; fill: white; }
-        .logo-text { font-size: 20px; font-weight: 700; color: var(--cor-primaria); }
-        .page-title { text-align: center; margin-bottom: 30px; }
-        .page-title h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; margin-bottom: 8px; }
-        .page-title p { font-size: 18px; color: var(--cor-texto-claro); font-weight: 500; }
-        .game-area { background: var(--cor-fundo-card); border-radius: var(--borda-radius); box-shadow: var(--sombra); padding: 40px; text-align: center; }
-        .game-icon { width: 120px; height: 120px; margin: 0 auto 30px; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .game-icon svg { width: 60px; height: 60px; fill: #EAB308; }
-        .game-description { font-size: 18px; color: var(--cor-texto-claro); line-height: 1.7; margin-bottom: 30px; }
-        .btn { padding: 16px 48px; background: var(--cor-primaria); color: white; border: none; border-radius: 30px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { background: #1D4ED8; transform: scale(1.05); }
-        footer { text-align: center; padding: 20px; color: var(--cor-texto-claro); font-size: 14px; }
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-erro: #EF4444;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 18px 48px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra);
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .btn-secondary {
+            background: var(--cor-terceira);
+        }
+
+        .btn-secondary:hover {
+            background: #D97706;
+        }
+
+        .btn-green {
+            background: var(--cor-secundaria);
+            font-size: 28px;
+            padding: 30px 60px;
+            min-width: 300px;
+        }
+
+        .btn-green:hover {
+            background: #059669;
+        }
+
+        .game-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .game-screen.active {
+            display: flex;
+        }
+
+        .message {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .message.prepare {
+            color: var(--cor-terceira);
+        }
+
+        .message.success {
+            color: var(--cor-secundaria);
+        }
+
+        .message.error {
+            color: var(--cor-erro);
+        }
+
+        .message .time {
+            font-size: 48px;
+            color: var(--cor-primaria);
+            display: block;
+            margin: 20px 0;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-box {
+            background: var(--cor-fundo-card);
+            padding: 16px 28px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .instructions {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 24px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            max-width: 500px;
+        }
+
+        .instructions p {
+            font-size: 16px;
+            font-weight: 600;
+            color: #92400E;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .title {
+                font-size: 22px;
+            }
+            
+            .message {
+                font-size: 24px;
+            }
+            
+            .message .time {
+                font-size: 36px;
+            }
+            
+            .btn {
+                padding: 14px 32px;
+                font-size: 18px;
+            }
+            
+            .btn-green {
+                font-size: 22px;
+                padding: 24px 40px;
+                min-width: 250px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
-        </div>
-        <div class="page-title"><h1>Treino Cerebral</h1><p>Teste sua atenção e reação</p></div>
-        <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg></div>
-            <p class="game-description">Teste sua velocidade de reação e atenção! Responda rapidamente aos estímulos visuais e melhore suas habilidades cognitivas.</p>
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
+    <div class="header">
+        <a href="grupo-simples.html" class="back-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </a>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <span class="logo-text">MindCare</span>
         </div>
     </div>
-    <footer><p>Feito com cuidado para você</p></footer>
+
+    <div class="game-area">
+        <div class="game-screen active" id="startScreen">
+            <h1 class="title">Teste de Reação</h1>
+            <p class="subtitle">Treine sua velocidade de reação</p>
+            
+            <div class="instructions">
+                <p>Como jogar: Clique em "Iniciar", espere aparecer o botão verde e clique o mais rápido que puder!</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Melhor Tempo</div>
+                    <div class="stat-value" id="bestTime">--</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Tentativas</div>
+                    <div class="stat-value" id="attempts">0</div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="startGame()">Iniciar</button>
+        </div>
+
+        <div class="game-screen" id="prepareScreen">
+            <p class="message prepare">Prepare-se...</p>
+            <p class="subtitle">Aguarde o botão verde aparecer</p>
+        </div>
+
+        <div class="game-screen" id="clickScreen">
+            <button class="btn btn-green" id="clickBtn" onclick="handleClick()">CLIQUE AGORA!</button>
+        </div>
+
+        <div class="game-screen" id="resultScreen">
+            <p class="message" id="resultMessage"></p>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Seu Tempo</div>
+                    <div class="stat-value" id="currentTime">--</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Melhor Tempo</div>
+                    <div class="stat-value" id="bestTimeResult">--</div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="startGame()">Tentar Novamente</button>
+            <button class="btn btn-secondary" onclick="goBack()" style="margin-top: 12px;">Voltar ao Menu</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+
+    <script>
+        let startTime = 0;
+        let timeoutId = null;
+        let canClick = false;
+        let gameStarted = false;
+        let attempts = 0;
+        let bestTime = null;
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function startGame() {
+            attempts++;
+            document.getElementById('attempts').textContent = attempts;
+            
+            gameStarted = true;
+            canClick = false;
+            
+            showScreen('prepareScreen');
+            
+            const delay = Math.random() * 3000 + 2000;
+            
+            timeoutId = setTimeout(() => {
+                if (gameStarted) {
+                    showClickScreen();
+                }
+            }, delay);
+        }
+
+        function showClickScreen() {
+            showScreen('clickScreen');
+            canClick = true;
+            startTime = Date.now();
+        }
+
+        function handleClick() {
+            if (!gameStarted) return;
+
+            if (!canClick) {
+                clearTimeout(timeoutId);
+                gameStarted = false;
+                showTooEarly();
+                return;
+            }
+
+            const reactionTime = Date.now() - startTime;
+            canClick = false;
+            gameStarted = false;
+
+            showResult(reactionTime);
+        }
+
+        function showTooEarly() {
+            const messageEl = document.getElementById('resultMessage');
+            messageEl.innerHTML = 'Muito cedo!<br><span class="subtitle">Aguarde o botão verde aparecer</span>';
+            messageEl.className = 'message error';
+            
+            document.getElementById('currentTime').textContent = '--';
+            
+            showScreen('resultScreen');
+        }
+
+        function showResult(time) {
+            const messageEl = document.getElementById('resultMessage');
+            
+            if (bestTime === null || time < bestTime) {
+                bestTime = time;
+                document.getElementById('bestTime').textContent = bestTime + ' ms';
+            }
+            
+            document.getElementById('currentTime').textContent = time + ' ms';
+            document.getElementById('bestTimeResult').textContent = bestTime + ' ms';
+            
+            let rating = '';
+            if (time < 200) {
+                rating = 'Incrível!';
+            } else if (time < 900) {
+                rating = 'Muito rápido!';
+            } else if (time < 1100) {
+                rating = 'Bom tempo!';
+            } else if (time < 3000) {
+                rating = 'Pode melhorar!';
+            } else {
+                rating = 'Continue praticando!';
+            }
+            
+            messageEl.innerHTML = `<span class="success">${rating}</span><span class="time">${time} ms</span>`;
+            messageEl.className = 'message success';
+            
+            showScreen('resultScreen');
+        }
+
+        function goBack() {
+            gameStarted = false;
+            canClick = false;
+            clearTimeout(timeoutId);
+            showScreen('startScreen');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.key === ' ') {
+                e.preventDefault();
+                if (document.getElementById('clickScreen').classList.contains('active')) {
+                    handleClick();
+                } else if (document.getElementById('startScreen').classList.contains('active')) {
+                    startGame();
+                } else if (document.getElementById('resultScreen').classList.contains('active')) {
+                    startGame();
+                }
+            }
+        });
+    </script>
 </body>
 </html>

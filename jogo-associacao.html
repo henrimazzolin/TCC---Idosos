@@ -7,11 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
     <style>
         :root {
             --cor-primaria: #2563EB;
             --cor-secundaria: #10B981;
             --cor-terceira: #F59E0B;
+            --cor-erro: #EF4444;
             --cor-fundo: #F0F9FF;
             --cor-fundo-card: #FFFFFF;
             --cor-texto: #000000;
@@ -112,12 +114,72 @@
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 8px;
+            display: inline;
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }
 
         .page-title p {
             font-size: 18px;
             color: var(--cor-texto-claro);
             font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.1);
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #10B981;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .instrucao-destaque {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .instrucao-destaque p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #92400E;
         }
 
         .game-info {
@@ -194,13 +256,26 @@
 
         .word-card.selected {
             border-color: var(--cor-primaria);
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(37, 99, 235, 0.15);
+            transform: scale(1.05);
         }
 
         .word-card.matched {
             border-color: var(--cor-secundaria);
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(16, 185, 129, 0.2);
             cursor: default;
+        }
+
+        .word-card.wrong {
+            border-color: var(--cor-erro);
+            background: rgba(239, 68, 68, 0.2);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .connection-line {
@@ -210,21 +285,6 @@
             justify-content: center;
             font-size: 24px;
             color: var(--cor-texto-claro);
-        }
-
-        .instruction {
-            background: var(--cor-fundo-card);
-            border-radius: var(--borda-radius);
-            padding: 20px;
-            text-align: center;
-            box-shadow: var(--sombra);
-            margin-bottom: 30px;
-        }
-
-        .instruction p {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
         }
 
         .btn {
@@ -273,24 +333,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .feedback-icon.success {
             background: rgba(16, 185, 129, 0.2);
         }
 
-        .feedback-icon.success svg {
+        .feedback-icon svg {
             fill: #10B981;
-            width: 50px;
-            height: 50px;
-        }
-
-        .feedback-icon.error {
-            background: rgba(239, 68, 68, 0.2);
-        }
-
-        .feedback-icon.error svg {
-            fill: #EF4444;
             width: 50px;
             height: 50px;
         }
@@ -380,8 +427,19 @@
         </div>
 
         <div class="page-title">
-            <h1>Associação de Palavras</h1>
+            <div class="titulo-com-tts">
+                <h1>Associação de Palavras</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Associação de Palavras. Conecte as palavras que têm relação entre si.', this)" aria-label="Ouvir instruções">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
             <p>Conecte as palavras que têm relação entre si</p>
+        </div>
+
+        <div class="instrucao-destaque">
+            <p>Como jogar: Toque em uma palavra da esquerda e depois na palavra relacionada da direita!</p>
         </div>
 
         <div class="game-info">
@@ -393,10 +451,6 @@
                 <div class="info-label">Pares</div>
                 <div class="info-value" id="pairs">0/4</div>
             </div>
-        </div>
-
-        <div class="instruction">
-            <p>Toque em uma palavra da esquerda e depois na palavra relacionada da direita</p>
         </div>
 
         <div class="game-area">
@@ -411,15 +465,17 @@
             </div>
         </div>
 
-        <button class="btn" id="restartBtn" onclick="initGame()">Reiniciar Jogo</button>
+        <button class="btn" id="restartBtn" onclick="restartGame()">Reiniciar Jogo</button>
     </div>
 
     <div class="overlay" id="overlay"></div>
     <div class="feedback" id="feedback">
-        <div class="feedback-icon" id="feedbackIcon"></div>
-        <h2 id="feedbackTitle">Parabéns!</h2>
-        <p id="feedbackText">Você completou todas as associações!</p>
-        <button class="btn" id="feedbackBtn" onclick="restartGame()">Jogar Novamente</button>
+        <div class="feedback-icon success">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <h2>Parabéns!</h2>
+        <p>Você completou todas as associações!</p>
+        <button class="btn" onclick="restartGame()">Jogar Novamente</button>
     </div>
 
     <footer>
@@ -443,7 +499,8 @@
         ];
 
         let currentPairs = [];
-        let selectedLeft = null;
+        let selectedLeftCard = null;
+        let selectedLeftWord = null;
         let matchedPairs = 0;
         let correctCount = 0;
         let isLocked = false;
@@ -458,11 +515,11 @@
         }
 
         function initGame() {
-            currentPairs = shuffleArray(wordPairs).slice(0, 4);
-            selectedLeft = null;
             matchedPairs = 0;
             correctCount = 0;
             isLocked = false;
+            selectedLeftCard = null;
+            selectedLeftWord = null;
             
             document.getElementById('correct').textContent = '0';
             document.getElementById('pairs').textContent = '0/4';
@@ -473,100 +530,88 @@
             leftContainer.innerHTML = '';
             rightContainer.innerHTML = '';
             
-            const leftWords = currentPairs.map(p => p.left);
-            const rightWords = shuffleArray(currentPairs.map(p => p.right));
+            currentPairs = shuffleArray(wordPairs).slice(0, 4);
             
-            leftWords.forEach(word => {
+            const shuffledRight = shuffleArray([...currentPairs]);
+            
+            currentPairs.forEach((pair, index) => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
-                card.textContent = word;
-                card.onclick = () => selectLeft(card, word);
+                card.textContent = pair.left;
+                card.dataset.word = pair.left;
+                card.dataset.pairIndex = index;
+                card.addEventListener('click', () => selectLeftCard(card));
                 leftContainer.appendChild(card);
             });
             
-            rightWords.forEach(word => {
+            shuffledRight.forEach((pair, index) => {
                 const card = document.createElement('div');
                 card.className = 'word-card';
-                card.textContent = word;
-                card.onclick = () => selectRight(card, word);
+                card.textContent = pair.right;
+                card.dataset.word = pair.right;
+                card.dataset.pairIndex = currentPairs.findIndex(p => p.right === pair.right);
+                card.addEventListener('click', () => selectRightCard(card));
                 rightContainer.appendChild(card);
             });
         }
 
-        function selectLeft(card, word) {
-            if (isLocked || card.classList.contains('matched')) return;
+        function selectLeftCard(card) {
+            if (isLocked) return;
+            if (card.classList.contains('matched')) return;
             
-            const allLeft = document.querySelectorAll('#leftWords .word-card');
-            allLeft.forEach(c => c.classList.remove('selected'));
-            
+            document.querySelectorAll('#leftWords .word-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
-            selectedLeft = word;
+            selectedLeftCard = card;
+            selectedLeftWord = card.dataset.word;
         }
 
-        function selectRight(card, word) {
-            if (isLocked || card.classList.contains('matched') || !selectedLeft) return;
+        function selectRightCard(card) {
+            if (isLocked) return;
+            if (card.classList.contains('matched')) return;
+            if (!selectedLeftCard) return;
             
             isLocked = true;
             
-            const pair = currentPairs.find(p => p.left === selectedLeft);
+            const leftPairIndex = parseInt(selectedLeftCard.dataset.pairIndex);
+            const rightPairIndex = parseInt(card.dataset.pairIndex);
             
-            if (pair && pair.right === word) {
+            if (leftPairIndex === rightPairIndex) {
                 correctCount++;
                 matchedPairs++;
                 document.getElementById('correct').textContent = correctCount;
-                document.getElementById('pairs').textContent = `${matchedPairs}/4`;
+                document.getElementById('pairs').textContent = matchedPairs + '/4';
                 
-                const leftCard = document.querySelector(`#leftWords .word-card:contains('${selectedLeft}')`);
-                document.querySelectorAll('#leftWords .word-card').forEach(c => {
-                    if (c.textContent === selectedLeft) {
-                        c.classList.remove('selected');
-                        c.classList.add('matched');
-                    }
-                });
+                selectedLeftCard.classList.remove('selected');
+                selectedLeftCard.classList.add('matched');
                 card.classList.add('matched');
                 
-                showFeedback(true, 'Muito bem!', 'Você encontrou uma associação!');
+                selectedLeftCard = null;
+                selectedLeftWord = null;
+                isLocked = false;
                 
                 if (matchedPairs === 4) {
                     setTimeout(() => {
-                        document.getElementById('feedbackTitle').textContent = 'Parabéns!';
-                        document.getElementById('feedbackText').textContent = 'Você completou todas as associações!';
-                        document.getElementById('overlay').classList.add('show');
-                        document.getElementById('feedback').classList.add('show');
-                    }, 1000);
+                        showWinMessage();
+                    }, 500);
                 }
             } else {
-                showFeedback(false, 'Quase lá!', 'Essas palavras não estão relacionadas');
-                document.querySelectorAll('#leftWords .word-card').forEach(c => {
-                    if (c.textContent === selectedLeft) {
-                        c.classList.remove('selected');
-                    }
-                });
-            }
-            
-            selectedLeft = null;
-            setTimeout(() => { isLocked = false; }, 500);
-        }
-
-        function showFeedback(success, title, text) {
-            const overlay = document.getElementById('overlay');
-            const feedback = document.getElementById('feedback');
-            const feedbackIcon = document.getElementById('feedbackIcon');
-            
-            feedbackIcon.className = 'feedback-icon ' + (success ? 'success' : 'error');
-            feedbackIcon.innerHTML = success 
-                ? '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
-                : '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
-            
-            document.getElementById('feedbackTitle').textContent = title;
-            document.getElementById('feedbackText').textContent = text;
-            
-            if (success && matchedPairs < 4) {
+                card.classList.add('wrong');
+                
                 setTimeout(() => {
-                    overlay.classList.remove('show');
-                    feedback.classList.remove('show');
+                    card.classList.remove('wrong');
+                    if (selectedLeftCard) {
+                        selectedLeftCard.classList.remove('selected');
+                        selectedLeftCard = null;
+                        selectedLeftWord = null;
+                    }
+                    isLocked = false;
                 }, 800);
             }
+        }
+
+        function showWinMessage() {
+            document.getElementById('overlay').classList.add('show');
+            document.getElementById('feedback').classList.add('show');
         }
 
         function restartGame() {
@@ -574,6 +619,8 @@
             document.getElementById('feedback').classList.remove('show');
             initGame();
         }
+
+        document.getElementById('overlay').addEventListener('click', restartGame);
 
         initGame();
     </script>

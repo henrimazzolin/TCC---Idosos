@@ -8,43 +8,685 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cor-primaria: #2563EB; --cor-secundaria: #10B981; --cor-fundo: #F0F9FF; --cor-fundo-card: #FFFFFF; --cor-texto: #000000; --cor-texto-claro: #1E293B; --sombra: 0 4px 20px rgba(37, 99, 235, 0.15); --borda-radius: 20px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--cor-fundo); color: var(--cor-texto); min-height: 100vh; font-weight: 500; }
-        .container { max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--cor-fundo-card); border: none; border-radius: 14px; cursor: pointer; box-shadow: var(--sombra); transition: all 0.3s ease; text-decoration: none; }
-        .back-btn:hover { transform: translateX(-4px); }
-        .back-btn svg { width: 24px; height: 24px; fill: var(--cor-texto); }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 26px; height: 26px; fill: white; }
-        .logo-text { font-size: 20px; font-weight: 700; color: var(--cor-primaria); }
-        .page-title { text-align: center; margin-bottom: 30px; }
-        .page-title h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; margin-bottom: 8px; }
-        .page-title p { font-size: 18px; color: var(--cor-texto-claro); font-weight: 500; }
-        .game-area { background: var(--cor-fundo-card); border-radius: var(--borda-radius); box-shadow: var(--sombra); padding: 40px; text-align: center; }
-        .game-icon { width: 120px; height: 120px; margin: 0 auto 30px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .game-icon svg { width: 60px; height: 60px; fill: #10B981; }
-        .game-description { font-size: 18px; color: var(--cor-texto-claro); line-height: 1.7; margin-bottom: 30px; }
-        .btn { padding: 16px 48px; background: var(--cor-primaria); color: white; border: none; border-radius: 30px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { background: #1D4ED8; transform: scale(1.05); }
-        footer { text-align: center; padding: 20px; color: var(--cor-texto-claro); font-size: 14px; }
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-erro: #EF4444;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: 16px;
+            color: var(--cor-texto-claro);
+        }
+
+        .game-container {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 25px;
+        }
+
+        .timer {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            padding: 12px;
+            background: var(--cor-fundo);
+            border-radius: 12px;
+        }
+
+        .sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 1px;
+            background: var(--cor-texto);
+            border: 3px solid var(--cor-texto);
+            margin: 0 auto 25px;
+            width: fit-content;
+        }
+
+        .cell {
+            width: 48px;
+            height: 48px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .cell:nth-child(3n) {
+            border-right: 2px solid var(--cor-texto);
+        }
+
+        .cell:nth-child(9n) {
+            border-right: none;
+        }
+
+        .cell:nth-child(n+19):nth-child(-n+27),
+        .cell:nth-child(n+46):nth-child(-n+54) {
+            border-bottom: 2px solid var(--cor-texto);
+        }
+
+        .cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: var(--cor-texto);
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .cell input:focus {
+            background: #DBEAFE;
+        }
+
+        .cell.fixed {
+            background: #E2E8F0;
+        }
+
+        .cell.fixed input {
+            color: var(--cor-texto);
+            cursor: not-allowed;
+        }
+
+        .cell.correct {
+            background: #DCFCE7;
+        }
+
+        .cell.correct input {
+            color: #065F46;
+        }
+
+        .cell.wrong {
+            background: #FEE2E2;
+        }
+
+        .cell.wrong input {
+            color: #991B1B;
+        }
+
+        .cell.highlight {
+            background: #FEF3C7;
+        }
+
+        .cell.same-number {
+            background: #DBEAFE;
+        }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 6px;
+            margin-bottom: 25px;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .num-btn {
+            width: 42px;
+            height: 48px;
+            background: var(--cor-fundo);
+            border: 2px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: var(--cor-texto);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .num-btn:hover {
+            background: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
+        }
+
+        .num-btn:active {
+            transform: scale(0.95);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: var(--cor-terceira);
+        }
+
+        .btn-secondary:hover {
+            background: #D97706;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--cor-texto);
+            border: 2px solid #CBD5E1;
+        }
+
+        .btn-outline:hover {
+            background: #F1F5F9;
+            border-color: var(--cor-primaria);
+        }
+
+        .message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cor-fundo-card);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .message.show {
+            display: block;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .message h2 {
+            font-size: 36px;
+            color: var(--cor-secundaria);
+            margin-bottom: 16px;
+        }
+
+        .message p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            margin-bottom: 24px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .cell {
+                width: 38px;
+                height: 38px;
+            }
+
+            .cell input {
+                font-size: 20px;
+            }
+
+            .numpad {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .num-btn {
+                width: 100%;
+                height: 44px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
+            <a href="grupo-moderado.html" class="back-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MindCare</span>
+            </div>
         </div>
-        <div class="page-title"><h1>Sudoku</h1><p>Preencha os números de 1 a 9</p></div>
-        <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24"><path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"/></svg></div>
-            <p class="game-description">O Sudoku é um clássico dos jogos de lógica! Preencha a grade 9x9 com números de 1 a 9, sem repeti-los em nenhuma linha, coluna ou bloco 3x3.</p>
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
+
+        <div class="page-title">
+            <h1>Sudoku</h1>
+            <p>Preencha com números de 1 a 9</p>
+        </div>
+
+        <div class="game-container">
+            <div class="timer" id="timer">00:00</div>
+
+            <div class="sudoku-grid" id="grid"></div>
+
+            <div class="numpad">
+                <button class="num-btn" onclick="inputNumber(1)">1</button>
+                <button class="num-btn" onclick="inputNumber(2)">2</button>
+                <button class="num-btn" onclick="inputNumber(3)">3</button>
+                <button class="num-btn" onclick="inputNumber(4)">4</button>
+                <button class="num-btn" onclick="inputNumber(5)">5</button>
+                <button class="num-btn" onclick="inputNumber(6)">6</button>
+                <button class="num-btn" onclick="inputNumber(7)">7</button>
+                <button class="num-btn" onclick="inputNumber(8)">8</button>
+                <button class="num-btn" onclick="inputNumber(9)">9</button>
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="checkSolution()">Verificar</button>
+                <button class="btn btn-outline" onclick="resetGame()">Reiniciar</button>
+                <button class="btn btn-secondary" onclick="showSolution()">Ver Solução</button>
+                <button class="btn btn-outline" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
+            </div>
         </div>
     </div>
-    <footer><p>Feito com cuidado para você</p></footer>
+
+    <div class="overlay" id="overlay" onclick="closeMessage()"></div>
+    <div class="message" id="message">
+        <h2>Parabéns!</h2>
+        <p>Você completou o Sudoku!</p>
+        <button class="btn" onclick="resetGame()">Jogar Novamente</button>
+    </div>
+
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
+
+    <script>
+        const puzzle = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        const solution = [
+            [5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+        ];
+
+        let selectedCell = null;
+        let timerInterval = null;
+        let seconds = 0;
+
+        function initGame() {
+            const gridEl = document.getElementById('grid');
+            gridEl.innerHTML = '';
+
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.dataset.row = row;
+                    input.dataset.col = col;
+
+                    if (puzzle[row][col] !== 0) {
+                        input.value = puzzle[row][col];
+                        input.readOnly = true;
+                        cell.classList.add('fixed');
+                    }
+
+                    input.addEventListener('focus', handleFocus);
+                    input.addEventListener('input', handleInput);
+                    input.addEventListener('keydown', handleKeydown);
+
+                    cell.appendChild(input);
+                    gridEl.appendChild(cell);
+                }
+            }
+
+            startTimer();
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            seconds = 0;
+            updateTimer();
+            timerInterval = setInterval(() => {
+                seconds++;
+                updateTimer();
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${mins}:${secs}`;
+        }
+
+        function handleFocus(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+
+            document.querySelectorAll('.cell').forEach(c => c.classList.remove('highlight', 'same-number'));
+
+            document.querySelectorAll('.cell').forEach(c => {
+                const r = parseInt(c.dataset.row);
+                const co = parseInt(c.dataset.col);
+                if (r === row || co === col) {
+                    c.classList.add('highlight');
+                }
+                const input = c.querySelector('input');
+                if (input && input.value && input.value === e.target.value && e.target.value !== '') {
+                    c.classList.add('same-number');
+                }
+            });
+
+            selectedCell = e.target;
+        }
+
+        function handleInput(e) {
+            const value = e.target.value;
+            if (value && !/[1-9]/.test(value)) {
+                e.target.value = '';
+            }
+            e.target.value = value.replace(/[^1-9]/g, '');
+
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+            
+            document.querySelectorAll('.cell').forEach(c => c.classList.remove('same-number'));
+            if (e.target.value) {
+                document.querySelectorAll('.cell').forEach(c => {
+                    const input = c.querySelector('input');
+                    if (input && input.value === e.target.value) {
+                        c.classList.add('same-number');
+                    }
+                });
+            }
+        }
+
+        function handleKeydown(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+
+            if (e.key >= '1' && e.key <= '9') {
+                if (!e.target.readOnly) {
+                    e.target.value = e.key;
+                    handleInput(e);
+                }
+            } else if (e.key === 'Backspace' || e.key === 'Delete') {
+                if (!e.target.readOnly) {
+                    e.target.value = '';
+                    handleInput(e);
+                }
+            } else if (e.key === 'ArrowRight' && col < 8) {
+                e.preventDefault();
+                focusCell(row, col + 1);
+            } else if (e.key === 'ArrowLeft' && col > 0) {
+                e.preventDefault();
+                focusCell(row, col - 1);
+            } else if (e.key === 'ArrowDown' && row < 8) {
+                e.preventDefault();
+                focusCell(row + 1, col);
+            } else if (e.key === 'ArrowUp' && row > 0) {
+                e.preventDefault();
+                focusCell(row - 1, col);
+            }
+        }
+
+        function focusCell(row, col) {
+            const input = document.querySelector(`input[data-row="${row}"][data-col="${col}"]`);
+            if (input) input.focus();
+        }
+
+        function inputNumber(num) {
+            if (selectedCell && !selectedCell.readOnly) {
+                selectedCell.value = num;
+                handleInput({ target: selectedCell });
+            }
+        }
+
+        function checkSolution() {
+            let allCorrect = true;
+            let allFilled = true;
+
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.classList.remove('correct', 'wrong');
+            });
+
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+                    const input = cell.querySelector('input');
+                    const value = parseInt(input.value);
+                    const expected = solution[row][col];
+
+                    if (!input.value) {
+                        allFilled = false;
+                        allCorrect = false;
+                    } else if (value === expected) {
+                        if (!input.readOnly) {
+                            cell.classList.add('correct');
+                        }
+                    } else {
+                        cell.classList.add('wrong');
+                        allCorrect = false;
+                    }
+                }
+            }
+
+            if (!allFilled) {
+                alert('Preencha todas as células antes de verificar.');
+            } else if (allCorrect) {
+                clearInterval(timerInterval);
+                document.getElementById('overlay').classList.add('show');
+                document.getElementById('message').classList.add('show');
+            }
+        }
+
+        function showSolution() {
+            if (confirm('Deseja ver a solução? O jogo será reiniciado.')) {
+                for (let row = 0; row < 9; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+                        const input = cell.querySelector('input');
+                        input.value = solution[row][col];
+                    }
+                }
+                clearInterval(timerInterval);
+            }
+        }
+
+        function resetGame() {
+            closeMessage();
+            
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+                    const input = cell.querySelector('input');
+                    
+                    cell.classList.remove('correct', 'wrong', 'highlight', 'same-number');
+                    
+                    if (!input.readOnly) {
+                        input.value = '';
+                    }
+                }
+            }
+
+            startTimer();
+        }
+
+        function closeMessage() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('message').classList.remove('show');
+        }
+
+        initGame();
+    </script>
 </body>
 </html>

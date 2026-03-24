@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
     <style>
         :root {
             --cor-primaria: #10B981;
@@ -112,12 +113,72 @@
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 8px;
+            display: inline;
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }
 
         .page-title p {
             font-size: 18px;
             color: var(--cor-texto-claro);
             font-weight: 500;
+        }
+
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #059669;
+            transform: scale(1.1);
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #2563EB;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .instrucao-destaque {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .instrucao-destaque p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #92400E;
         }
 
         .game-info {
@@ -375,8 +436,19 @@
         </div>
 
         <div class="page-title">
-            <h1>Reconhecimento de Imagens</h1>
+            <div class="titulo-com-tts">
+                <h1>Reconhecimento de Imagens</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Reconhecimento de Imagens. Identifique o que está na figura. Clique na resposta correta.', this)" aria-label="Ouvir instruções">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
             <p>Identifique o que está na figura</p>
+        </div>
+
+        <div class="instrucao-destaque">
+            <p>Como jogar: Olhe a figura e clique no nome dela!</p>
         </div>
 
         <div class="game-info">

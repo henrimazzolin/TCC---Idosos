@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/acessibilidade.js" defer></script>
     <style>
         :root {
             --cor-primaria: #2563EB;
@@ -102,6 +103,41 @@
             color: var(--cor-primaria);
         }
 
+        .tts-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: var(--cor-primaria);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tts-btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.1);
+        }
+
+        .tts-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .tts-btn.lendo {
+            background: #10B981;
+            animation: pulsando 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulsando {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
         .page-title {
             text-align: center;
             margin-bottom: 30px;
@@ -112,12 +148,37 @@
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 8px;
+            display: inline;
+        }
+
+        .titulo-com-tts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }
 
         .page-title p {
             font-size: 18px;
             color: var(--cor-texto-claro);
             font-weight: 500;
+        }
+
+        .instrucao-destaque {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .instrucao-destaque p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #92400E;
         }
 
         .game-info {
@@ -147,11 +208,47 @@
             color: var(--cor-primaria);
         }
 
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: var(--cor-terceira);
+        }
+
+        .btn-secondary:hover {
+            background: #D97706;
+        }
+
         .game-board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .card {
@@ -260,23 +357,8 @@
             font-weight: 500;
         }
 
-        .btn {
-            padding: 14px 36px;
-            background: var(--cor-primaria);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .feedback .btn {
             margin-top: 20px;
-        }
-
-        .btn:hover {
-            background: #1D4ED8;
-            transform: scale(1.05);
         }
 
         .overlay {
@@ -350,8 +432,19 @@
         </div>
 
         <div class="page-title">
-            <h1>Jogo da Memória</h1>
+            <div class="titulo-com-tts">
+                <h1>Jogo da Memória</h1>
+                <button class="tts-btn" onclick="toggleLeitura('Jogo da Memória. Encontre os pares de cartas iguais. Clique em uma carta para virar.', this)" aria-label="Ouvir instruções">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
             <p>Encontre os pares de cartas iguais</p>
+        </div>
+
+        <div class="instrucao-destaque">
+            <p>Como jogar: Clique em uma carta para ver a figura. Depois clique em outra para encontrar o par!</p>
         </div>
 
         <div class="game-info">
@@ -366,6 +459,11 @@
         </div>
 
         <div class="game-board" id="gameBoard"></div>
+
+        <div class="buttons">
+            <button class="btn" onclick="initGame()">Reiniciar Jogo</button>
+            <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
+        </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -398,12 +496,20 @@
         let attempts = 0;
         let isLocked = false;
 
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         function initGame() {
             const board = document.getElementById('gameBoard');
             board.innerHTML = '';
             
-            cards = [...icons, ...icons];
-            cards = cards.sort(() => Math.random() - 0.5);
+            cards = shuffleArray([...icons, ...icons]);
             
             flippedCards = [];
             matchedPairs = 0;
@@ -417,19 +523,21 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.dataset.index = index;
+                card.dataset.icon = icon;
                 card.innerHTML = `<div class="card-icon">${icon}</div>`;
-                card.addEventListener('click', () => flipCard(card, index));
+                card.addEventListener('click', () => flipCard(card));
                 board.appendChild(card);
             });
         }
 
-        function flipCard(card, index) {
-            if (isLocked || card.classList.contains('flipped') || card.classList.contains('matched')) {
-                return;
-            }
+        function flipCard(card) {
+            if (isLocked) return;
+            if (card.classList.contains('flipped')) return;
+            if (card.classList.contains('matched')) return;
+            if (flippedCards.length >= 2) return;
             
             card.classList.add('flipped');
-            flippedCards.push({ card, index, icon: cards[index] });
+            flippedCards.push(card);
             
             if (flippedCards.length === 2) {
                 attempts++;
@@ -440,27 +548,38 @@
 
         function checkMatch() {
             isLocked = true;
-            const [first, second] = flippedCards;
             
-            if (first.icon === second.icon) {
+            const [card1, card2] = flippedCards;
+            const icon1 = card1.dataset.icon;
+            const icon2 = card2.dataset.icon;
+            
+            if (icon1 === icon2) {
                 setTimeout(() => {
-                    first.card.classList.add('matched');
-                    second.card.classList.add('matched');
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
                     matchedPairs++;
                     document.getElementById('pairs').textContent = matchedPairs;
                     
-                    showFeedback(true, 'Muito bem!', 'Você encontrou um par!');
-                }, 300);
+                    flippedCards = [];
+                    isLocked = false;
+                    
+                    if (matchedPairs === 8) {
+                        setTimeout(() => {
+                            showWinMessage();
+                        }, 500);
+                    }
+                }, 400);
             } else {
                 setTimeout(() => {
-                    first.card.classList.remove('flipped');
-                    second.card.classList.remove('flipped');
-                    showFeedback(false, 'Quase lá!', 'Tente encontrar outro par');
-                }, 600);
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                    isLocked = false;
+                }, 1000);
             }
         }
 
-        function showFeedback(success, title, text) {
+        function showWinMessage() {
             const overlay = document.getElementById('overlay');
             const feedback = document.getElementById('feedback');
             const feedbackIcon = document.getElementById('feedbackIcon');
@@ -468,30 +587,16 @@
             const feedbackText = document.getElementById('feedbackText');
             const feedbackBtn = document.getElementById('feedbackBtn');
             
-            feedbackIcon.className = 'feedback-icon ' + (success ? 'success' : 'error');
-            feedbackIcon.innerHTML = success 
-                ? '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
-                : '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+            feedbackIcon.className = 'feedback-icon success';
+            feedbackIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
             
-            feedbackTitle.textContent = title;
-            feedbackText.textContent = text;
-            
-            if (matchedPairs === 8) {
-                feedbackTitle.textContent = 'Parabéns!';
-                feedbackText.textContent = 'Você encontrou todos os pares!';
-                feedbackBtn.textContent = 'Jogar Novamente';
-                feedbackBtn.onclick = () => {
-                    hideFeedback();
-                    initGame();
-                };
-            } else {
-                feedbackBtn.textContent = 'Continuar';
-                feedbackBtn.onclick = () => {
-                    hideFeedback();
-                    flippedCards = [];
-                    isLocked = false;
-                };
-            }
+            feedbackTitle.textContent = 'Parabéns!';
+            feedbackText.textContent = `Você encontrou todos os pares em ${attempts} tentativas!`;
+            feedbackBtn.textContent = 'Jogar Novamente';
+            feedbackBtn.onclick = () => {
+                hideFeedback();
+                initGame();
+            };
             
             overlay.classList.add('show');
             feedback.classList.add('show');
