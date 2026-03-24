@@ -176,6 +176,39 @@
             margin-left: 16px;
         }
 
+        /* ===== SUDOKU ===== */
+
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 45px);
+            gap: 4px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .sudoku-board input {
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .sudoku-board input:focus {
+            background-color: #dbeafe;
+        }
+
+        /* blocos 3x3 */
+        .sudoku-board input:nth-child(3n) {
+            margin-right: 6px;
+        }
+
+        .sudoku-board input:nth-child(n+19):nth-child(-n+27),
+        .sudoku-board input:nth-child(n+46):nth-child(-n+54) {
+            margin-bottom: 6px;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -216,6 +249,51 @@
     <footer>
         <p>Feito com cuidado para você</p>
     </footer>
+
+    <script>
+        function iniciarJogo() {
+            document.querySelector(".game-icon").style.display = "none";
+            document.querySelector(".game-description").style.display = "none";
+
+            document.querySelector(".btn").style.display = "none";
+            document.querySelector(".btn-secondary").style.display = "none";
+
+            document.getElementById("jogo").style.display = "block";
+
+            gerarTabuleiro();
+        }
+
+        function voltarMenu() {
+            document.querySelector(".game-icon").style.display = "flex";
+            document.querySelector(".game-description").style.display = "block";
+
+            document.querySelector(".btn").style.display = "inline-block";
+            document.querySelector(".btn-secondary").style.display = "inline-block";
+
+            document.getElementById("jogo").style.display = "none";
+        }
+
+        function gerarTabuleiro() {
+            const board = document.getElementById("board");
+            board.innerHTML = "";
+
+            for (let i = 0; i < 81; i++) {
+                const input = document.createElement("input");
+
+                input.maxLength = 1;
+
+                input.addEventListener("input", () => {
+                    input.value = input.value.replace(/[^1-9]/g, "");
+                });
+
+                board.appendChild(input);
+            }
+        }
+
+        function novoJogo() {
+            gerarTabuleiro();
+        }
+    </script>
 </body>
 
 </html>

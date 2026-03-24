@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindCare - Quebra-cabeça</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --cor-primaria: #2563EB;
@@ -31,9 +31,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--cor-fundo);
-            color: var(--cor-texto);
             min-height: 100vh;
-            font-weight: 500;
         }
 
         .container {
@@ -50,51 +48,15 @@
         }
 
         .back-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             width: 50px;
             height: 50px;
             background: var(--cor-fundo-card);
-            border: none;
             border-radius: 14px;
-            cursor: pointer;
-            box-shadow: var(--sombra);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .back-btn:hover {
-            transform: translateX(-4px);
-            box-shadow: var(--sombra-hover);
-        }
-
-        .back-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--cor-texto);
-        }
-
-        .logo {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-        }
-
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
+            align-items: center;
+            box-shadow: var(--sombra);
+            text-decoration: none;
         }
 
         .logo-text {
@@ -106,19 +68,6 @@
         .page-title {
             text-align: center;
             margin-bottom: 30px;
-        }
-
-        .page-title h1 {
-            font-size: clamp(24px, 4vw, 32px);
-            font-weight: 700;
-            color: var(--cor-texto);
-            margin-bottom: 8px;
-        }
-
-        .page-title p {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
         }
 
         .game-area {
@@ -133,110 +82,219 @@
             width: 120px;
             height: 120px;
             margin: 0 auto 30px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(37, 99, 235, 0.1));
+            background: rgba(37, 99, 235, 0.15);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .game-icon svg {
-            width: 60px;
-            height: 60px;
-            fill: var(--cor-primaria);
-        }
-
         .game-description {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            line-height: 1.7;
             margin-bottom: 30px;
         }
 
         .btn {
-            padding: 16px 48px;
-            background: var(--cor-primaria);
-            color: white;
+            padding: 14px 30px;
             border: none;
             border-radius: 30px;
-            font-size: 20px;
-            font-weight: 600;
-            font-family: inherit;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background: #1D4ED8;
-            transform: scale(1.05);
-        }
-        .btn-secondary:hover {
-            background: #D97706;
+            font-weight: 600;
+            margin: 5px;
+            background: var(--cor-primaria);
+            color: white;
         }
 
         .btn-secondary {
             background: #D97706;
-            margin-left: 16px;
+        }
+
+        /* ===== PUZZLE ===== */
+
+        .puzzle-board {
+            display: grid;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .puzzle-tile {
+            border-radius: 10px;
+            cursor: pointer;
+            background-size: 100% 100%;
+            transition: 0.2s;
+        }
+
+        .puzzle-tile:hover {
+            transform: scale(1.05);
+        }
+
+        .empty {
+            background: transparent !important;
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: var(--cor-texto-claro);
             font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-            .header {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .logo {
-                width: 100%;
-                justify-content: center;
-                margin-top: 12px;
-            }
-
-            .btn {
-                width: 100%;
-            }
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
+
         <div class="header">
-            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg></a>
-            <div class="logo">
-                <div class="logo-icon"><svg viewBox="0 0 24 24">
-                        <path
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                    </svg></div><span class="logo-text">MindCare</span>
-            </div>
+            <a href="grupo-moderado.html" class="back-btn">←</a>
+            <div class="logo-text">MindCare</div>
         </div>
+
         <div class="page-title">
             <h1>Quebra-cabeça</h1>
             <p>Monte a imagem correta</p>
         </div>
+
         <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24">
-                    <path
-                        d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 9H6V4h7v7zm5 5h-4v-2h4v2zm0-4h-4V9h4v3zm0-5h-4V6h4v2z" />
-                </svg></div>
-            <p class="game-description">Monte as peças do quebra-cabeça na ordem correta para revelar a imagem completa.
-                Um ótimo exercício para a concentração e percepção visual.</p>
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
-            <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
-            
+
+            <!-- MENU -->
+            <div id="menu">
+                <div class="game-icon">🧩</div>
+
+                <p class="game-description">
+                    Monte as peças do quebra-cabeça na ordem correta para revelar a imagem completa.
+                </p>
+
+                <button class="btn" onclick="iniciarJogo()">Começar Jogo</button>
+                <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
+            </div>
+
+            <!-- JOGO -->
+            <div id="jogo" style="display:none;">
+
+                <div style="margin-bottom:20px;">
+                    <select id="dificuldade">
+                        <option value="3">3x3</option>
+                        <option value="4" selected>4x4</option>
+                        <option value="5">5x5</option>
+                    </select>
+                    <button class="btn" onclick="novoJogo()">Novo Jogo</button>
+                </div>
+
+                <div id="puzzle-board" class="puzzle-board"></div>
+
+                <button class="btn btn-secondary" onclick="voltarMenu()">Voltar</button>
+            </div>
+
         </div>
+
     </div>
+
     <footer>
         <p>Feito com cuidado para você</p>
     </footer>
-</body>
 
+    <script>
+        let board = [];
+        let size = 4;
+        let imagemURL = "https://picsum.photos/400";
+
+        function iniciarJogo() {
+            document.getElementById("menu").style.display = "none";
+            document.getElementById("jogo").style.display = "block";
+            novoJogo();
+        }
+
+        function voltarMenu() {
+            document.getElementById("menu").style.display = "block";
+            document.getElementById("jogo").style.display = "none";
+        }
+
+        function novoJogo() {
+            size = parseInt(document.getElementById("dificuldade").value);
+
+            board = [...Array(size * size - 1).keys()].map(n => n + 1);
+            board.push(null);
+
+            embaralhar(board);
+            renderizar();
+        }
+
+        function renderizar() {
+            const container = document.getElementById("puzzle-board");
+            container.innerHTML = "";
+            container.style.gridTemplateColumns = `repeat(${size}, 80px)`;
+
+            board.forEach((num, index) => {
+                const tile = document.createElement("div");
+                tile.classList.add("puzzle-tile");
+
+                tile.style.width = "80px";
+                tile.style.height = "80px";
+
+                if (num === null) {
+                    tile.classList.add("empty");
+                } else {
+                    const row = Math.floor((num - 1) / size);
+                    const col = (num - 1) % size;
+
+                    tile.style.backgroundImage = `url(${imagemURL})`;
+                    tile.style.backgroundSize = `${size * 100}%`;
+                    tile.style.backgroundPosition =
+                        `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
+
+                    tile.onclick = () => mover(index);
+                }
+
+                container.appendChild(tile);
+            });
+        }
+
+        function mover(index) {
+            const emptyIndex = board.indexOf(null);
+
+            const linha = Math.floor(index / size);
+            const coluna = index % size;
+
+            const linhaVazia = Math.floor(emptyIndex / size);
+            const colunaVazia = emptyIndex % size;
+
+            const podeMover =
+                (linha === linhaVazia && Math.abs(coluna - colunaVazia) === 1) ||
+                (coluna === colunaVazia && Math.abs(linha - linhaVazia) === 1);
+
+            if (podeMover) {
+                [board[index], board[emptyIndex]] = [board[emptyIndex], board[index]];
+                renderizar();
+                verificarVitoria();
+            }
+        }
+
+        function verificarVitoria() {
+            for (let i = 0; i < board.length - 1; i++) {
+                if (board[i] !== i + 1) return;
+            }
+
+            setTimeout(() => {
+                alert("🎉 Você venceu!");
+            }, 200);
+        }
+
+        function embaralhar(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        document.getElementById("uploadImagem").addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            imagemURL = URL.createObjectURL(file);
+            novoJogo();
+        });
+    </script>
+
+</body>
 </html>
+```
