@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,43 +9,213 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cor-primaria: #2563EB; --cor-secundaria: #10B981; --cor-fundo: #F0F9FF; --cor-fundo-card: #FFFFFF; --cor-texto: #000000; --cor-texto-claro: #1E293B; --sombra: 0 4px 20px rgba(37, 99, 235, 0.15); --borda-radius: 20px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--cor-fundo); color: var(--cor-texto); min-height: 100vh; font-weight: 500; }
-        .container { max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--cor-fundo-card); border: none; border-radius: 14px; cursor: pointer; box-shadow: var(--sombra); transition: all 0.3s ease; text-decoration: none; }
-        .back-btn:hover { transform: translateX(-4px); }
-        .back-btn svg { width: 24px; height: 24px; fill: var(--cor-texto); }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 26px; height: 26px; fill: white; }
-        .logo-text { font-size: 20px; font-weight: 700; color: var(--cor-primaria); }
-        .page-title { text-align: center; margin-bottom: 30px; }
-        .page-title h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; margin-bottom: 8px; }
-        .page-title p { font-size: 18px; color: var(--cor-texto-claro); font-weight: 500; }
-        .game-area { background: var(--cor-fundo-card); border-radius: var(--borda-radius); box-shadow: var(--sombra); padding: 40px; text-align: center; }
-        .game-icon { width: 120px; height: 120px; margin: 0 auto 30px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .game-icon svg { width: 60px; height: 60px; fill: #10B981; }
-        .game-description { font-size: 18px; color: var(--cor-texto-claro); line-height: 1.7; margin-bottom: 30px; }
-        .btn { padding: 16px 48px; background: var(--cor-primaria); color: white; border: none; border-radius: 30px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { background: #1D4ED8; transform: scale(1.05); }
-        footer { text-align: center; padding: 20px; color: var(--cor-texto-claro); font-size: 14px; }
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --borda-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-4px);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cor-texto);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
+
+        .game-area {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .game-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: #10B981;
+        }
+
+        .game-description {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 16px 48px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary:hover {
+            background: #D97706;
+        }
+
+        .btn-secondary {
+            background: #D97706;
+            margin-left: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
+            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                </svg></a>
+            <div class="logo">
+                <div class="logo-icon"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg></div><span class="logo-text">MindCare</span>
+            </div>
         </div>
-        <div class="page-title"><h1>Sudoku</h1><p>Preencha os números de 1 a 9</p></div>
+        <div class="page-title">
+            <h1>Sudoku</h1>
+            <p>Preencha os números de 1 a 9</p>
+        </div>
         <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24"><path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"/></svg></div>
-            <p class="game-description">O Sudoku é um clássico dos jogos de lógica! Preencha a grade 9x9 com números de 1 a 9, sem repeti-los em nenhuma linha, coluna ou bloco 3x3.</p>
+            <div class="game-icon"><svg viewBox="0 0 24 24">
+                    <path
+                        d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z" />
+                </svg></div>
+            <p class="game-description">O Sudoku é um clássico dos jogos de lógica! Preencha a grade 9x9 com números de
+                1 a 9, sem repeti-los em nenhuma linha, coluna ou bloco 3x3.</p>
             <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
+            <button class="btn btn-secondary" onclick="window.location.href='grupo-moderado.html'">Voltar</button>
         </div>
     </div>
-    <footer><p>Feito com cuidado para você</p></footer>
+    <footer>
+        <p>Feito com cuidado para você</p>
+    </footer>
 </body>
+
 </html>
