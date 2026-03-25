@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Jogos</title>
+    <title>Mente Ativa - Jogos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
     <style>
         :root {
-            --cor-primaria: #2563EB;
+            --cor-primaria: #3B82F6;
             --cor-secundaria: #10B981;
             --cor-terceira: #F59E0B;
-            --cor-fundo: #F0F9FF;
+            --cor-fundo: #F8FAFC;
             --cor-fundo-card: #FFFFFF;
-            --cor-texto: #000000;
-            --cor-texto-claro: #1E293B;
-            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
-            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
-            --borda-radius: 20px;
+            --cor-texto: #1E293B;
+            --cor-texto-claro: #64748B;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --borda-radius: 16px;
+        }
+
+        body {
+            background-image: 
+                radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
         }
 
         * {
@@ -37,23 +43,26 @@
         }
 
         .tts-btn {
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: none;
-            background: var(--cor-primaria);
-            color: white;
+            background: var(--cor-fundo-card);
+            color: var(--cor-primaria);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .tts-btn:hover {
-            background: #1D4ED8;
-            transform: scale(1.1);
+            background: var(--cor-primaria);
+            color: white;
+            transform: scale(1.08);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
         }
 
         .tts-btn:focus {
@@ -93,8 +102,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             background: var(--cor-fundo-card);
             border: none;
             border-radius: 14px;
@@ -110,8 +119,8 @@
         }
 
         .back-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: var(--cor-texto);
         }
 
@@ -124,23 +133,28 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            background: var(--cor-fundo-card);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .logo-text {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--cor-primaria);
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-title {
@@ -198,13 +212,13 @@
             padding: 32px 24px;
             box-shadow: var(--sombra);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
         }
 
         .game-card:hover {
@@ -212,35 +226,40 @@
             box-shadow: var(--sombra-hover);
         }
 
-        .game-card.verde:hover { border-color: #10B981; }
-        .game-card.azul:hover { border-color: #2563EB; }
-        .game-card.laranja:hover { border-color: #F59E0B; }
-        .game-card.roxo:hover { border-color: #8B5CF6; }
+        .game-card.verde:hover { border-color: #10B981; background: linear-gradient(to bottom, rgba(16, 185, 129, 0.03), var(--cor-fundo-card)); }
+        .game-card.azul:hover { border-color: var(--cor-primaria); background: linear-gradient(to bottom, rgba(59, 130, 246, 0.03), var(--cor-fundo-card)); }
+        .game-card.laranja:hover { border-color: #F59E0B; background: linear-gradient(to bottom, rgba(245, 158, 11, 0.03), var(--cor-fundo-card)); }
+        .game-card.roxo:hover { border-color: #8B5CF6; background: linear-gradient(to bottom, rgba(139, 92, 246, 0.03), var(--cor-fundo-card)); }
 
         .game-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-icon {
+            transform: scale(1.08);
         }
 
         .game-icon svg {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
         }
 
         .game-card.verde .game-icon {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
         }
         .game-card.verde .game-icon svg { fill: #10B981; }
 
         .game-card.azul .game-icon {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0.1));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
         }
-        .game-card.azul .game-icon svg { fill: #2563EB; }
+        .game-card.azul .game-icon svg { fill: #3B82F6; }
 
         .game-card.laranja .game-icon {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.1));
@@ -269,26 +288,31 @@
             margin-top: 16px;
             padding: 12px 28px;
             border: none;
-            border-radius: 30px;
-            font-size: 16px;
+            border-radius: 25px;
+            font-size: 15px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
             transition: all 0.3s ease;
             color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .jogar-btn:hover {
+            transform: scale(1.05);
         }
 
         .game-card.verde .jogar-btn { background: #10B981; }
-        .game-card.verde .jogar-btn:hover { background: #059669; }
+        .game-card.verde .jogar-btn:hover { background: #059669; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
 
-        .game-card.azul .jogar-btn { background: #2563EB; }
-        .game-card.azul .jogar-btn:hover { background: #1D4ED8; }
+        .game-card.azul .jogar-btn { background: var(--cor-primaria); }
+        .game-card.azul .jogar-btn:hover { background: #2563EB; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
 
         .game-card.laranja .jogar-btn { background: #F59E0B; }
-        .game-card.laranja .jogar-btn:hover { background: #D97706; }
+        .game-card.laranja .jogar-btn:hover { background: #D97706; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
 
         .game-card.roxo .jogar-btn { background: #8B5CF6; }
-        .game-card.roxo .jogar-btn:hover { background: #7C3AED; }
+        .game-card.roxo .jogar-btn:hover { background: #7C3AED; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
 
         .game-card.disabled {
             opacity: 0.6;
@@ -334,11 +358,9 @@
             </a>
             <div class="logo">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
                 </div>
-                <span class="logo-text">MindCare</span>
+                <span class="logo-text">Mente Ativa</span>
             </div>
         </div>
 

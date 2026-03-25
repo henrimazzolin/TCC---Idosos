@@ -3,48 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Sequência Simples</title>
+    <title>Mente Ativa - Sequência Simples</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cor-primaria: #10B981; --cor-secundaria: #2563EB; --cor-fundo: #F0F9FF; --cor-fundo-card: #FFFFFF; --cor-texto: #000000; --cor-texto-claro: #1E293B; --sombra: 0 4px 20px rgba(16, 185, 129, 0.15); --borda-radius: 20px; }
+        :root {
+            --cor-primaria: #EAB308;
+            --cor-secundaria: #10B981;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(234, 179, 8, 0.15);
+            --sombra-hover: 0 8px 30px rgba(234, 179, 8, 0.25);
+            --borda-radius: 20px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--cor-fundo); color: var(--cor-texto); min-height: 100vh; font-weight: 500; }
-        .container { max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--cor-fundo-card); border: none; border-radius: 14px; cursor: pointer; box-shadow: var(--sombra); transition: all 0.3s ease; text-decoration: none; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
         .back-btn:hover { transform: translateX(-4px); }
         .back-btn svg { width: 24px; height: 24px; fill: var(--cor-texto); }
+
         .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 26px; height: 26px; fill: white; }
-        .logo-text { font-size: 20px; font-weight: 700; color: var(--cor-primaria); }
-        .page-title { text-align: center; margin-bottom: 30px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-text { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #7C3AED, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .page-title { text-align: center; margin-bottom: 20px; }
         .page-title h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; margin-bottom: 8px; }
-        .page-title p { font-size: 18px; color: var(--cor-texto-claro); font-weight: 500; }
-        .game-area { background: var(--cor-fundo-card); border-radius: var(--borda-radius); box-shadow: var(--sombra); padding: 40px; text-align: center; }
-        .game-icon { width: 120px; height: 120px; margin: 0 auto 30px; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .game-icon svg { width: 60px; height: 60px; fill: #EAB308; }
-        .game-description { font-size: 18px; color: var(--cor-texto-claro); line-height: 1.7; margin-bottom: 30px; }
-        .btn { padding: 16px 48px; background: var(--cor-primaria); color: white; border: none; border-radius: 30px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { background: #059669; transform: scale(1.05); }
-        footer { text-align: center; padding: 20px; color: var(--cor-texto-claro); font-size: 14px; }
+        .page-title p { font-size: 18px; color: var(--cor-texto-claro); }
+
+        .instrucao {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .instrucao p { font-size: 20px; font-weight: 600; color: #92400E; }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: var(--cor-fundo-card);
+            padding: 10px 20px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .info-label { font-size: 14px; color: var(--cor-texto-claro); }
+        .info-value { font-size: 24px; font-weight: 700; color: var(--cor-primaria); }
+
+        .game-area {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .sequence-display {
+            margin-bottom: 30px;
+        }
+
+        .sequence-box {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(234, 179, 8, 0.05));
+            border: 3px solid var(--cor-primaria);
+            border-radius: var(--borda-radius);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .sequence-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .seq-item {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: var(--cor-fundo);
+            border: 3px solid var(--cor-primaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .seq-item.blank {
+            background: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
+        }
+
+        .seq-item.wrong {
+            background: #EF4444;
+            border-color: #EF4444;
+            color: white;
+        }
+
+        .seq-item.correct {
+            background: var(--cor-secundaria);
+            border-color: var(--cor-secundaria);
+            color: white;
+        }
+
+        .seq-dot {
+            font-size: 32px;
+            color: var(--cor-texto-claro);
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .option-btn {
+            background: var(--cor-fundo-card);
+            border: 3px solid var(--cor-primaria);
+            border-radius: var(--borda-radius);
+            padding: 24px 32px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-texto);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra);
+            min-width: 80px;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: var(--cor-primaria);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .option-btn.correct {
+            background: var(--cor-secundaria);
+            border-color: var(--cor-secundaria);
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: #EF4444;
+            border-color: #EF4444;
+            color: white;
+        }
+
+        .option-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+
+        .btn {
+            padding: 16px 48px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #CA8A04;
+            transform: scale(1.05);
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--cor-fundo-card);
+            padding: 40px 50px;
+            border-radius: var(--borda-radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback.show { transform: translate(-50%, -50%) scale(1); }
+
+        .feedback-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-icon.success { background: rgba(16, 185, 129, 0.2); }
+        .feedback-icon.success svg { fill: #10B981; width: 50px; height: 50px; }
+
+        .feedback h2 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+        .feedback p { font-size: 18px; color: var(--cor-texto-claro); }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .overlay.show { opacity: 1; visibility: visible; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .seq-item { width: 55px; height: 55px; font-size: 24px; }
+            .option-btn { font-size: 24px; padding: 20px; min-width: 65px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="grupo-simples.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
+            <a href="grupo-simples.html" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
+                </div>
+                <span class="logo-text">Mente Ativa</span>
+            </div>
         </div>
-        <div class="page-title"><h1>Sequência Simples</h1><p>Complete a sequência de figuras</p></div>
+
+        <div class="page-title">
+            <h1>Sequência Simples</h1>
+            <p>Qual número vem depois?</p>
+        </div>
+
+        <div class="instrucao">
+            <p>Como jogar: Olhe a sequência e clique no número que falta!</p>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">Acertos</div>
+                <div class="info-value" id="correct">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Questão</div>
+                <div class="info-value" id="question">1/5</div>
+            </div>
+        </div>
+
         <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
-            <p class="game-description">Observe a sequência de figuras e toque na figura que completa o padrão. Um exercício simples e intuitivo.</p>
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
+            <div class="sequence-display">
+                <div class="sequence-box">
+                    <div class="sequence-items" id="sequenceItems"></div>
+                </div>
+                <p class="question">Qual número completa a sequência?</p>
+            </div>
+
+            <div class="options-container" id="optionsGrid"></div>
+
+            <button class="btn" id="nextBtn" style="display: none;" onclick="nextQuestion()">Próxima</button>
         </div>
     </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <div class="feedback-icon" id="feedbackIcon"></div>
+        <h2 id="feedbackTitle">Muito bem!</h2>
+        <p id="feedbackText">Você acertou!</p>
+        <button class="btn" id="feedbackBtn" onclick="handleFeedback()">Continuar</button>
+    </div>
+
     <footer><p>Feito com cuidado para você</p></footer>
+
+    <script>
+        const sequences = [
+            {
+                sequence: [1, 2, 3],
+                next: 4,
+                options: [4, 5, 6, 7]
+            },
+            {
+                sequence: [2, 4, 6],
+                next: 8,
+                options: [7, 8, 9, 10]
+            },
+            {
+                sequence: [5, 10, 15],
+                next: 20,
+                options: [18, 20, 22, 25]
+            },
+            {
+                sequence: [10, 20, 30],
+                next: 40,
+                options: [35, 40, 45, 50]
+            },
+            {
+                sequence: [1, 2, 4],
+                next: 8,
+                options: [6, 8, 10, 12]
+            },
+            {
+                sequence: [3, 6, 9],
+                next: 12,
+                options: [10, 12, 14, 15]
+            },
+            {
+                sequence: [10, 9, 8],
+                next: 7,
+                options: [5, 6, 7, 8]
+            },
+            {
+                sequence: [5, 4, 3],
+                next: 2,
+                options: [1, 2, 3, 4]
+            }
+        ];
+
+        let currentSequences = [];
+        let currentIndex = 0;
+        let correctCount = 0;
+        let isComplete = false;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initGame() {
+            currentSequences = shuffleArray(sequences).slice(0, 5);
+            currentIndex = 0;
+            correctCount = 0;
+            isComplete = false;
+            
+            document.getElementById('correct').textContent = '0';
+            document.getElementById('question').textContent = '1/5';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const seq = currentSequences[currentIndex];
+            
+            const sequenceItems = document.getElementById('sequenceItems');
+            sequenceItems.innerHTML = '';
+            
+            seq.sequence.forEach((num, idx) => {
+                const item = document.createElement('span');
+                item.className = 'seq-item';
+                item.textContent = num;
+                sequenceItems.appendChild(item);
+                
+                if (idx < seq.sequence.length - 1) {
+                    const dot = document.createElement('span');
+                    dot.className = 'seq-dot';
+                    dot.textContent = '→';
+                    sequenceItems.appendChild(dot);
+                }
+            });
+            
+            const dot = document.createElement('span');
+            dot.className = 'seq-dot';
+            dot.textContent = '→';
+            sequenceItems.appendChild(dot);
+            
+            const blank = document.createElement('span');
+            blank.className = 'seq-item blank';
+            blank.textContent = '?';
+            sequenceItems.appendChild(blank);
+            
+            const optionsGrid = document.getElementById('optionsGrid');
+            optionsGrid.innerHTML = '';
+            
+            const shuffledOptions = shuffleArray([...seq.options]);
+            
+            shuffledOptions.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option, btn, seq.next);
+                optionsGrid.appendChild(btn);
+            });
+            
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function checkAnswer(answer, btn, correct) {
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+            
+            if (answer === correct) {
+                btn.classList.add('correct');
+                correctCount++;
+                document.getElementById('correct').textContent = correctCount;
+                showFeedback(true, 'Muito bem!', 'Você acertou!');
+            } else {
+                btn.classList.add('wrong');
+                buttons.forEach(b => {
+                    if (parseInt(b.textContent) === correct) {
+                        b.classList.add('correct');
+                    }
+                });
+                showFeedback(false, 'Quase lá!', 'O número correto era ' + correct);
+            }
+            
+            document.getElementById('nextBtn').style.display = 'block';
+            
+            if (currentIndex === currentSequences.length - 1) {
+                isComplete = true;
+                document.getElementById('nextBtn').textContent = 'Ver Resultado';
+                document.getElementById('nextBtn').onclick = showResult;
+            }
+        }
+
+        function nextQuestion() {
+            if (isComplete) {
+                showResult();
+                return;
+            }
+            
+            currentIndex++;
+            document.getElementById('question').textContent = (currentIndex + 1) + '/5';
+            loadQuestion();
+        }
+
+        function showResult() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            const feedbackBtn = document.getElementById('feedbackBtn');
+            
+            feedbackIcon.className = 'feedback-icon success';
+            feedbackIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
+            
+            feedbackTitle.textContent = 'Parabéns!';
+            feedbackText.textContent = `Você acertou ${correctCount} de ${currentSequences.length} sequências!`;
+            
+            feedbackBtn.textContent = 'Jogar Novamente';
+            feedbackBtn.onclick = () => {
+                overlay.classList.remove('show');
+                feedback.classList.remove('show');
+                document.getElementById('nextBtn').textContent = 'Próxima';
+                document.getElementById('nextBtn').onclick = nextQuestion;
+                initGame();
+            };
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function handleFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            overlay.classList.remove('show');
+            feedback.classList.remove('show');
+        }
+
+        document.getElementById('overlay').addEventListener('click', handleFeedback);
+
+        initGame();
+    </script>
 </body>
 </html>

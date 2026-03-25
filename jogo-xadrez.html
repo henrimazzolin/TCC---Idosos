@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Xadrez</title>
+    <title>Mente Ativa - Xadrez</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @charset "utf-8";
-
         :root {
             --cor-primaria: #2563EB;
             --cor-secundaria: #10B981;
@@ -82,23 +80,28 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            background: #ffffff;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .logo-text {
             font-size: 20px;
             font-weight: 700;
-            color: var(--cor-primaria);
+            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-title {
@@ -127,9 +130,6 @@
             flex-direction: column;
             align-items: center;
             border: 2px solid var(--cor-primaria);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
         }
 
         .game-area.active {
@@ -137,11 +137,51 @@
             visibility: visible;
         }
 
-        /* ===== XADREZ STYLES ===== */
-        .borda { border: #F00; }
-        .tabPreto { background: #03C; }
+        .game-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-        /* TABULEIRO */
+        .game-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: #8B5CF6;
+        }
+
+        .game-description {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            line-height: 1.7;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 16px 48px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
         #tabuleiro {
             width: 576px;
             height: 576px;
@@ -266,7 +306,6 @@
             fill: var(--cor-texto);
         }
 
-
         .color-choice-container {
             display: flex;
             gap: 80px;
@@ -339,31 +378,12 @@
             min-width: 160px;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--cor-texto-claro);
-            font-size: 14px;
-            margin-top: 40px;
-        }
-
-        #game-header {
-            transition: all 0.3s ease;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #game-header.hidden {
-            opacity: 0;
-            visibility: hidden;
-            display: none;
-        }
-
         #game-status {
             padding: 15px 30px;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
             border-radius: 12px;
             border-left: 5px solid var(--cor-primaria);
+            margin-bottom: 20px;
         }
 
         #status-text {
@@ -381,7 +401,6 @@
             color: #FF6B6B;
         }
 
-        /* TELA DE FIM DE JOGO */
         #game-over-modal {
             display: none;
             position: fixed;
@@ -469,6 +488,14 @@
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
         }
 
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
         @media (max-width: 768px) {
             .page-title h1 {
                 font-size: 24px;
@@ -522,8 +549,6 @@
 
             .color-choice-container {
                 gap: 40px;
-                align-self: center;
-                justify-self: center;
             }
 
             .escolha-lado-container {
@@ -560,47 +585,34 @@
             .escolhe {
                 padding: 20px;
                 border-radius: 15px;
-        }
-    
+            }
         }
     </style>
 </head>
-<body onload="inicia_jogo();">
+<body>
     <div class="container">
-        <div id="game-header">
-            <div class="header">
-                <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-                <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
-            </div>
-
-            <div class="page-title">
-                <h1>♟️ Xadrez</h1>
-                <p>Jogue uma partida de xadrez</p>
+        <div class="header">
+            <a href="grupo-moderado.html" class="back-btn"><svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg></a>
+            <div class="logo">
+                <div class="logo-icon"><img src="img/unnamed.jpg" alt="Logo Mente Ativa" /></div><span class="logo-text">Mente Ativa</span>
             </div>
         </div>
-
-        <!-- TELA DE ESCOLHA DE CORES -->
-        <div id="escolhecor-inicio" class="escolhe">
-            <a href="grupo-moderado.html" class="back-btn-escolha">
-                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            </a>
-            <div class="escolha-lado-container">
-                <div class="escolha-lado-titulo">ESCOLHA SEU LADO</div>
-                <div class="color-choice-container">
-                    <div class="color-option" onclick="escolhecor_incio('branco');">
-                        <div class="color-piece">&#9812;</div>
-                        <div class="color-label">BRANCO</div>
-                    </div>
-                    <div class="color-option" onclick="escolhecor_incio('preto');">
-                        <div class="color-piece">&#9818;</div>
-                        <div class="color-label">PRETO</div>
-                    </div>
-                </div>
-            </div>
+        <div class="page-title">
+            <h1>Xadrez</h1>
+            <p>Jogue uma partida de xadrez</p>
+        </div>
+        
+        <div id="intro-screen" class="game-area">
+            <div class="game-icon"><svg viewBox="0 0 24 24">
+                <path d="M19 22H5v-2h14v2zm-5-6H10v-2h4v2zM7.5 7c.83 0 1.5.67 1.5 1.5S8.33 10 7.5 10 6 9.33 6 8.5 6.67 7 7.5 7zm9 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z" />
+            </svg></div>
+            <p class="game-description">O xadrez é um jogo estratégico que estimula o raciocínio lógico e o planejamento. Desafie sua mente com partidas contra o computador.</p>
+            <button class="btn" onclick="inicia_jogo()">Começar Jogo</button>
         </div>
 
-        <!-- TELA DO JOGO -->
-        <div class="game-area">
+        <div id="game-screen" class="game-area" style="display: none;">
             <div id="fundo"></div>
 
             <div id="game-status" style="display: none; text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 700;">
@@ -651,12 +663,30 @@
         </div>
     </div>
 
-    <!-- MODAL DE FIM DE JOGO -->
+    <div id="escolhecor-inicio" class="escolhe" style="display: none;">
+        <a href="grupo-moderado.html" class="back-btn-escolha">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        </a>
+        <div class="escolha-lado-container">
+            <div class="escolha-lado-titulo">ESCOLHA SEU LADO</div>
+            <div class="color-choice-container">
+                <div class="color-option" onclick="escolhecor_incio('branco');">
+                    <div class="color-piece">&#9812;</div>
+                    <div class="color-label">BRANCO</div>
+                </div>
+                <div class="color-option" onclick="escolhecor_incio('preto');">
+                    <div class="color-piece">&#9818;</div>
+                    <div class="color-label">PRETO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="game-over-modal">
         <div class="game-over-content">
             <div class="game-over-emoji" id="game-over-emoji">🏆</div>
             <h2 class="game-over-title" id="game-over-title">Você Ganhou!</h2>
-            <p class="game-over-message" id="game-over-message">Parabéns! Você conquistou a vitória!</p>
+            <p class="game-over-message" id="game-over-message">Parabéns! Você conseguiu uma vitória impressionante!</p>
             <button class="game-over-btn" onclick="location.reload()">Jogar Novamente</button>
         </div>
     </div>
@@ -664,15 +694,26 @@
     <footer><p>Desafie sua mente com xadrez estratégico | Feito com cuidado para você</p></footer>
 
     <script>
-        // Variáveis globais para rastrear os jogadores
         let playerColor = null;
         let robotColor = null;
         let gameEnded = false;
+        let vez = "branco";
+        let peca = [];
+        let il = [];
+        let movimenta = [];
+        let possiveis = [];
+        let cont_possiveis = 0;
 
-        function inicia_jogo(){
+        function inicia_jogo() {
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'flex';
+            document.getElementById('escolhecor-inicio').style.display = 'flex';
+            document.getElementById('escolhecor-inicio').classList.remove('hidden');
+        }
+
+        function configura_tabuleiro() {
             vez = "branco";
 
-            //muda a classe das pecas pretas(encima) para mostrar imgens das pecas
             document.getElementById("t11").innerHTML = "&#9820;";
             document.getElementById("t12").innerHTML = "&#9822;";
             document.getElementById("t13").innerHTML = "&#9821;";
@@ -691,7 +732,6 @@
             document.getElementById("t27").innerHTML = "&#9823;";
             document.getElementById("t28").innerHTML = "&#9823;";
 
-            //muda a classe das pecas brancas(embaixo) para mostrar imgens das pecas
             document.getElementById("t81").innerHTML = "&#9814;";
             document.getElementById("t82").innerHTML = "&#9816;";
             document.getElementById("t83").innerHTML = "&#9815;";
@@ -710,324 +750,276 @@
             document.getElementById("t77").innerHTML = "&#9817;";
             document.getElementById("t78").innerHTML = "&#9817;";
 
-            //cria array que var receber as posicoes do tabuleiro
             cria_array();
-            function cria_array(){
-                var x,y;
+        }
 
-                peca = new Array();
+        function cria_array() {
+            var x, y;
 
-                for(x=1;x<=8;x++){
+            peca = new Array();
 
-                    peca[x] = new Array();
-
-                    for(y=1;y<=8;y++){
-
-                        peca[x][y] = new Array();
-                        peca[x][y]['peca'] = false; 		//defino como falso para as que não começam com peça ficarem nulas
-                        peca[x][y]['cor'] = false;			//defino como falso para as que não começam com peça ficarem nulas
-
-                    }
+            for (x = 1; x <= 8; x++) {
+                peca[x] = new Array();
+                for (y = 1; y <= 8; y++) {
+                    peca[x][y] = new Array();
+                    peca[x][y]['peca'] = false;
+                    peca[x][y]['cor'] = false;
                 }
-
-
-                il = new Array();
-                il['preto'] = new Array();
-                il['branco'] = new Array();
-
             }
 
-            //posiciona as pecas pretas no array
-            peca[1][1]['peca']="torre";		peca[1][1]['cor']="preto";	peca[1][1]['mov']=0; il['preto']['torre'] = "&#9820;";
-            peca[1][2]['peca']="cavalo";	peca[1][2]['cor']="preto";	peca[1][2]['mov']=0; il['preto']['cavalo'] = "&#9822;";
-            peca[1][3]['peca']="bispo"; 	peca[1][3]['cor']="preto";	peca[1][3]['mov']=0; il['preto']['bispo'] = "&#9821;";
-            peca[1][4]['peca']="rainha";	peca[1][4]['cor']="preto";	peca[1][4]['mov']=0; il['preto']['rainha'] = "&#9819;";
-            peca[1][5]['peca']="rei";		peca[1][5]['cor']="preto";	peca[1][5]['mov']=0; il['preto']['rei'] = "&#9818;";
-            peca[1][6]['peca']="bispo";		peca[1][6]['cor']="preto";	peca[1][6]['mov']=0;
-            peca[1][7]['peca']="cavalo";	peca[1][7]['cor']="preto";	peca[1][7]['mov']=0;
-            peca[1][8]['peca']="torre";		peca[1][8]['cor']="preto";	peca[1][8]['mov']=0;
+            il = new Array();
+            il['preto'] = new Array();
+            il['branco'] = new Array();
 
-            peca[2][1]['peca']="peao";		peca[2][1]['cor']="preto";	peca[2][1]['mov']=0; il['preto']['peao'] = "&#9823;";
-            peca[2][2]['peca']="peao";		peca[2][2]['cor']="preto";	peca[2][2]['mov']=0;
-            peca[2][3]['peca']="peao"; 		peca[2][3]['cor']="preto";	peca[2][3]['mov']=0;
-            peca[2][4]['peca']="peao";		peca[2][4]['cor']="preto";	peca[2][4]['mov']=0;
-            peca[2][5]['peca']="peao";		peca[2][5]['cor']="preto";	peca[2][5]['mov']=0;
-            peca[2][6]['peca']="peao";		peca[2][6]['cor']="preto";	peca[2][6]['mov']=0;
-            peca[2][7]['peca']="peao";		peca[2][7]['cor']="preto";	peca[2][7]['mov']=0;
-            peca[2][8]['peca']="peao";		peca[2][8]['cor']="preto";	peca[2][8]['mov']=0;
+            peca[1][1]['peca'] = "torre"; peca[1][1]['cor'] = "preto"; peca[1][1]['mov'] = 0; il['preto']['torre'] = "&#9820;";
+            peca[1][2]['peca'] = "cavalo"; peca[1][2]['cor'] = "preto"; peca[1][2]['mov'] = 0; il['preto']['cavalo'] = "&#9822;";
+            peca[1][3]['peca'] = "bispo"; peca[1][3]['cor'] = "preto"; peca[1][3]['mov'] = 0; il['preto']['bispo'] = "&#9821;";
+            peca[1][4]['peca'] = "rainha"; peca[1][4]['cor'] = "preto"; peca[1][4]['mov'] = 0; il['preto']['rainha'] = "&#9819;";
+            peca[1][5]['peca'] = "rei"; peca[1][5]['cor'] = "preto"; peca[1][5]['mov'] = 0; il['preto']['rei'] = "&#9818;";
+            peca[1][6]['peca'] = "bispo"; peca[1][6]['cor'] = "preto"; peca[1][6]['mov'] = 0;
+            peca[1][7]['peca'] = "cavalo"; peca[1][7]['cor'] = "preto"; peca[1][7]['mov'] = 0;
+            peca[1][8]['peca'] = "torre"; peca[1][8]['cor'] = "preto"; peca[1][8]['mov'] = 0;
 
-            //posiciona as pecas brancas no array
-            peca[8][1]['peca']="torre";		peca[8][1]['cor']="branco";	peca[8][1]['mov']=0; il['branco']['torre'] = "&#9814;";
-            peca[8][2]['peca']="cavalo";	peca[8][2]['cor']="branco";	peca[8][2]['mov']=0; il['branco']['cavalo'] = "&#9816;";
-            peca[8][3]['peca']="bispo"; 	peca[8][3]['cor']="branco";	peca[8][3]['mov']=0; il['branco']['bispo'] = "&#9815;";
-            peca[8][4]['peca']="rainha";	peca[8][4]['cor']="branco";	peca[8][4]['mov']=0; il['branco']['rainha'] = "&#9813;";
-            peca[8][5]['peca']="rei";		peca[8][5]['cor']="branco";	peca[8][5]['mov']=0; il['branco']['rei'] = "&#9812;";
-            peca[8][6]['peca']="bispo";		peca[8][6]['cor']="branco";	peca[8][6]['mov']=0;
-            peca[8][7]['peca']="cavalo";	peca[8][7]['cor']="branco";	peca[8][7]['mov']=0;
-            peca[8][8]['peca']="torre";		peca[8][8]['cor']="branco";	peca[8][8]['mov']=0;
+            peca[2][1]['peca'] = "peao"; peca[2][1]['cor'] = "preto"; peca[2][1]['mov'] = 0; il['preto']['peao'] = "&#9823;";
+            peca[2][2]['peca'] = "peao"; peca[2][2]['cor'] = "preto"; peca[2][2]['mov'] = 0;
+            peca[2][3]['peca'] = "peao"; peca[2][3]['cor'] = "preto"; peca[2][3]['mov'] = 0;
+            peca[2][4]['peca'] = "peao"; peca[2][4]['cor'] = "preto"; peca[2][4]['mov'] = 0;
+            peca[2][5]['peca'] = "peao"; peca[2][5]['cor'] = "preto"; peca[2][5]['mov'] = 0;
+            peca[2][6]['peca'] = "peao"; peca[2][6]['cor'] = "preto"; peca[2][6]['mov'] = 0;
+            peca[2][7]['peca'] = "peao"; peca[2][7]['cor'] = "preto"; peca[2][7]['mov'] = 0;
+            peca[2][8]['peca'] = "peao"; peca[2][8]['cor'] = "preto"; peca[2][8]['mov'] = 0;
 
-            peca[7][1]['peca']="peao";		peca[7][1]['cor']="branco";	peca[7][1]['mov']=0; il['branco']['peao'] = "&#9817;";
-            peca[7][2]['peca']="peao";		peca[7][2]['cor']="branco";	peca[7][2]['mov']=0;
-            peca[7][3]['peca']="peao"; 		peca[7][3]['cor']="branco";	peca[7][3]['mov']=0;
-            peca[7][4]['peca']="peao";		peca[7][4]['cor']="branco";	peca[7][4]['mov']=0;
-            peca[7][5]['peca']="peao";		peca[7][5]['cor']="branco";	peca[7][5]['mov']=0;
-            peca[7][6]['peca']="peao";		peca[7][6]['cor']="branco";	peca[7][6]['mov']=0;
-            peca[7][7]['peca']="peao";		peca[7][7]['cor']="branco";	peca[7][7]['mov']=0;
-            peca[7][8]['peca']="peao";		peca[7][8]['cor']="branco";	peca[7][8]['mov']=0;
+            peca[8][1]['peca'] = "torre"; peca[8][1]['cor'] = "branco"; peca[8][1]['mov'] = 0; il['branco']['torre'] = "&#9814;";
+            peca[8][2]['peca'] = "cavalo"; peca[8][2]['cor'] = "branco"; peca[8][2]['mov'] = 0; il['branco']['cavalo'] = "&#9816;";
+            peca[8][3]['peca'] = "bispo"; peca[8][3]['cor'] = "branco"; peca[8][3]['mov'] = 0; il['branco']['bispo'] = "&#9815;";
+            peca[8][4]['peca'] = "rainha"; peca[8][4]['cor'] = "branco"; peca[8][4]['mov'] = 0; il['branco']['rainha'] = "&#9813;";
+            peca[8][5]['peca'] = "rei"; peca[8][5]['cor'] = "branco"; peca[8][5]['mov'] = 0; il['branco']['rei'] = "&#9812;";
+            peca[8][6]['peca'] = "bispo"; peca[8][6]['cor'] = "branco"; peca[8][6]['mov'] = 0;
+            peca[8][7]['peca'] = "cavalo"; peca[8][7]['cor'] = "branco"; peca[8][7]['mov'] = 0;
+            peca[8][8]['peca'] = "torre"; peca[8][8]['cor'] = "branco"; peca[8][8]['mov'] = 0;
 
-            ///aray para movimentar as pecas
+            peca[7][1]['peca'] = "peao"; peca[7][1]['cor'] = "branco"; peca[7][1]['mov'] = 0; il['branco']['peao'] = "&#9817;";
+            peca[7][2]['peca'] = "peao"; peca[7][2]['cor'] = "branco"; peca[7][2]['mov'] = 0;
+            peca[7][3]['peca'] = "peao"; peca[7][3]['cor'] = "branco"; peca[7][3]['mov'] = 0;
+            peca[7][4]['peca'] = "peao"; peca[7][4]['cor'] = "branco"; peca[7][4]['mov'] = 0;
+            peca[7][5]['peca'] = "peao"; peca[7][5]['cor'] = "branco"; peca[7][5]['mov'] = 0;
+            peca[7][6]['peca'] = "peao"; peca[7][6]['cor'] = "branco"; peca[7][6]['mov'] = 0;
+            peca[7][7]['peca'] = "peao"; peca[7][7]['cor'] = "branco"; peca[7][7]['mov'] = 0;
+            peca[7][8]['peca'] = "peao"; peca[7][8]['cor'] = "branco"; peca[7][8]['mov'] = 0;
+
             movimenta = new Array();
-
             movimenta['selecionada'] = new Array();
-            movimenta['selecionada']['x'] =0;
-            movimenta['selecionada']['y'] =0;
-            movimenta['selecionada']['peca']="0";
-            movimenta['selecionada']['cor']="0";
+            movimenta['selecionada']['x'] = 0;
+            movimenta['selecionada']['y'] = 0;
+            movimenta['selecionada']['peca'] = "0";
+            movimenta['selecionada']['cor'] = "0";
 
             movimenta['destino'] = new Array();
-            movimenta['destino']['x'] =0;
-            movimenta['destino']['y'] =0;
-            movimenta['destino']['peca'] ="0";
-            movimenta['destino']['cor']="0";
+            movimenta['destino']['x'] = 0;
+            movimenta['destino']['y'] = 0;
+            movimenta['destino']['peca'] = "0";
+            movimenta['destino']['cor'] = "0";
 
-            ///aray para os possiveis movimentos
             possiveis = new Array();
         }
 
-        function possiveis_movimentos(){
-            var x,y;
-            var c =0; //contador pro array possiveis
-            var i; //contador pros for
+        function possiveis_movimentos() {
+            var x, y;
+            var c = 0;
+            var i;
             x = movimenta['selecionada']['x'];
             y = movimenta['selecionada']['y'];
 
-            document.getElementById('t'+x+y).style.backgroundColor = "#3C9"; //muda cor de fundo
-            possiveis[c] = "t"+x+y; c++;
+            document.getElementById('t' + x + y).style.backgroundColor = "#3C9";
+            possiveis[c] = "t" + x + y;
+            c++;
 
-            ///////////////////////////////////////////////////////////////////////////////////PEAO////////////////////////////////
-            if(peca[x][y]['peca']=='peao'){
-                if(peca[x][y]['cor']=="branco"){
-
-                    if(!peca[x-1][y]['peca']){
-                        possivel(x-1,y);
-                    }if(y-1>0 && peca[x-1][y-1]['peca']){
-                        possivel(x-1,y-1);
+            if (peca[x][y]['peca'] == 'peao') {
+                if (peca[x][y]['cor'] == "branco") {
+                    if (!peca[x - 1][y]['peca']) {
+                        possivel(x - 1, y);
                     }
-                    if(y+1<9 && peca[x-1][y+1]['peca']){
-                        possivel(x-1,y+1);
+                    if (y - 1 > 0 && peca[x - 1][y - 1]['peca']) {
+                        possivel(x - 1, y - 1);
                     }
-
-                    if(x==7){
-                        if(!peca[x-2][y]['peca'] && !peca[x-1][y]['peca']){
-                            possivel(x-2,y);
+                    if (y + 1 < 9 && peca[x - 1][y + 1]['peca']) {
+                        possivel(x - 1, y + 1);
+                    }
+                    if (x == 7) {
+                        if (!peca[x - 2][y]['peca'] && !peca[x - 1][y]['peca']) {
+                            possivel(x - 2, y);
                         }
                     }
-
                 }
 
-
-                if(peca[x][y]['cor']=="preto"){
-
-                    if(!peca[x+1][y]['peca']){
-                        possivel(x+1,y);
-                    }if(y-1>0 && peca[x+1][y-1]['peca']){
-                        possivel(x+1,y-1);
+                if (peca[x][y]['cor'] == "preto") {
+                    if (!peca[x + 1][y]['peca']) {
+                        possivel(x + 1, y);
                     }
-                    if(y+1<9 && peca[x+1][y+1]['peca']){
-                        possivel(x+1,y+1);
+                    if (y - 1 > 0 && peca[x + 1][y - 1]['peca']) {
+                        possivel(x + 1, y - 1);
                     }
-
-                    if(x==2){
-
-                        if(!peca[x+2][y]['peca'] && !peca[x+1][y]['peca']){
-                            possivel(x+2,y);
+                    if (y + 1 < 9 && peca[x + 1][y + 1]['peca']) {
+                        possivel(x + 1, y + 1);
+                    }
+                    if (x == 2) {
+                        if (!peca[x + 2][y]['peca'] && !peca[x + 1][y]['peca']) {
+                            possivel(x + 2, y);
                         }
-
                     }
-
                 }
             }
-            ///////////////////////////////////////////////////////////////////////////////////////FIM PEAO//////////////////////////////
 
-            //////////////////////////////////////////////////////////////////////////////////////CAVALO ////////////////////////////////
-
-            if(peca[x][y]['peca']=='cavalo'){
-
-                possivel(x-1,y-2);
-                possivel(x+1,y+2);
-                possivel(x+1,y-2);
-                possivel(x-1,y+2);
-                possivel(x-2,y-1);
-                possivel(x+2,y+1);
-                possivel(x+2,y-1);
-                possivel(x-2,y+1);
-
+            if (peca[x][y]['peca'] == 'cavalo') {
+                possivel(x - 1, y - 2);
+                possivel(x + 1, y + 2);
+                possivel(x + 1, y - 2);
+                possivel(x - 1, y + 2);
+                possivel(x - 2, y - 1);
+                possivel(x + 2, y + 1);
+                possivel(x + 2, y - 1);
+                possivel(x - 2, y + 1);
             }
-            //////////////////////////////////////////////////////////////////////////////////////FIM CAVALO ////////////////////////////
 
-            //////////////////////////////////////////////////////////////////////////////////////REI ///////////////////////////////////
-            if(peca[x][y]['peca']=='rei'){
-                possivel(x-1,y);
-                possivel(x,y-1);
-                possivel(x-1,y-1);
-                possivel(x+1,y);
-                possivel(x,y+1);
-                possivel(x+1,y+1);
-                possivel(x-1,y+1);
-                possivel(x+1,y-1);
+            if (peca[x][y]['peca'] == 'rei') {
+                possivel(x - 1, y);
+                possivel(x, y - 1);
+                possivel(x - 1, y - 1);
+                possivel(x + 1, y);
+                possivel(x, y + 1);
+                possivel(x + 1, y + 1);
+                possivel(x - 1, y + 1);
+                possivel(x + 1, y - 1);
             }
-            //////////////////////////////////////////////////////////////////////////////////////FIM REI ////////////////////////////
 
-
-            //////////////////////////////////////////////////////////////////////////////////////TORRE ///////////////////////////////////
-            if(peca[x][y]['peca']=='torre'){
-
-                for(i=1;possivel(x-i,y);i++);
-                for(i=1;possivel(x+i,y);i++);
-                for(i=1;possivel(x,y-i);i++);
-                for(i=1;possivel(x,y+i);i++);
+            if (peca[x][y]['peca'] == 'torre') {
+                for (i = 1; possivel(x - i, y); i++);
+                for (i = 1; possivel(x + i, y); i++);
+                for (i = 1; possivel(x, y - i); i++);
+                for (i = 1; possivel(x, y + i); i++);
             }
-            //////////////////////////////////////////////////////////////////////////////////////FIM TORRE ////////////////////////////
 
-            //////////////////////////////////////////////////////////////////////////////////////BISPO ///////////////////////////////////
-            if(peca[x][y]['peca']=='bispo'){
-
-                for(i=1;possivel(x-i,y-i);i++);
-                for(i=1;possivel(x+i,y+i);i++);
-                for(i=1;possivel(x-i,y+i);i++);
-                for(i=1;possivel(x+i,y-i);i++);
+            if (peca[x][y]['peca'] == 'bispo') {
+                for (i = 1; possivel(x - i, y - i); i++);
+                for (i = 1; possivel(x + i, y + i); i++);
+                for (i = 1; possivel(x - i, y + i); i++);
+                for (i = 1; possivel(x + i, y - i); i++);
             }
-            //////////////////////////////////////////////////////////////////////////////////////FIM BISPO ////////////////////////////
 
-            //////////////////////////////////////////////////////////////////////////////////////RAINHA ///////////////////////////////////
-            if(peca[x][y]['peca']=='rainha'){
-
-                for(i=1;possivel(x-i,y-i);i++);
-                for(i=1;possivel(x+i,y+i);i++);
-                for(i=1;possivel(x-i,y+i);i++);
-                for(i=1;possivel(x+i,y-i);i++);
-                for(i=1;possivel(x-i,y);i++);
-                for(i=1;possivel(x+i,y);i++);
-                for(i=1;possivel(x,y-i);i++);
-                for(i=1;possivel(x,y+i);i++);
-
+            if (peca[x][y]['peca'] == 'rainha') {
+                for (i = 1; possivel(x - i, y - i); i++);
+                for (i = 1; possivel(x + i, y + i); i++);
+                for (i = 1; possivel(x - i, y + i); i++);
+                for (i = 1; possivel(x + i, y - i); i++);
+                for (i = 1; possivel(x - i, y); i++);
+                for (i = 1; possivel(x + i, y); i++);
+                for (i = 1; possivel(x, y - i); i++);
+                for (i = 1; possivel(x, y + i); i++);
             }
-            //////////////////////////////////////////////////////////////////////////////////////FIM RAINHA ////////////////////////////
 
+            function possivel(px, py) {
+                if (px > 0 && px < 9 && py > 0 && py < 9 && peca[px][py]['cor'] != movimenta['selecionada']['cor']) {
+                    document.getElementById('t' + (px) + (py)).style.backgroundColor = "#3C9";
+                    possiveis[c] = "t" + (px) + (py);
+                    c++;
 
-
-            function possivel(px,py){
-                if(px>0 && px <9 && py>0 && py <9 && peca[px][py]['cor']!= movimenta['selecionada']['cor']){
-                    document.getElementById('t'+(px)+(py)).style.backgroundColor = "#3C9"; //muda cor de fundo
-                    possiveis[c] = "t"+(px)+(py); c++;
-
-                    if(!peca[px][py]['peca']){
+                    if (!peca[px][py]['peca']) {
                         return true;
                     }
-                }else{
+                } else {
                     return false;
                 }
-
-
             }
 
             return c;
         }
 
-        function volta_fundo(){
+        function volta_fundo() {
             var cf;
-            for(cf=0;cf<possiveis.length;cf++){
-                document.getElementById(possiveis[cf]).style.backgroundColor = "";
+            for (cf = 0; cf < possiveis.length; cf++) {
+                if (possiveis[cf]) {
+                    document.getElementById(possiveis[cf]).style.backgroundColor = "";
+                }
             }
         }
 
-        function verifica_possivel(x,y,c){
-            var pode=0;
+        function verifica_possivel(x, y, c) {
+            var pode = 0;
             var cp;
-            var div = "t"+x+y;
+            var div = "t" + x + y;
 
-            for(cp=1;cp<c;cp++){
-
-                if(possiveis[cp]==div){
-                    pode ++;
+            for (cp = 1; cp < c; cp++) {
+                if (possiveis[cp] == div) {
+                    pode++;
                 }
-                if(pode>0){
+                if (pode > 0) {
                     return 1;
                 }
             }
-
         }
 
-        function seleciona(x,y){
-
-
-            if((movimenta['selecionada']['x']==0 || peca[x][y]['cor'] == movimenta['selecionada']['cor']) && peca[x][y]['cor']==vez){
-                if(movimenta['selecionada']['x']!=0){
-                    volta_fundo(); //volta a cor de fundo normal
+        function seleciona(x, y) {
+            if ((movimenta['selecionada']['x'] == 0 || peca[x][y]['cor'] == movimenta['selecionada']['cor']) && peca[x][y]['cor'] == vez) {
+                if (movimenta['selecionada']['x'] != 0) {
+                    volta_fundo();
                 }
-                if(peca[x][y]['peca']){ //se tiver uma peca nessa posição
-                    movimenta['selecionada']['x'] = x;	//recebe x selecionado
-                    movimenta['selecionada']['y'] = y;  //recebe y selecionado
-                    movimenta['selecionada']['peca'] = peca[x][y]['peca']; //recebe a peca selecionada
-                    movimenta['selecionada']['cor'] = peca[x][y]['cor'];	//recebe a cor selecionada
+                if (peca[x][y]['peca']) {
+                    movimenta['selecionada']['x'] = x;
+                    movimenta['selecionada']['y'] = y;
+                    movimenta['selecionada']['peca'] = peca[x][y]['peca'];
+                    movimenta['selecionada']['cor'] = peca[x][y]['cor'];
 
                     cont_possiveis = possiveis_movimentos();
                 }
-
-            }else if(verifica_possivel(x,y,cont_possiveis)){ //se for segundo clique e a cor da peca destino for diferente da selecionada
-
-                if(peca[x][y]['peca']=="rei"){
-                    // Mostrar tela de fim de jogo
+            } else if (verifica_possivel(x, y, cont_possiveis)) {
+                if (peca[x][y]['peca'] == "rei") {
                     mostrarFimDeJogo(movimenta['selecionada']['cor']);
                     return;
                 }
 
-                if(peca[x][y]['cor'] != movimenta['selecionada']['cor']){
-                    movimenta['destino']['x'] =x;	//recebe o x do destino(segundo clique)
-                    movimenta['destino']['y'] =y;  //recebe y do destino(segundo clique)
+                if (peca[x][y]['cor'] != movimenta['selecionada']['cor']) {
+                    movimenta['destino']['x'] = x;
+                    movimenta['destino']['y'] = y;
 
-                    if(peca[x][y]['peca']){  //se tiver alguma peca nessa posição
-                        movimenta['destino']['peca'] = peca[x][y]['peca'];	//destino recebe a peca selecionada
-                        movimenta['destino']['cor'] = peca[x][y]['cor'];	//destino recebe a cor selecionada
+                    if (peca[x][y]['peca']) {
+                        movimenta['destino']['peca'] = peca[x][y]['peca'];
+                        movimenta['destino']['cor'] = peca[x][y]['cor'];
                     }
 
+                    document.getElementById("t" + movimenta['selecionada']['x'] + "" + movimenta['selecionada']['y']).innerHTML = "";
+                    document.getElementById("t" + x + "" + y).innerHTML = il[movimenta['selecionada']['cor']][movimenta['selecionada']['peca']];
+                    peca[x][y]['peca'] = movimenta['selecionada']['peca'];
+                    peca[x][y]['cor'] = movimenta['selecionada']['cor'];
 
-                    document.getElementById("t"+movimenta['selecionada']['x']+""+movimenta['selecionada']['y']).innerHTML = ""; //selcionada fica sem imagem
-                    document.getElementById("t"+x+""+y).innerHTML = il[movimenta['selecionada']['cor']][movimenta['selecionada']['peca']]; //destino recebe a imagem da peça selecinada
-                    peca[x][y]['peca']=movimenta['selecionada']['peca'];	//posicao destino recebe a peca
-                    peca[x][y]['cor']=movimenta['selecionada']['cor'];		//posicao destino recebe a cor
+                    peca[movimenta['selecionada']['x']][movimenta['selecionada']['y']]['peca'] = false;
+                    peca[movimenta['selecionada']['x']][movimenta['selecionada']['y']]['cor'] = false;
 
-                    peca[movimenta['selecionada']['x']][movimenta['selecionada']['y']]['peca'] = false;		//peca selecionada recebe 0
-                    peca[movimenta['selecionada']['x']][movimenta['selecionada']['y']]['cor'] = false;		//cor selecionada recebe 0
-
-                    movimenta['selecionada']['x'] =0;	//selecionada x recebe 0 (pra na proxima ver q é o primeiro movimento)
-                    movimenta['selecionada']['y'] =0;	//selecionada y recebe 0 (pra na proxima ver q é o primeiro movimento)
-                    movimenta['selecionada']['peca']="0";	//selecionada peca recebe 0 (pra na proxima ver q é o primeiro movimento)
-                    movimenta['selecionada']['cor']="0";	//selecionada cor recebe 0 (pra na proxima ver q é o primeiro movimento)
-
+                    movimenta['selecionada']['x'] = 0;
+                    movimenta['selecionada']['y'] = 0;
+                    movimenta['selecionada']['peca'] = "0";
+                    movimenta['selecionada']['cor'] = "0";
                 }
 
-                volta_fundo(); //volta a cor de fundo normal
+                volta_fundo();
 
-                if(vez=="branco"){vez="preto";}else{vez="branco";} //troca a vez
-                
-                if(playerColor) {
-                    atualizarStatus(); //atualizar status do jogo
+                if (vez == "branco") {
+                    vez = "preto";
+                } else {
+                    vez = "branco";
                 }
 
+                if (playerColor) {
+                    atualizarStatus();
+                }
             }
-
-
-
-
         }
 
-        function escolhecor_incio(cor){
-            document.getElementById('escolhecor-inicio').classList.add('hidden');
+        function escolhecor_incio(cor) {
+            document.getElementById('escolhecor-inicio').style.display = 'none';
             document.getElementById('fundo').style.display = 'none';
             document.getElementById('game-status').style.display = 'block';
-            document.querySelector('.game-area').classList.add('active');
-            document.getElementById('game-header').classList.add('hidden');
+            
+            configura_tabuleiro();
             
             playerColor = cor;
             robotColor = (cor === 'branco') ? 'preto' : 'branco';
@@ -1047,7 +1039,6 @@
                 html = '<span class="status-robo">🤖 VEZ DO ROBÔ</span>';
             }
             
-            // Verificar se alguém está em cheque
             if (estaEmCheque(playerColor)) {
                 html += ' <span style="color: #FF6B6B; font-weight: 800; font-size: 14px; margin-left: 10px;">⚠️ SEU REI ESTÁ EM CHEQUE!</span>';
             } else if (estaEmCheque(robotColor)) {
@@ -1057,9 +1048,7 @@
             statusDiv.innerHTML = html;
         }
 
-        // Função para verificar se uma cor de rei está em cheque
         function estaEmCheque(cor) {
-            // Encontrar a posição do rei
             let reiX = -1, reiY = -1;
             for (let x = 1; x <= 8; x++) {
                 for (let y = 1; y <= 8; y++) {
@@ -1074,27 +1063,12 @@
 
             if (reiX === -1) return false;
 
-            // Verificar se alguma peça inimiga pode atacar o rei
             const corInimiga = (cor === 'branco') ? 'preto' : 'branco';
             
             for (let x = 1; x <= 8; x++) {
                 for (let y = 1; y <= 8; y++) {
                     if (peca[x][y]['peca'] && peca[x][y]['cor'] === corInimiga) {
-                        // Temporariamente trocar turno para verificar movimentos inimigos
-                        const vezAnterior = vez;
-                        vez = corInimiga;
-                        
-                        // Salvar array de possiveis
-                        const possivelAnterior = possiveis;
-                        possiveis = [];
-                        
-                        // Verificar se esse inimigo pode atacar o rei
                         const podeAtacar = verificaAtaque(x, y, reiX, reiY);
-                        
-                        // Restaurar
-                        possiveis = possivelAnterior;
-                        vez = vezAnterior;
-                        
                         if (podeAtacar) return true;
                     }
                 }
@@ -1102,7 +1076,6 @@
             return false;
         }
 
-        // Função auxiliar para verificar se uma peça pode atacar uma posição
         function verificaAtaque(px, py, tx, ty) {
             const tipo = peca[px][py]['peca'];
             
@@ -1114,7 +1087,7 @@
                 }
             }
             else if (tipo === 'cavalo') {
-                const movsCavalo = [[-2,-1], [-2,1], [-1,-2], [-1,2], [1,-2], [1,2], [2,-1], [2,1]];
+                const movsCavalo = [[-2, -1], [-2, 1], [-1, -2], [-1, 2], [1, -2], [1, 2], [2, -1], [2, 1]];
                 for (const [dx, dy] of movsCavalo) {
                     if (px + dx === tx && py + dy === ty) return true;
                 }
@@ -1128,7 +1101,6 @@
                 }
             }
             else if (tipo === 'torre' || tipo === 'rainha') {
-                // Movimento em linha reta (torre e rainha)
                 if (px === tx) {
                     const start = Math.min(py, ty) + 1;
                     const end = Math.max(py, ty);
@@ -1150,7 +1122,6 @@
             }
             
             if (tipo === 'bispo' || tipo === 'rainha') {
-                // Movimento diagonal
                 if (Math.abs(px - tx) === Math.abs(py - ty) && Math.abs(px - tx) > 0) {
                     const dx = tx > px ? 1 : -1;
                     const dy = ty > py ? 1 : -1;
@@ -1168,7 +1139,6 @@
             return false;
         }
 
-        // Função para mostrar tela de fim de jogo
         function mostrarFimDeJogo(vencedorCor) {
             if (gameEnded) return;
             gameEnded = true;
@@ -1179,13 +1149,11 @@
             const message = document.getElementById('game-over-message');
             
             if (vencedorCor === playerColor) {
-                // Você ganhou
                 emoji.textContent = '🏆';
                 title.textContent = 'Você Ganhou!';
                 title.className = 'game-over-title won';
                 message.textContent = 'Parabéns! Você conseguiu uma vitória impressionante no xadrez!';
             } else {
-                // Você perdeu
                 emoji.textContent = '😔';
                 title.textContent = 'Você Perdeu!';
                 title.className = 'game-over-title lost';

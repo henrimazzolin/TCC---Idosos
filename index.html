@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Jogos para Treinar a Mente</title>
+    <title>Mente Ativa - Jogos para Treinar a Mente</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
     <style>
         :root {
-            --cor-primaria: #2563EB;
+            --cor-primaria: #3B82F6;
             --cor-secundaria: #10B981;
             --cor-terceira: #F59E0B;
-            --cor-quarta: #EF4444;
-            --cor-quinta: #8B5CF6;
-            --cor-fundo: #F0F9FF;
+            --cor-fundo: #F8FAFC;
             --cor-fundo-card: #FFFFFF;
-            --cor-texto: #000000;
-            --cor-texto-claro: #1E293B;
-            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
-            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
-            --borda-radius: 20px;
+            --cor-texto: #1E293B;
+            --cor-texto-claro: #64748B;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --borda-radius: 16px;
         }
 
         * {
@@ -38,6 +36,9 @@
             display: flex;
             flex-direction: column;
             font-weight: 500;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
         }
 
         .container {
@@ -54,35 +55,40 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: 14px;
+            margin-bottom: 48px;
         }
 
         .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            width: 64px;
+            height: 64px;
+            background: var(--cor-fundo-card);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .logo-icon svg {
-            width: 36px;
-            height: 36px;
-            fill: white;
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .logo-text {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--cor-primaria);
+            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 48px;
         }
 
         .titulo-com-tts {
@@ -94,80 +100,84 @@
         }
 
         h1 {
-            font-size: clamp(28px, 5vw, 42px);
+            font-size: clamp(26px, 5vw, 38px);
             font-weight: 700;
             color: var(--cor-texto);
             line-height: 1.3;
         }
 
         .tts-btn {
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: none;
-            background: var(--cor-primaria);
-            color: white;
+            background: var(--cor-fundo-card);
+            color: var(--cor-primaria);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .tts-btn:hover {
-            background: #1D4ED8;
-            transform: scale(1.1);
+            background: var(--cor-primaria);
+            color: white;
+            transform: scale(1.08);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
         }
 
         .tts-btn:focus {
-            outline: 4px solid var(--cor-secundaria);
+            outline: 3px solid var(--cor-secundaria);
             outline-offset: 2px;
         }
 
         .tts-btn svg {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
         }
 
         .tts-btn.lendo {
-            background: #10B981;
+            background: var(--cor-secundaria);
+            color: white;
             animation: pulsando 1.5s ease-in-out infinite;
         }
 
         @keyframes pulsando {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.08); }
         }
 
         .subtitle {
-            font-size: clamp(18px, 3vw, 24px);
+            font-size: clamp(16px, 2.5vw, 20px);
             color: var(--cor-texto-claro);
             font-weight: 500;
-            margin-top: 12px;
+            margin-top: 14px;
         }
 
         .groups-container {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px;
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
         }
 
         .group-btn {
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 28px 32px;
+            padding: 26px 28px;
             border: none;
             border-radius: var(--borda-radius);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             text-decoration: none;
             background: var(--cor-fundo-card);
             box-shadow: var(--sombra);
-            border: 3px solid transparent;
+            border: 2px solid transparent;
         }
 
         .group-btn:hover {
@@ -176,35 +186,42 @@
         }
 
         .group-btn:focus {
-            outline: 4px solid var(--cor-primaria);
-            outline-offset: 4px;
+            outline: 3px solid var(--cor-primaria);
+            outline-offset: 3px;
         }
 
         .group-btn.moderado:hover {
             border-color: var(--cor-primaria);
+            background: linear-gradient(to right, rgba(59, 130, 246, 0.03), var(--cor-fundo-card));
         }
 
         .group-btn.simples:hover {
             border-color: var(--cor-secundaria);
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.03), var(--cor-fundo-card));
         }
 
         .group-icon {
-            width: 72px;
-            height: 72px;
-            min-width: 72px;
-            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .group-btn:hover .group-icon {
+            transform: scale(1.08);
         }
 
         .group-icon svg {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
         }
 
         .moderado .group-icon {
-            background: rgba(37, 99, 235, 0.15);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
         }
 
         .moderado .group-icon svg {
@@ -212,7 +229,7 @@
         }
 
         .simples .group-icon {
-            background: rgba(16, 185, 129, 0.15);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
         }
 
         .simples .group-icon svg {
@@ -225,47 +242,56 @@
         }
 
         .group-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--cor-texto);
             margin-bottom: 4px;
         }
 
         .group-desc {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             color: var(--cor-texto-claro);
         }
 
         .arrow-icon {
             margin-left: auto;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             fill: var(--cor-texto-claro);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            opacity: 0.6;
         }
 
         .group-btn:hover .arrow-icon {
             transform: translateX(6px);
+            opacity: 1;
+            fill: var(--cor-primaria);
+        }
+
+        .simples:hover .arrow-icon {
+            fill: var(--cor-secundaria);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 24px 20px;
             color: var(--cor-texto-claro);
             font-size: 14px;
+            font-weight: 500;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .groups-container {
                 flex-direction: row;
+                max-width: 800px;
             }
             
             .group-btn {
                 flex: 1;
                 flex-direction: column;
                 text-align: center;
-                padding: 40px 24px;
+                padding: 36px 24px;
             }
             
             .group-content {
@@ -275,6 +301,10 @@
             .arrow-icon {
                 display: none;
             }
+
+            .group-icon {
+                margin-bottom: 8px;
+            }
         }
     </style>
 </head>
@@ -282,11 +312,9 @@
     <div class="container">
         <div class="logo">
             <div class="logo-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
             </div>
-            <span class="logo-text">MindCare</span>
+            <span class="logo-text">Mente Ativa</span>
         </div>
 
         <header>

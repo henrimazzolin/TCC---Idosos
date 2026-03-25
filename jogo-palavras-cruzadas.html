@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Palavras Cruzadas</title>
+    <title>Mente Ativa - Palavras Cruzadas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -85,23 +85,28 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            background: #ffffff;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .logo-text {
             font-size: 20px;
             font-weight: 700;
-            color: var(--cor-primaria);
+            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-title {
@@ -408,11 +413,9 @@
             </a>
             <div class="logo">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
                 </div>
-                <span class="logo-text">MindCare</span>
+                <span class="logo-text">Mente Ativa</span>
             </div>
         </div>
 
@@ -461,69 +464,59 @@
         const games = [
             {
                 id: 1,
-                name: "Tema: Natureza",
+                name: "Tema: Casa",
                 size: 7,
                 layout: [
-                    ['L', '#', '#', 'A', '#', 'C', '#'],
-                    ['U', '#', '#', 'O', '#', 'S', '#'],
-                    ['M', 'O', 'R', 'A', 'R', 'A', '#'],
+                    ['C', 'A', 'S', 'A', '#', '#', '#'],
                     ['#', '#', '#', '#', '#', '#', '#'],
-                    ['#', '#', 'R', 'O', 'S', 'A', 'M'],
-                    ['#', '#', 'O', '#', '#', '#', 'A'],
-                    ['P', 'A', 'O', '#', '#', '#', 'R']
+                    ['#', '#', 'S', 'O', 'L', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', '#', 'T', 'E', 'L', 'A', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#']
                 ],
                 words: [
-                    { number: 1, word: 'SOL', direction: 'h', row: 0, col: 0, hint: 'Estrela que ilumina o dia' },
-                    { number: 2, word: 'LUZ', direction: 'v', row: 0, col: 0, hint: 'Oposto de escuridão' },
-                    { number: 3, word: 'MAO', direction: 'v', row: 0, col: 3, hint: 'Parte do corpo com cinco dedos' },
-                    { number: 4, word: 'AMOR', direction: 'h', row: 2, col: 0, hint: 'Sentimento de carinho e afeto' },
-                    { number: 5, word: 'CASA', direction: 'v', row: 0, col: 5, hint: 'Local onde moramos' },
-                    { number: 6, word: 'ROSA', direction: 'h', row: 4, col: 2, hint: 'Flor bonita com espinhos' },
-                    { number: 7, word: 'MAR', direction: 'v', row: 4, col: 5, hint: 'Grande extensão de água salgada' },
-                    { number: 8, word: 'PAO', direction: 'h', row: 6, col: 0, hint: 'Alimento feito de farinha' }
+                    { number: 1, word: 'CASA', direction: 'h', row: 0, col: 0, hint: 'Local onde moramos' },
+                    { number: 2, word: 'SOL', direction: 'h', row: 2, col: 2, hint: 'Estrela que ilumina o dia' },
+                    { number: 3, word: 'TELA', direction: 'h', row: 4, col: 2, hint: 'Para ver imagens' }
                 ]
             },
             {
                 id: 2,
-                name: "Tema: Animais",
+                name: "Tema: Natureza",
                 size: 7,
                 layout: [
-                    ['G', 'A', 'T', 'O', '#', 'P', '#'],
-                    ['#', '#', '#', '#', '#', 'A', '#'],
-                    ['#', 'C', 'A', 'C', 'H', 'O', 'R'],
-                    ['#', '#', '#', '#', '#', 'E', '#'],
-                    ['#', 'P', 'A', 'S', 'S', 'A', 'R'],
-                    ['#', '#', '#', '#', '#', 'R', '#'],
-                    ['#', 'C', 'O', 'E', 'L', 'O', '#']
+                    ['S', 'O', 'L', '#', '#', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', 'F', 'L', 'O', 'R', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', 'R', 'O', 'S', 'A', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#']
                 ],
                 words: [
-                    { number: 1, word: 'GATO', direction: 'h', row: 0, col: 0, hint: 'Animal que mia' },
-                    { number: 2, word: 'CACHORRO', direction: 'h', row: 2, col: 1, hint: 'Melhor amigo do homem' },
-                    { number: 3, word: 'PASSARO', direction: 'h', row: 4, col: 1, hint: 'Animal que voa' },
-                    { number: 4, word: 'PATA', direction: 'v', row: 0, col: 5, hint: ' pé do cachorro' },
-                    { number: 5, word: 'PEIXE', direction: 'h', row: 6, col: 1, hint: 'Animal que nada' }
+                    { number: 1, word: 'SOL', direction: 'h', row: 0, col: 0, hint: 'Estrela que ilumina o dia' },
+                    { number: 2, word: 'FLOR', direction: 'h', row: 3, col: 1, hint: 'Planta bonita' },
+                    { number: 3, word: 'ROSA', direction: 'h', row: 5, col: 1, hint: 'Flor com espinhos' }
                 ]
             },
             {
                 id: 3,
-                name: "Tema: Comida",
+                name: "Tema: Corpo",
                 size: 7,
                 layout: [
-                    ['A', 'R', 'R', 'O', 'Z', '#', '#'],
+                    ['O', 'L', 'H', 'O', '#', '#', '#'],
                     ['#', '#', '#', '#', '#', '#', '#'],
-                    ['F', 'R', 'U', 'T', 'A', '#', '#'],
-                    ['#', 'A', '#', 'O', '#', 'A', '#'],
-                    ['#', 'C', 'A', 'V', 'A', 'L', 'O'],
-                    ['#', '#', '#', 'E', '#', '#', '#'],
-                    ['#', 'C', 'A', 'F', 'E', '#', '#']
+                    ['#', 'B', 'O', 'C', 'A', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', 'M', 'A', 'O', '#', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#'],
+                    ['#', '#', '#', '#', '#', '#', '#']
                 ],
                 words: [
-                    { number: 1, word: 'ARROZ', direction: 'h', row: 0, col: 0, hint: 'Grão branco muito consumido' },
-                    { number: 2, word: 'FRUTA', direction: 'h', row: 2, col: 0, hint: 'Alimento natural doce' },
-                    { number: 3, word: 'CAVALO', direction: 'h', row: 4, col: 1, hint: 'Animal que corre' },
-                    { number: 4, word: 'CAFE', direction: 'h', row: 6, col: 1, hint: 'Bebida quente pela manhã' },
-                    { number: 5, word: 'AVE', direction: 'v', row: 2, col: 2, hint: 'Pássaro em português' },
-                    { number: 6, word: 'Ovo', direction: 'v', row: 2, col: 4, hint: 'Alimento de galinha' }
+                    { number: 1, word: 'OLHO', direction: 'h', row: 0, col: 0, hint: 'Usamos para ver' },
+                    { number: 2, word: 'BOCA', direction: 'h', row: 2, col: 1, hint: 'Para comer e falar' },
+                    { number: 3, word: 'MAO', direction: 'h', row: 4, col: 1, hint: 'Tem cinco dedos' }
                 ]
             }
         ];

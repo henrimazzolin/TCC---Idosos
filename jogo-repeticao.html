@@ -3,48 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare - Repetição de Palavras</title>
+    <title>Mente Ativa - Repetição de Palavras</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cor-primaria: #10B981; --cor-secundaria: #2563EB; --cor-fundo: #F0F9FF; --cor-fundo-card: #FFFFFF; --cor-texto: #000000; --cor-texto-claro: #1E293B; --sombra: 0 4px 20px rgba(16, 185, 129, 0.15); --borda-radius: 20px; }
+        :root {
+            --cor-primaria: #2563EB;
+            --cor-secundaria: #10B981;
+            --cor-fundo: #F0F9FF;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-texto-claro: #1E293B;
+            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
+            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
+            --borda-radius: 20px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: var(--cor-fundo); color: var(--cor-texto); min-height: 100vh; font-weight: 500; }
-        .container { max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--cor-fundo-card); border: none; border-radius: 14px; cursor: pointer; box-shadow: var(--sombra); transition: all 0.3s ease; text-decoration: none; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
+            min-height: 100vh;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-fundo-card);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
         .back-btn:hover { transform: translateX(-4px); }
         .back-btn svg { width: 24px; height: 24px; fill: var(--cor-texto); }
+
         .logo { display: flex; align-items: center; gap: 10px; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 26px; height: 26px; fill: white; }
-        .logo-text { font-size: 20px; font-weight: 700; color: var(--cor-primaria); }
-        .page-title { text-align: center; margin-bottom: 30px; }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-text { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #7C3AED, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .page-title { text-align: center; margin-bottom: 20px; }
         .page-title h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; margin-bottom: 8px; }
-        .page-title p { font-size: 18px; color: var(--cor-texto-claro); font-weight: 500; }
-        .game-area { background: var(--cor-fundo-card); border-radius: var(--borda-radius); box-shadow: var(--sombra); padding: 40px; text-align: center; }
-        .game-icon { width: 120px; height: 120px; margin: 0 auto 30px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(37, 99, 235, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .game-icon svg { width: 60px; height: 60px; fill: #2563EB; }
-        .game-description { font-size: 18px; color: var(--cor-texto-claro); line-height: 1.7; margin-bottom: 30px; }
-        .btn { padding: 16px 48px; background: var(--cor-primaria); color: white; border: none; border-radius: 30px; font-size: 20px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; }
-        .btn:hover { background: #059669; transform: scale(1.05); }
-        footer { text-align: center; padding: 20px; color: var(--cor-texto-claro); font-size: 14px; }
+        .page-title p { font-size: 18px; color: var(--cor-texto-claro); }
+
+        .instrucao {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .instrucao p { font-size: 20px; font-weight: 600; color: #92400E; }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: var(--cor-fundo-card);
+            padding: 10px 20px;
+            border-radius: 14px;
+            box-shadow: var(--sombra);
+            text-align: center;
+        }
+
+        .info-label { font-size: 14px; color: var(--cor-texto-claro); }
+        .info-value { font-size: 24px; font-weight: 700; color: var(--cor-primaria); }
+
+        .game-area {
+            background: var(--cor-fundo-card);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--sombra);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .word-display {
+            margin-bottom: 30px;
+        }
+
+        .word-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.05));
+            border: 3px solid var(--cor-primaria);
+            border-radius: var(--borda-radius);
+            padding: 30px 50px;
+            margin: 0 auto 20px;
+            display: inline-block;
+        }
+
+        .word-text {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        .btn {
+            padding: 18px 48px;
+            background: var(--cor-primaria);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 22px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #1D4ED8;
+            transform: scale(1.05);
+        }
+
+        .btn.secondary {
+            background: #10B981;
+        }
+
+        .btn.secondary:hover {
+            background: #059669;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: var(--cor-fundo-card);
+            padding: 40px 50px;
+            border-radius: var(--borda-radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback.show { transform: translate(-50%, -50%) scale(1); }
+
+        .feedback-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-icon.success { background: rgba(16, 185, 129, 0.2); }
+        .feedback-icon.success svg { fill: #10B981; width: 50px; height: 50px; }
+
+        .feedback-icon.error { background: rgba(239, 68, 68, 0.2); }
+        .feedback-icon.error svg { fill: #EF4444; width: 50px; height: 50px; }
+
+        .feedback h2 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+        .feedback p { font-size: 18px; color: var(--cor-texto-claro); }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .overlay.show { opacity: 1; visibility: visible; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--cor-texto-claro);
+            font-size: 14px;
+        }
+
+        .buttons-area {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <a href="grupo-simples.html" class="back-btn"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></a>
-            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">MindCare</span></div>
+            <a href="grupo-simples.html" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
+                </div>
+                <span class="logo-text">Mente Ativa</span>
+            </div>
         </div>
-        <div class="page-title"><h1>Repetição de Palavras</h1><p>Repita as palavras ouvidas</p></div>
+
+        <div class="page-title">
+            <h1>Repetição de Palavras</h1>
+            <p>Lembre das palavras</p>
+        </div>
+
+        <div class="instrucao">
+            <p>Como jogar: Leia a palavra e clique em "Próxima" para ver a próxima!</p>
+        </div>
+
+        <div class="game-info">
+            <div class="info-item">
+                <div class="info-label">Palavra Atual</div>
+                <div class="info-value" id="currentWord">1/5</div>
+            </div>
+        </div>
+
         <div class="game-area">
-            <div class="game-icon"><svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
-            <p class="game-description">Um jogo para exercitar a memória de curto prazo. Ouça as palavras e repita na ordem correta para treinar sua memória.</p>
-            <button class="btn" onclick="alert('Este jogo estará disponível em breve!')">Começar Jogo</button>
+            <div class="word-display">
+                <div class="word-box">
+                    <p class="word-text" id="wordText">Clique em Começar</p>
+                </div>
+                <p class="question" id="question">Prepare-se para lembrar!</p>
+            </div>
+
+            <div class="buttons-area">
+                <button class="btn secondary" id="startBtn" onclick="startGame()">Começar</button>
+                <button class="btn" id="nextBtn" onclick="nextWord()" style="display: none;">Próxima</button>
+                <button class="btn" id="finishBtn" onclick="showResult()" style="display: none;">Ver Resultado</button>
+            </div>
         </div>
     </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback" id="feedback">
+        <div class="feedback-icon" id="feedbackIcon"></div>
+        <h2 id="feedbackTitle">Parabéns!</h2>
+        <p id="feedbackText">Você viu todas as palavras!</p>
+        <button class="btn" id="feedbackBtn" onclick="handleFeedback()">Jogar Novamente</button>
+    </div>
+
     <footer><p>Feito com cuidado para você</p></footer>
+
+    <script>
+        const words = [
+            "Casa",
+            "Árvore",
+            "Porta",
+            "Janela",
+            "Cadeira",
+            "Mesa",
+            "Cama",
+            "Sol",
+            "Lua",
+            "Água"
+        ];
+
+        let currentWords = [];
+        let currentIndex = 0;
+        let gameStarted = false;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initGame() {
+            currentWords = shuffleArray(words).slice(0, 5);
+            currentIndex = 0;
+            gameStarted = false;
+            
+            document.getElementById('currentWord').textContent = '1/5';
+            document.getElementById('wordText').textContent = 'Clique em Começar';
+            document.getElementById('question').textContent = 'Prepare-se para lembrar!';
+            
+            document.getElementById('startBtn').style.display = 'inline-block';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('finishBtn').style.display = 'none';
+        }
+
+        function startGame() {
+            gameStarted = true;
+            currentIndex = 0;
+            
+            document.getElementById('wordText').textContent = currentWords[currentIndex];
+            document.getElementById('question').textContent = 'Atenção! Esta é a palavra ' + (currentIndex + 1);
+            
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextWord() {
+            currentIndex++;
+            
+            if (currentIndex >= currentWords.length) {
+                showResult();
+                return;
+            }
+            
+            document.getElementById('currentWord').textContent = (currentIndex + 1) + '/5';
+            document.getElementById('wordText').textContent = currentWords[currentIndex];
+            document.getElementById('question').textContent = 'Atenção! Esta é a palavra ' + (currentIndex + 1);
+            
+            if (currentIndex === currentWords.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('finishBtn').style.display = 'inline-block';
+            }
+        }
+
+        function showResult() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackText = document.getElementById('feedbackText');
+            
+            feedbackIcon.className = 'feedback-icon success';
+            feedbackIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
+            
+            feedbackTitle.textContent = 'Muito Bem!';
+            feedbackText.textContent = `Você viu ${currentWords.length} palavras! Tente lembrar delas.`;
+            
+            overlay.classList.add('show');
+            feedback.classList.add('show');
+        }
+
+        function handleFeedback() {
+            const overlay = document.getElementById('overlay');
+            const feedback = document.getElementById('feedback');
+            overlay.classList.remove('show');
+            feedback.classList.remove('show');
+            initGame();
+        }
+
+        document.getElementById('overlay').addEventListener('click', handleFeedback);
+
+        initGame();
+    </script>
 </body>
 </html>
