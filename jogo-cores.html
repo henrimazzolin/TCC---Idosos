@@ -3,25 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mente Ativa - Jogo de Cores</title>
+    <title>Mente Ativa - Reconhecimento de Cores</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
     <style>
-        :root {
-            --cor-primaria: #EF4444;
-            --cor-secundaria: #10B981;
-            --cor-terceira: #F59E0B;
-            --cor-fundo: #F0F9FF;
-            --cor-fundo-card: #FFFFFF;
-            --cor-texto: #000000;
-            --cor-texto-claro: #1E293B;
-            --sombra: 0 4px 20px rgba(239, 68, 68, 0.15);
-            --sombra-hover: 0 8px 30px rgba(239, 68, 68, 0.25);
-            --borda-radius: 20px;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -30,67 +17,57 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--cor-fundo);
-            color: var(--cor-texto);
+            background: #E0F2FE;
+            color: #1E293B;
             min-height: 100vh;
-            font-weight: 500;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
+            background: white;
+            padding: 20px;
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .back-btn {
+            width: 56px;
+            height: 56px;
+            background: #10B981;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--cor-fundo-card);
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            box-shadow: var(--sombra);
             transition: all 0.3s ease;
-            text-decoration: none;
         }
 
         .back-btn:hover {
-            transform: translateX(-4px);
-            box-shadow: var(--sombra-hover);
+            background: #059669;
+            transform: scale(1.05);
         }
 
         .back-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--cor-texto);
+            width: 28px;
+            height: 28px;
+            fill: white;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: #ffffff;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-icon img {
@@ -100,540 +77,487 @@
         }
 
         .logo-text {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(135deg, #7C3AED, #3B82F6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .page-title {
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
             text-align: center;
-            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .page-title h1 {
-            font-size: clamp(24px, 4vw, 32px);
+        .game-title {
+            font-size: 32px;
             font-weight: 700;
-            color: var(--cor-texto);
-            margin-bottom: 8px;
-            display: inline;
+            color: #1E293B;
+            margin-bottom: 25px;
         }
 
-        .titulo-com-tts {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-
-        .page-title p {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
-        }
-
-        .tts-btn {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: none;
-            background: var(--cor-primaria);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .tts-btn:hover {
-            background: #1D4ED8;
-            transform: scale(1.1);
-        }
-
-        .tts-btn svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .tts-btn.lendo {
-            background: #10B981;
-            animation: pulsando 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulsando {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .instrucao-destaque {
+        .instruction-box {
             background: #FEF3C7;
-            border-left: 4px solid #F59E0B;
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 24px;
-            text-align: center;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
         }
 
-        .instrucao-destaque p {
-            font-size: 20px;
+        .instruction-text {
+            font-size: 24px;
             font-weight: 600;
             color: #92400E;
         }
 
-        .game-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .info-item {
-            background: var(--cor-fundo-card);
-            padding: 12px 24px;
-            border-radius: 14px;
-            box-shadow: var(--sombra);
-            text-align: center;
-        }
-
-        .info-label {
-            font-size: 14px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
-        }
-
-        .info-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--cor-primaria);
-        }
-
         .color-display {
-            background: var(--cor-fundo-card);
-            border-radius: var(--borda-radius);
-            box-shadow: var(--sombra);
+            background: #F0F9FF;
+            border-radius: 24px;
             padding: 50px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .color-circle {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            min-height: 200px;
         }
 
-        .question {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--cor-texto);
+        .color-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        .question-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 25px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
             gap: 16px;
-            margin-bottom: 30px;
         }
 
         .option-btn {
-            background: var(--cor-fundo-card);
-            border: 3px solid var(--cor-primaria);
-            border-radius: var(--borda-radius);
-            padding: 24px;
-            font-size: 22px;
+            background: white;
+            border: 4px solid;
+            border-radius: 16px;
+            padding: 22px 40px;
+            font-size: 30px;
             font-weight: 700;
-            color: var(--cor-texto);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: var(--sombra);
+            font-family: 'Poppins', sans-serif;
         }
 
-        .option-btn:hover:not(:disabled) {
-            transform: scale(1.02);
-            box-shadow: var(--sombra-hover);
+        .option-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .option-btn.correct {
-            background: var(--cor-secundaria);
-            border-color: var(--cor-secundaria);
-            color: white;
+            opacity: 1;
         }
 
         .option-btn.wrong {
-            background: #EF4444;
-            border-color: #EF4444;
-            color: white;
+            opacity: 0.5;
         }
 
         .option-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.8;
         }
 
-        .btn {
-            padding: 14px 36px;
-            background: var(--cor-primaria);
+        .next-btn {
+            background: #10B981;
             color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
-            font-family: inherit;
+            border-radius: 16px;
+            padding: 20px 50px;
+            font-size: 26px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 25px;
+            display: none;
         }
 
-        .btn:hover {
-            background: #DC2626;
-            transform: scale(1.05);
+        .next-btn:hover {
+            background: #059669;
+            transform: scale(1.03);
         }
 
-        .feedback {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--cor-fundo-card);
-            padding: 40px 60px;
-            border-radius: var(--borda-radius);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            z-index: 100;
-            transition: transform 0.3s ease;
+        .next-btn.show {
+            display: inline-block;
         }
 
-        .feedback.show {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .feedback-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
+        .score-display {
             display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
         }
 
-        .feedback-icon.success {
-            background: rgba(16, 185, 129, 0.2);
+        .score-item {
+            background: #F1F5F9;
+            padding: 12px 25px;
+            border-radius: 14px;
         }
 
-        .feedback-icon.success svg {
-            fill: #10B981;
-            width: 50px;
-            height: 50px;
+        .score-label {
+            font-size: 16px;
+            color: #64748B;
         }
 
-        .feedback-icon.error {
-            background: rgba(239, 68, 68, 0.2);
-        }
-
-        .feedback-icon.error svg {
-            fill: #EF4444;
-            width: 50px;
-            height: 50px;
-        }
-
-        .feedback h2 {
-            font-size: 28px;
+        .score-value {
+            font-size: 32px;
             font-weight: 700;
-            color: var(--cor-texto);
-            margin-bottom: 10px;
+            color: #10B981;
         }
 
-        .feedback p {
-            font-size: 18px;
-            color: var(--cor-texto-claro);
-            font-weight: 500;
-        }
-
-        .overlay {
+        .feedback-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 99;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
 
-        .overlay.show {
-            opacity: 1;
-            visibility: visible;
+        .feedback-overlay.show {
+            display: flex;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .feedback-icon {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 70px;
+        }
+
+        .feedback-icon.success {
+            background: #D1FAE5;
+        }
+
+        .feedback-icon.error {
+            background: #FEE2E2;
+        }
+
+        .feedback-title {
+            font-size: 34px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 12px;
+        }
+
+        .feedback-subtitle {
+            font-size: 22px;
+            color: #64748B;
+        }
+
+        .feedback-btn {
+            background: #10B981;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 18px 45px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 25px;
+        }
+
+        .feedback-btn:hover {
+            background: #059669;
+            transform: scale(1.03);
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: var(--cor-texto-claro);
-            font-size: 14px;
+            color: #64748B;
+            font-size: 16px;
         }
 
-        @media (max-width: 600px) {
-            .header {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .logo {
-                width: 100%;
-                justify-content: center;
-                margin-top: 12px;
-            }
-
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .color-circle {
-                width: 140px;
-                height: 140px;
-                font-size: 22px;
-            }
-
-            .color-display {
-                padding: 30px;
-            }
+        @media (max-width: 500px) {
+            .game-card { padding: 25px; }
+            .game-title { font-size: 26px; }
+            .instruction-text { font-size: 20px; }
+            .color-circle { width: 120px; height: 120px; }
+            .question-text { font-size: 26px; }
+            .option-btn { font-size: 26px; padding: 18px 25px; }
+            .next-btn { font-size: 22px; padding: 18px 35px; }
+            .feedback-icon { font-size: 55px; width: 90px; height: 90px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="grupo-simples.html" class="back-btn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </a>
-            <div class="logo">
-                <div class="logo-icon">
-                    <img src="img/unnamed.jpg" alt="Logo Mente Ativa" />
+    <div class="header">
+        <button class="back-btn" onclick="location.href='grupo-simples.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="img/unnamed.jpg" alt="Logo">
+            </div>
+            <span class="logo-text">Mente Ativa</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="game-card">
+            <h1 class="game-title">Reconhecimento de Cores</h1>
+
+            <div class="instruction-box">
+                <p class="instruction-text">Clique na cor que aparece abaixo!</p>
+            </div>
+
+            <div class="color-display">
+                <div id="colorCircle" class="color-circle"></div>
+            </div>
+
+            <div class="options-container" id="optionsContainer"></div>
+
+            <button class="next-btn" id="nextBtn" onclick="proximaQuestao()">Próxima</button>
+
+            <div class="score-display">
+                <div class="score-item">
+                    <div class="score-label">Acertos</div>
+                    <div class="score-value" id="acertos">0</div>
                 </div>
-                <span class="logo-text">Mente Ativa</span>
+                <div class="score-item">
+                    <div class="score-label">Questão</div>
+                    <div class="score-value" id="questao">1/5</div>
+                </div>
             </div>
         </div>
-
-        <div class="page-title">
-            <div class="titulo-com-tts">
-                <h1>Jogo de Cores</h1>
-                <button class="tts-btn" onclick="toggleLeitura('Jogo de Cores. Qual é a cor deste círculo? Clique na resposta correta.', this)" aria-label="Ouvir instruções">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                    </svg>
-                </button>
-            </div>
-            <p>Qual é a cor deste círculo?</p>
-        </div>
-
-        <div class="instrucao-destaque">
-            <p>Como jogar: Olhe a cor e clique no nome correto!</p>
-        </div>
-
-        <div class="game-info">
-            <div class="info-item">
-                <div class="info-label">Acertos</div>
-                <div class="info-value" id="correct">0</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Questão</div>
-                <div class="info-value" id="question">1/5</div>
-            </div>
-        </div>
-
-        <div class="color-display">
-            <div class="color-circle" id="colorCircle">AZUL</div>
-            <p class="question">Qual é esta cor?</p>
-        </div>
-
-        <div class="options-grid" id="optionsGrid"></div>
-
-        <button class="btn" id="nextBtn" style="display: none;" onclick="nextQuestion()">Próxima Cor</button>
     </div>
 
-    <div class="overlay" id="overlay"></div>
-    <div class="feedback" id="feedback">
-        <div class="feedback-icon" id="feedbackIcon"></div>
-        <h2 id="feedbackTitle">Muito bem!</h2>
-        <p id="feedbackText">Você acertou!</p>
-        <button class="btn" id="feedbackBtn" onclick="handleFeedback()">Continuar</button>
+    <div class="feedback-overlay" id="feedbackOverlay">
+        <div class="feedback-card">
+            <div class="feedback-icon" id="feedbackIcon"></div>
+            <h2 class="feedback-title" id="feedbackTitle"></h2>
+            <p class="feedback-subtitle" id="feedbackSubtitle"></p>
+            <button class="feedback-btn" id="feedbackBtn" onclick="fecharFeedback()">Continuar</button>
+        </div>
     </div>
 
-    <footer>
-        <p>Feito com cuidado para você</p>
-    </footer>
+    <footer>Feito com cuidado para você</footer>
 
     <script>
-        const colors = [
-            { name: 'Vermelho', hex: '#EF4444' },
-            { name: 'Azul', hex: '#3B82F6' },
-            { name: 'Verde', hex: '#10B981' },
-            { name: 'Amarelo', hex: '#F59E0B' },
-            { name: 'Roxo', hex: '#8B5CF6' },
-            { name: 'Laranja', hex: '#F97316' },
-            { name: 'Rosa', hex: '#EC4899' },
-            { name: 'Marrom', hex: '#92400E' },
-            { name: 'Cinza', hex: '#6B7280' },
-            { name: 'Preto', hex: '#1F2937' }
+        const bancoCores = [
+            { cor: '#E53935', nome: 'Vermelho', texto: '#FFFFFF' },
+            { cor: '#1E88E5', nome: 'Azul', texto: '#FFFFFF' },
+            { cor: '#43A047', nome: 'Verde', texto: '#FFFFFF' },
+            { cor: '#FDD835', nome: 'Amarelo', texto: '#000000' },
+            { cor: '#8E24AA', nome: 'Roxo', texto: '#FFFFFF' },
+            { cor: '#FB8C00', nome: 'Laranja', texto: '#000000' },
+            { cor: '#F06292', nome: 'Rosa', texto: '#FFFFFF' },
+            { cor: '#00ACC1', nome: 'Azul Claro', texto: '#FFFFFF' },
+            { cor: '#6D4C41', nome: 'Marrom', texto: '#FFFFFF' },
+            { cor: '#546E7A', nome: 'Cinza', texto: '#FFFFFF' },
+            { cor: '#00897B', nome: 'Verde Água', texto: '#FFFFFF' },
+            { cor: '#5E35B1', nome: 'Índigo', texto: '#FFFFFF' },
+            { cor: '#D81B60', nome: 'Rosa Escuro', texto: '#FFFFFF' },
+            { cor: '#FFB300', nome: 'Âmbar', texto: '#000000' },
+            { cor: '#7CB342', nome: 'Verde Limão', texto: '#000000' },
+            { cor: '#039BE5', nome: 'Azul Céu', texto: '#FFFFFF' },
+            { cor: '#FF7043', nome: 'Coral', texto: '#FFFFFF' },
+            { cor: '#8D6E63', nome: 'Caramelo', texto: '#FFFFFF' },
+            { cor: '#78909C', nome: 'Cinza Azulado', texto: '#FFFFFF' },
+            { cor: '#A1887F', nome: 'Bege', texto: '#000000' }
         ];
 
-        let currentColors = [];
-        let currentIndex = 0;
-        let correctCount = 0;
-        let isComplete = false;
+        let questaoAtual = 0;
+        let acertos = 0;
+        let coresDaRodada = [];
+        let jogoFinalizado = false;
 
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
+        function embaralhar(array) {
+            const novo = [...array];
+            for (let i = novo.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                [novo[i], novo[j]] = [novo[j], novo[i]];
             }
-            return shuffled;
+            return novo;
         }
 
-        function initGame() {
-            currentColors = shuffleArray(colors).slice(0, 5);
-            currentIndex = 0;
-            correctCount = 0;
-            isComplete = false;
-            
-            document.getElementById('correct').textContent = '0';
-            document.getElementById('question').textContent = '1/5';
-            
-            loadQuestion();
+        function iniciarJogo() {
+            coresDaRodada = embaralhar(bancoCores).slice(0, 5);
+            questaoAtual = 0;
+            acertos = 0;
+            jogoFinalizado = false;
+            document.getElementById('acertos').textContent = '0';
+            document.getElementById('questao').textContent = '1/5';
+            document.getElementById('nextBtn').classList.remove('show');
+            carregarQuestao();
         }
 
-        function loadQuestion() {
-            const color = currentColors[currentIndex];
+        function carregarQuestao() {
+            const item = coresDaRodada[questaoAtual];
+            const circle = document.getElementById('colorCircle');
+            circle.style.backgroundColor = item.cor;
             
-            const colorCircle = document.getElementById('colorCircle');
-            colorCircle.style.backgroundColor = color.hex;
-            colorCircle.textContent = color.name.toUpperCase();
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
             
-            if (color.name === 'Preto' || color.name === 'Marrom' || color.name === 'Roxo' || color.name === 'Cinza') {
-                colorCircle.style.color = 'white';
-            } else {
-                colorCircle.style.color = 'white';
-            }
+            const outrasCores = bancoCores
+                .filter(c => c.nome !== item.nome)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 1);
             
-            const optionsGrid = document.getElementById('optionsGrid');
-            optionsGrid.innerHTML = '';
+            const opcoes = embaralhar([item, ...outrasCores]);
             
-            const otherColors = colors.filter(c => c.name !== color.name);
-            const wrongOptions = shuffleArray(otherColors).slice(0, 3);
-            const options = shuffleArray([color, ...wrongOptions]);
-            
-            options.forEach(opt => {
+            opcoes.forEach(opcao => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
-                btn.textContent = opt.name;
-                btn.onclick = () => checkAnswer(opt.name, btn, color.name);
-                optionsGrid.appendChild(btn);
+                btn.textContent = opcao.nome;
+                btn.style.borderColor = opcao.cor;
+                btn.style.color = opcao.cor;
+                btn.style.backgroundColor = opcao.cor + '20';
+                btn.onclick = function() { verificarResposta(opcao.nome, opcao.cor, this); };
+                container.appendChild(btn);
             });
-            
-            document.getElementById('nextBtn').style.display = 'none';
         }
 
-        function checkAnswer(answer, btn, correct) {
-            const buttons = document.querySelectorAll('.option-btn');
+        function verificarResposta(resposta, corResposta, botao) {
+            const correta = coresDaRodada[questaoAtual].nome;
+            const corretaCor = coresDaRodada[questaoAtual].cor;
+            const botoes = document.querySelectorAll('.option-btn');
             
-            buttons.forEach(b => b.disabled = true);
+            botoes.forEach(b => b.disabled = true);
             
-            if (answer === correct) {
-                btn.classList.add('correct');
-                correctCount++;
-                document.getElementById('correct').textContent = correctCount;
-                
-                showFeedback(true, 'Muito bem!', 'Você acertou a cor!');
+            if (resposta === correta) {
+                botao.classList.add('correct');
+                botao.style.backgroundColor = corretaCor;
+                botao.style.color = coresDaRodada[questaoAtual].texto;
+                acertos++;
+                document.getElementById('acertos').textContent = acertos;
+                mostrarFeedback(true);
             } else {
-                btn.classList.add('wrong');
-                buttons.forEach(b => {
-                    if (b.textContent === correct) {
+                botao.classList.add('wrong');
+                botoes.forEach(b => {
+                    if (b.textContent === correta) {
                         b.classList.add('correct');
+                        b.style.backgroundColor = corretaCor;
+                        b.style.color = coresDaRodada[questaoAtual].texto;
                     }
                 });
-                
-                showFeedback(false, 'Quase lá!', 'A cor era ' + correct);
+                mostrarFeedback(false);
             }
             
-            document.getElementById('nextBtn').style.display = 'block';
-            
-            if (currentIndex === currentColors.length - 1) {
-                isComplete = true;
-                document.getElementById('nextBtn').textContent = 'Ver Resultado';
-                document.getElementById('nextBtn').onclick = showResult;
+            if (questaoAtual < 4) {
+                document.getElementById('nextBtn').classList.add('show');
+            } else {
+                setTimeout(mostrarResultadoFinal, 1200);
             }
         }
 
-        function nextQuestion() {
-            if (isComplete) {
-                showResult();
-                return;
-            }
-            
-            currentIndex++;
-            document.getElementById('question').textContent = `${currentIndex + 1}/5`;
-            loadQuestion();
+        function proximaQuestao() {
+            questaoAtual++;
+            document.getElementById('questao').textContent = (questaoAtual + 1) + '/5';
+            document.getElementById('nextBtn').classList.remove('show');
+            carregarQuestao();
         }
 
-        function showResult() {
-            const overlay = document.getElementById('overlay');
-            const feedback = document.getElementById('feedback');
-            const feedbackIcon = document.getElementById('feedbackIcon');
-            const feedbackTitle = document.getElementById('feedbackTitle');
-            const feedbackText = document.getElementById('feedbackText');
-            const feedbackBtn = document.getElementById('feedbackBtn');
+        function mostrarFeedback(acertou) {
+            const overlay = document.getElementById('feedbackOverlay');
+            const icon = document.getElementById('feedbackIcon');
+            const title = document.getElementById('feedbackTitle');
+            const subtitle = document.getElementById('feedbackSubtitle');
             
-            feedbackIcon.className = 'feedback-icon success';
-            feedbackIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>';
+            if (acertou) {
+                icon.className = 'feedback-icon success';
+                icon.textContent = '✅';
+                title.textContent = 'Muito bem!';
+                subtitle.textContent = 'Você acertou!';
+            } else {
+                icon.className = 'feedback-icon error';
+                icon.textContent = '❌';
+                title.textContent = 'Tente outra vez';
+                subtitle.textContent = 'A cor era: ' + coresDaRodada[questaoAtual].nome;
+            }
             
-            feedbackTitle.textContent = 'Parabéns!';
-            feedbackText.textContent = `Você acertou ${correctCount} de ${currentColors.length} cores!`;
+            overlay.classList.add('show');
+        }
+
+        function fecharFeedback() {
+            document.getElementById('feedbackOverlay').classList.remove('show');
             
-            feedbackBtn.textContent = 'Jogar Novamente';
-            feedbackBtn.onclick = () => {
+            if (questaoAtual === 4 && !jogoFinalizado) {
+                mostrarResultadoFinal();
+            }
+        }
+
+        function mostrarResultadoFinal() {
+            jogoFinalizado = true;
+            const overlay = document.getElementById('feedbackOverlay');
+            const icon = document.getElementById('feedbackIcon');
+            const title = document.getElementById('feedbackTitle');
+            const subtitle = document.getElementById('feedbackSubtitle');
+            const btn = document.getElementById('feedbackBtn');
+            
+            icon.className = 'feedback-icon success';
+            icon.textContent = '🏆';
+            
+            if (acertos === 5) {
+                title.textContent = 'Perfeito!';
+                subtitle.textContent = 'Você acertou todas as 5 questões!';
+            } else if (acertos >= 3) {
+                title.textContent = 'Muito bem!';
+                subtitle.textContent = 'Você acertou ' + acertos + ' de 5 questões!';
+            } else {
+                title.textContent = 'Parabéns!';
+                subtitle.textContent = 'Você acertou ' + acertos + ' de 5 questões!';
+            }
+            
+            btn.textContent = 'Jogar Novamente';
+            btn.onclick = function() {
                 overlay.classList.remove('show');
-                feedback.classList.remove('show');
-                document.getElementById('nextBtn').textContent = 'Próxima Cor';
-                document.getElementById('nextBtn').onclick = nextQuestion;
-                initGame();
+                iniciarJogo();
             };
             
             overlay.classList.add('show');
-            feedback.classList.add('show');
         }
 
-        function handleFeedback() {
-            const overlay = document.getElementById('overlay');
-            const feedback = document.getElementById('feedback');
-            overlay.classList.remove('show');
-            feedback.classList.remove('show');
-        }
-
-        document.getElementById('overlay').addEventListener('click', handleFeedback);
-
-        initGame();
+        iniciarJogo();
     </script>
 </body>
 </html>
