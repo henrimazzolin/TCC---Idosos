@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jogo de palavras cruzadas para idosos - Mente Ativa">
     <title>Mente Ativa - Palavras Cruzadas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +21,10 @@
             --cor-terceira: #F59E0B;
             --cor-sucesso: #10B981;
             --cor-erro: #EF4444;
+            --cor-bloqueada: #374151;
+            --cor-bloqueada-escura: #1F2937;
+            --cor-destaque: #DBEAFE;
+            --cor-correto: #D1FAE5;
             --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
             --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
             --borda-radius: 16px;
@@ -88,7 +93,7 @@
         .logo-icon {
             width: 44px;
             height: 44px;
-            background: #ffffff;
+            background: var(--cor-fundo-card);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -167,7 +172,7 @@
             width: 50px;
             height: 50px;
             position: relative;
-            background: white;
+            background: var(--cor-fundo-card);
         }
 
         .cell.blocked {
@@ -200,11 +205,11 @@
         }
 
         .cell input.active-row {
-            background: #FEF3C7;
+            background: var(--cor-destaque);
         }
 
         .cell input.active-col {
-            background: #FEF3C7;
+            background: var(--cor-destaque);
         }
 
         .cell .cell-number {
