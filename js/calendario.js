@@ -1,4 +1,4 @@
-// MindCare - Calendário Interativo
+// Mente Ativa - Calendário Interativo
 
 const nomesMeses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -22,7 +22,7 @@ function carregarEventos() {
     const mesAtual = hoje.getMonth();
     const anoAtual = hoje.getFullYear();
     
-    const eventosSalvos = localStorage.getItem('mindcare_eventos');
+    const eventosSalvos = localStorage.getItem('menteativa_eventos');
     if (eventosSalvos) {
         eventos = JSON.parse(eventosSalvos);
     } else {
@@ -129,7 +129,7 @@ function renderizarEventos() {
     } else {
         let html = `<h3>${nomeDiaSemana}, ${dia} de ${mes}</h3>`;
         
-        eventosDia.forEach(evento => {
+        eventosDia.forEach((evento, index) => {
             html += `
                 <div class="event-item">
                     <div class="event-icon ${evento.tipo}">
@@ -141,6 +141,10 @@ function renderizarEventos() {
                         <div class="event-title">${evento.titulo}</div>
                         <div class="event-time">${evento.hora} - ${evento.periodo}</div>
                     </div>
+                    <button class="delete-event-btn" onclick="confirmarExclusao(${index})" aria-label="Remover evento ${evento.titulo}">
+                        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                        Remover
+                    </button>
                 </div>
             `;
         });
@@ -208,11 +212,54 @@ function salvarEvento() {
         periodo: periodo || ' '
     });
     
-    localStorage.setItem('mindcare_eventos', JSON.stringify(eventos));
+    localStorage.setItem('menteativa_eventos', JSON.stringify(eventos));
     
     fecharModal();
     renderizarCalendario();
     renderizarEventos();
+}
+
+function confirmarExclusao(index) {
+    const dataStr = `${dataSelecionada.getFullYear()}-${dataSelecionada.getMonth() + 1}-${dataSelecionada.getDate()}`;
+    const evento = eventos[dataStr][index];
+    
+    document.getElementById('deleteModalOverlay').classList.add('active');
+    document.getElementById('deleteEventTitle').textContent = evento.titulo;
+    document.getElementById('deleteEventTime').textContent = evento.hora;
+    
+    window.eventoParaExcluir = { index: index, dataStr: dataStr };
+}
+
+function fecharModalExclusao(event) {
+    if (event && event.target !== document.getElementById('deleteModalOverlay')) {
+        return;
+    }
+    document.getElementById('deleteModalOverlay').classList.remove('active');
+    window.eventoParaExcluir = null;
+}
+
+function removerEvento() {
+    if (!window.eventoParaExcluir) return;
+    
+    const { index, dataStr } = window.eventoParaExcluir;
+    
+    eventos[dataStr].splice(index, 1);
+    
+    if (eventos[dataStr].length === 0) {
+        delete eventos[dataStr];
+    }
+    
+    localStorage.setItem('menteativa_eventos', JSON.stringify(eventos));
+    
+    fecharModalExclusao();
+    renderizarCalendario();
+    renderizarEventos();
+    
+    alert('Atividade removida com sucesso');
+}
+
+function excluirEvento(index) {
+    confirmarExclusao(index);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jogos cognitivos para idosos - Mente Ativa">
     <title>Mente Ativa - Jogos para Treinar a Mente</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
+    
     <style>
         :root {
-            --cor-primaria: #3B82F6;
-            --cor-secundaria: #10B981;
-            --cor-terceira: #F59E0B;
             --cor-fundo: #F8FAFC;
             --cor-fundo-card: #FFFFFF;
             --cor-texto: #1E293B;
             --cor-texto-claro: #64748B;
+            --cor-primaria: #3B82F6;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-sucesso: #10B981;
+            --cor-erro: #EF4444;
             --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
             --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
             --borda-radius: 16px;
+            --border: #E2E8F0;
+            --primary-light: rgba(59, 130, 246, 0.1);
         }
 
         * {
@@ -36,9 +42,6 @@
             display: flex;
             flex-direction: column;
             font-weight: 500;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
         }
 
         .container {
@@ -80,7 +83,7 @@
         .logo-text {
             font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            background: linear-gradient(135deg, #0B6477, #0AD1C8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -126,11 +129,11 @@
             background: var(--cor-primaria);
             color: white;
             transform: scale(1.08);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(20, 145, 155, 0.4);
         }
 
         .tts-btn:focus {
-            outline: 3px solid var(--cor-secundaria);
+            outline: 3px solid var(--cor-terceira);
             outline-offset: 2px;
         }
 
@@ -141,7 +144,7 @@
 
         .tts-btn.lendo {
             background: var(--cor-secundaria);
-            color: white;
+            color: #213A57;
             animation: pulsando 1.5s ease-in-out infinite;
         }
 
@@ -192,12 +195,12 @@
 
         .group-btn.moderado:hover {
             border-color: var(--cor-primaria);
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.03), var(--cor-fundo-card));
+            background: linear-gradient(to right, rgba(20, 145, 155, 0.03), var(--cor-fundo-card));
         }
 
         .group-btn.simples:hover {
             border-color: var(--cor-secundaria);
-            background: linear-gradient(to right, rgba(16, 185, 129, 0.03), var(--cor-fundo-card));
+            background: linear-gradient(to right, rgba(69, 223, 177, 0.03), var(--cor-fundo-card));
         }
 
         .group-icon {
@@ -221,7 +224,7 @@
         }
 
         .moderado .group-icon {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+            background: linear-gradient(135deg, rgba(20, 145, 155, 0.15), rgba(20, 145, 155, 0.08));
         }
 
         .moderado .group-icon svg {
@@ -229,7 +232,7 @@
         }
 
         .simples .group-icon {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+            background: linear-gradient(135deg, rgba(69, 223, 177, 0.15), rgba(69, 223, 177, 0.08));
         }
 
         .simples .group-icon svg {
@@ -271,6 +274,10 @@
 
         .simples:hover .arrow-icon {
             fill: var(--cor-secundaria);
+        }
+
+        .moderado:hover .arrow-icon {
+            fill: var(--cor-terceira);
         }
 
         footer {
@@ -330,7 +337,7 @@
         </header>
 
         <div class="groups-container">
-            <a href="menu.html" class="group-btn moderado">
+            <a href="grupo-moderado.html" class="group-btn moderado">
                 <div class="group-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -345,7 +352,7 @@
                 </svg>
             </a>
 
-            <a href="jogos.html" class="group-btn simples">
+            <a href="com-ajuda.html" class="group-btn simples">
                 <div class="group-icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>

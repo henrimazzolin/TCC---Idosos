@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jogos para idosos com ajuda de acompanhante - Mente Ativa">
     <title>Mente Ativa - Usar com Ajuda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --cor-primaria: #2563EB;
+            --cor-fundo: #F8FAFC;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #1E293B;
+            --cor-texto-claro: #64748B;
+            --cor-primaria: #3B82F6;
             --cor-secundaria: #10B981;
             --cor-terceira: #F59E0B;
-            --cor-fundo: #F0F9FF;
-            --cor-fundo-card: #FFFFFF;
-            --cor-texto: #000000;
-            --cor-texto-claro: #1E293B;
-            --cor-botao-solitario: #10B981;
-            --cor-botao-ajuda: #F59E0B;
-            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
-            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
-            --borda-radius: 20px;
+            --cor-botao-ajuda: #14919B;
+            --cor-sucesso: #10B981;
+            --cor-erro: #EF4444;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --borda-radius: 16px;
+            --border: #E2E8F0;
+            --primary-light: rgba(59, 130, 246, 0.1);
         }
 
         * {
@@ -108,7 +113,7 @@
         .logo-text {
             font-size: 20px;
             font-weight: 600;
-            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            background: linear-gradient(135deg, #0B6477, #0AD1C8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -130,12 +135,6 @@
             font-size: 18px;
             color: var(--cor-texto-claro);
             font-weight: 500;
-        }
-
-        .info-box p {
-            color: #B45309;
-            font-size: 16px;
-            font-weight: 600;
         }
 
         .games-grid {
@@ -188,11 +187,11 @@
         }
 
         .game-card.azul .game-icon {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0.1));
+            background: linear-gradient(135deg, rgba(20, 145, 155, 0.25), rgba(20, 145, 155, 0.1));
         }
 
         .game-card.azul .game-icon svg {
-            fill: #2563EB;
+            fill: #14919B;
         }
 
         .game-title {
@@ -212,8 +211,8 @@
         .jogar-btn {
             margin-top: 20px;
             padding: 14px 36px;
-            background: #F59E0B;
-            color: white;
+            background: #0AD1C8;
+            color: #213A57;
             border: none;
             border-radius: 30px;
             font-size: 18px;
@@ -224,37 +223,19 @@
         }
 
         .game-card:hover .jogar-btn {
-            background: #D97706;
+            background: #06B6AC;
         }
 
         .game-card.azul .jogar-btn {
-            background: #2563EB;
+            background: #14919B;
         }
 
         .game-card.azul:hover .jogar-btn {
-            background: #1D4ED8;
+            background: #0F766E;
         }
 
         .info-box {
             background: rgba(245, 158, 11, 0.15);
-            border-radius: 16px;
-            padding: 20px 24px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .info-box p {
-            color: #B45309;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .game-card.azul:hover .jogar-btn {
-            background: #234863;
-        }
-
-        .info-box {
-            background: rgba(123, 107, 74, 0.1);
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 40px;

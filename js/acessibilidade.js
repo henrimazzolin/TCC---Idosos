@@ -1,4 +1,4 @@
-// MindCare - Acessibilidade e Text-to-Speech
+// Mente Ativa - Acessibilidade e Text-to-Speech
 
 // Configuração da voz em português
 const VOZ_PORTUGUES = 'pt-BR';

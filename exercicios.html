@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exercícios cognitivos para idosos - Mente Ativa">
     <title>Mente Ativa - Exercícios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
+    
     <style>
         :root {
-            --cor-primaria: #2563EB;
-            --cor-secundaria: #10B981;
-            --cor-fundo: #F0F9FF;
+            /* Light theme (default) */
+            --cor-fundo: #F8FAFC;
             --cor-fundo-card: #FFFFFF;
-            --cor-texto: #000000;
-            --cor-texto-claro: #1E293B;
-            --sombra: 0 4px 20px rgba(37, 99, 235, 0.15);
-            --sombra-hover: 0 8px 30px rgba(37, 99, 235, 0.25);
-            --borda-radius: 20px;
+            --cor-texto: #1E293B;
+            --cor-texto-claro: #64748B;
+            --cor-primaria: #3B82F6;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-sucesso: #10B981;
+            --cor-erro: #EF4444;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --borda-radius: 16px;
+            --border: #E2E8F0;
+            --primary-light: rgba(59, 130, 246, 0.1);
         }
 
         * {
@@ -51,12 +59,12 @@
         }
 
         .tts-btn:hover {
-            background: #1D4ED8;
+            background: #0B6477;
             transform: scale(1.1);
         }
 
         .tts-btn:focus {
-            outline: 4px solid var(--cor-secundaria);
+            outline: 4px solid var(--cor-terceira);
             outline-offset: 2px;
         }
 
@@ -66,7 +74,8 @@
         }
 
         .tts-btn.lendo {
-            background: #10B981;
+            background: #45DFB1;
+            color: #213A57;
             animation: pulsando 1.5s ease-in-out infinite;
         }
 
@@ -141,7 +150,7 @@
         .logo-text {
             font-size: 20px;
             font-weight: 600;
-            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            background: linear-gradient(135deg, #0B6477, #0AD1C8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -216,10 +225,10 @@
             box-shadow: var(--sombra-hover);
         }
 
-        .exercise-card.verde:hover { border-color: #10B981; }
-        .exercise-card.laranja:hover { border-color: #F59E0B; }
-        .exercise-card.azul:hover { border-color: #2563EB; }
-        .exercise-card.roxo:hover { border-color: #8B5CF6; }
+        .exercise-card.verde:hover { border-color: #45DFB1; }
+        .exercise-card.laranja:hover { border-color: #0AD1C8; }
+        .exercise-card.azul:hover { border-color: #14919B; }
+        .exercise-card.roxo:hover { border-color: #0B6477; }
 
         .exercise-icon {
             width: 72px;
@@ -237,24 +246,24 @@
         }
 
         .exercise-card.verde .exercise-icon {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(135deg, rgba(69, 223, 177, 0.2), rgba(69, 223, 177, 0.1));
         }
-        .exercise-card.verde .exercise-icon svg { fill: #10B981; }
+        .exercise-card.verde .exercise-icon svg { fill: #45DFB1; }
 
         .exercise-card.laranja .exercise-icon {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+            background: linear-gradient(135deg, rgba(10, 209, 200, 0.2), rgba(10, 209, 200, 0.1));
         }
-        .exercise-card.laranja .exercise-icon svg { fill: #F59E0B; }
+        .exercise-card.laranja .exercise-icon svg { fill: #0AD1C8; }
 
         .exercise-card.azul .exercise-icon {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1));
+            background: linear-gradient(135deg, rgba(20, 145, 155, 0.2), rgba(20, 145, 155, 0.1));
         }
-        .exercise-card.azul .exercise-icon svg { fill: #2563EB; }
+        .exercise-card.azul .exercise-icon svg { fill: #14919B; }
 
         .exercise-card.roxo .exercise-icon {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+            background: linear-gradient(135deg, rgba(11, 100, 119, 0.2), rgba(11, 100, 119, 0.1));
         }
-        .exercise-card.roxo .exercise-icon svg { fill: #8B5CF6; }
+        .exercise-card.roxo .exercise-icon svg { fill: #0B6477; }
 
         .exercise-title {
             font-size: 22px;
@@ -301,17 +310,17 @@
             transition: all 0.3s ease;
         }
 
-        .exercise-card.verde .ver-btn { background: #10B981; color: white; }
-        .exercise-card.verde .ver-btn:hover { background: #059669; }
+        .exercise-card.verde .ver-btn { background: #45DFB1; color: #213A57; }
+        .exercise-card.verde .ver-btn:hover { background: #34D399; }
 
-        .exercise-card.laranja .ver-btn { background: #F59E0B; color: white; }
-        .exercise-card.laranja .ver-btn:hover { background: #D97706; }
+        .exercise-card.laranja .ver-btn { background: #0AD1C8; color: #213A57; }
+        .exercise-card.laranja .ver-btn:hover { background: #06B6AC; }
 
-        .exercise-card.azul .ver-btn { background: #2563EB; color: white; }
-        .exercise-card.azul .ver-btn:hover { background: #1D4ED8; }
+        .exercise-card.azul .ver-btn { background: #14919B; color: white; }
+        .exercise-card.azul .ver-btn:hover { background: #0F766E; }
 
-        .exercise-card.roxo .ver-btn { background: #8B5CF6; color: white; }
-        .exercise-card.roxo .ver-btn:hover { background: #7C3AED; }
+        .exercise-card.roxo .ver-btn { background: #0B6477; color: white; }
+        .exercise-card.roxo .ver-btn:hover { background: #094756; }
 
         .tip-box {
             background: rgba(245, 158, 11, 0.1);

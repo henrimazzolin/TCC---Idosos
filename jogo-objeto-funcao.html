@@ -8,7 +8,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="js/acessibilidade.js" defer></script>
+    
     <style>
+        :root {
+            /* Light theme (default) */
+            --cor-fundo: #F8FAFC;
+            --cor-fundo-card: #FFFFFF;
+            --cor-texto: #1E293B;
+            --cor-texto-claro: #64748B;
+            --cor-primaria: #3B82F6;
+            --cor-secundaria: #10B981;
+            --cor-terceira: #F59E0B;
+            --cor-sucesso: #10B981;
+            --cor-erro: #EF4444;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --borda-radius: 16px;
+            --border: #E2E8F0;
+            --primary-light: rgba(59, 130, 246, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +55,7 @@
         .back-btn {
             width: 56px;
             height: 56px;
-            background: #10B981;
+            background: #45DFB1;
             border: none;
             border-radius: 16px;
             cursor: pointer;
@@ -79,7 +98,7 @@
         .logo-text {
             font-size: 22px;
             font-weight: 700;
-            background: linear-gradient(135deg, #7C3AED, #3B82F6);
+            background: linear-gradient(135deg, #0B6477, #0AD1C8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -168,17 +187,17 @@
 
         .emoji-item:hover {
             transform: scale(1.08);
-            border-color: #10B981;
+            border-color: #45DFB1;
         }
 
         .emoji-item.selected {
-            border-color: #3B82F6;
+            border-color: #14919B;
             background: #DBEAFE;
             transform: scale(1.1);
         }
 
         .emoji-item.matched {
-            border-color: #10B981;
+            border-color: #45DFB1;
             background: #D1FAE5;
             cursor: default;
         }
@@ -202,7 +221,7 @@
         .connection-line {
             position: absolute;
             height: 4px;
-            background: #10B981;
+            background: #45DFB1;
             top: 50%;
             transform-origin: left center;
             z-index: 10;
@@ -228,11 +247,11 @@
         .score-value {
             font-size: 32px;
             font-weight: 700;
-            color: #10B981;
+            color: #45DFB1;
         }
 
         .restart-btn {
-            background: #10B981;
+            background: #45DFB1;
             color: white;
             border: none;
             border-radius: 16px;
@@ -308,7 +327,7 @@
         }
 
         .feedback-btn {
-            background: #10B981;
+            background: #45DFB1;
             color: white;
             border: none;
             border-radius: 16px;
