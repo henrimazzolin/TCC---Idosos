@@ -22,6 +22,7 @@
             --cor-terceira: #F59E0B;
             --cor-sucesso: #10B981;
             --cor-erro: #EF4444;
+            --cor-botao-ajuda: #14919B;
             --sombra: 0 4px 20px rgba(0, 0, 0, 0.08);
             --sombra-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
             --borda-radius: 16px;
@@ -176,7 +177,7 @@
             font-size: clamp(24px, 4vw, 34px);
             font-weight: 700;
             color: var(--cor-texto);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .titulo-com-tts {
@@ -190,7 +191,7 @@
         .welcome p {
             font-size: 16px;
             color: var(--cor-texto-claro);
-            margin-top: 10px;
+            font-weight: 500;
         }
 
         .menu-grid {
@@ -225,6 +226,85 @@
             outline-offset: 3px;
         }
 
+        .menu-btn.jogos:hover {
+            border-color: #45DFB1;
+        }
+
+        .menu-btn.calendario:hover {
+            border-color: var(--cor-terceira);
+        }
+
+        .menu-btn.exercicios:hover {
+            border-color: var(--cor-botao-ajuda);
+        }
+
+        .menu-btn.seguranca:hover {
+            border-color: var(--cor-erro);
+        }
+
+        .menu-btn .icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .menu-btn .icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .menu-btn.jogos .icon {
+            background: rgba(69, 223, 177, 0.15);
+        }
+
+        .menu-btn.jogos .icon svg {
+            fill: #45DFB1;
+        }
+
+        .menu-btn.calendario .icon {
+            background: rgba(245, 158, 11, 0.15);
+        }
+
+        .menu-btn.calendario .icon svg {
+            fill: var(--cor-terceira);
+        }
+
+        .menu-btn.exercicios .icon {
+            background: rgba(20, 145, 155, 0.15);
+        }
+
+        .menu-btn.exercicios .icon svg {
+            fill: var(--cor-botao-ajuda);
+        }
+
+        .menu-btn.seguranca .icon {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .menu-btn.seguranca .icon svg {
+            fill: var(--cor-erro);
+        }
+
+        .menu-btn .text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        @media (max-width: 500px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         .menu-btn.jogos:hover {
             border-color: #45DFB1;
             background: linear-gradient(to bottom, rgba(69, 223, 177, 0.03), var(--cor-fundo-card));
@@ -335,7 +415,7 @@
             .menu-btn .text {
                 font-size: 17px;
             }
-        }
+        } -->
     </style>
 </head>
 <body>
