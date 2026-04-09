@@ -57,6 +57,9 @@ function toggleLeitura(texto, botao) {
     if (estaLendo) {
         pararLeitura();
     } else {
+        if (!botao && typeof event !== 'undefined' && event && event.target) {
+            botao = event.target.closest('.tts-btn');
+        }
         falar(texto);
     }
 }

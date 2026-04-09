@@ -141,7 +141,7 @@ function renderizarEventos() {
                         <div class="event-title">${evento.titulo}</div>
                         <div class="event-time">${evento.hora} - ${evento.periodo}</div>
                     </div>
-                    <button class="delete-event-btn" onclick="confirmarExclusao(${index})" aria-label="Remover evento ${evento.titulo}">
+                    <button class="delete-event-btn" data-index="${index}" aria-label="Remover evento ${evento.titulo}">
                         <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                         Remover
                     </button>
@@ -150,6 +150,13 @@ function renderizarEventos() {
         });
         
         eventsListDiv.innerHTML = html;
+        
+        eventsListDiv.querySelectorAll('.delete-event-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = parseInt(btn.dataset.index);
+                confirmarExclusao(index);
+            });
+        });
     }
 }
 
@@ -261,6 +268,19 @@ function removerEvento() {
 function excluirEvento(index) {
     confirmarExclusao(index);
 }
+
+document.getElementById('btn-tts-calendario').addEventListener('click', function() {
+    toggleLeitura('Calendário de Março de 2026. Organize seus compromissos e eventos.');
+});
+document.getElementById('btn-mes-anterior').addEventListener('click', () => mudarMes(-1));
+document.getElementById('btn-proximo-mes').addEventListener('click', () => mudarMes(1));
+document.getElementById('btn-adicionar-evento').addEventListener('click', abrirModal);
+document.getElementById('modalOverlay').addEventListener('click', fecharModalCliqueFora);
+document.getElementById('btn-cancelar-evento').addEventListener('click', fecharModal);
+document.getElementById('btn-salvar-evento').addEventListener('click', salvarEvento);
+document.getElementById('deleteModalOverlay').addEventListener('click', fecharModalExclusao);
+document.getElementById('btn-cancelar-exclusao').addEventListener('click', fecharModalExclusao);
+document.getElementById('btn-confirmar-exclusao').addEventListener('click', removerEvento);
 
 document.addEventListener('DOMContentLoaded', () => {
     inicializarCalendario();
