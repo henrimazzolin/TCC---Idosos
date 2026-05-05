@@ -98,14 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Enviar pergunta para a API
     async function sendQuestion() {
-        const pergunta = userInput.value.trim();
+        const message = userInput.value.trim();
         
-        if (!pergunta) {
+        if (!message) {
             return;
         }
 
         // Adicionar pergunta do usuário
-        addMessage(pergunta, true);
+        addMessage(message, true);
         userInput.value = '';
         
         // Desabilitar botão enquanto carrega
@@ -116,12 +116,12 @@ document.addEventListener('DOMContentLoaded', function() {
         showTyping();
 
         try {
-            const response = await fetch('http://localhost:3000/api', {
+            const response = await fetch('http://localhost:3000/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ pergunta })
+                body: JSON.stringify({ message })
             });
 
             if (!response.ok) {
@@ -134,10 +134,10 @@ document.addEventListener('DOMContentLoaded', function() {
             hideTyping();
 
             // Adicionar resposta do assistente
-            addMessage(data.resposta, false);
+            addMessage(data.reply, false);
 
             // Falar a resposta em voz alta
-            falar(data.resposta);
+            falar(data.reply);
 
         } catch (error) {
             // Remover indicador de digitação
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners
     sendBtn.addEventListener('click', sendQuestion);
     
-    userInput.addEventListener('keypress', function(e) {
+    userInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             sendQuestion();
         }
