@@ -107,12 +107,28 @@ body {
 }
 
 
-.page-title {
-    text-align: center;
-    margin-bottom: 24px;
-}
+    .page-title {
+        text-align: center;
+        margin-bottom: 24px;
+    }
 
-.page-title h1 {
+    .instrucao-destaque {
+        background: #FEF3C7;
+        border-left: 4px solid var(--cor-terceira);
+        padding: 16px 20px;
+        border-radius: 0 12px 12px 0;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+    .instrucao-destaque p {
+        font-size: 18px;
+        font-weight: 600;
+        color: #92400E;
+        margin: 0;
+    }
+  
+    .page-title h1 {
     font-size: 32px;
     font-weight: 700;
     color: var(--cor-texto);
@@ -275,6 +291,36 @@ body {
     font-size: 16px;
     color: var(--cor-texto-claro);
     line-height: 1.4;
+    flex: 1;
+}
+
+.hint-btn {
+    padding: 12px 20px;
+    background: var(--cor-terceira);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-btn:hover:not(:disabled) {
+    background: #D97706;
+    transform: scale(1.05);
+}
+
+.hint-btn:disabled,
+.hint-btn-disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .buttons {

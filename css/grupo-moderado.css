@@ -173,13 +173,29 @@ body {
     flex-wrap: wrap;
 }
 
-.page-title p {
-    font-size: 18px;
-    color: var(--cor-texto-claro);
-    font-weight: 500;
-}
+        .page-title p {
+            font-size: 18px;
+            color: var(--cor-texto-claro);
+            font-weight: 500;
+        }
 
-.games-grid {
+        .instrucao-destaque {
+            background: #FEF3C7;
+            border-left: 4px solid var(--cor-terceira);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .instrucao-destaque p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #92400E;
+            margin: 0;
+        }
+
+        .games-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;

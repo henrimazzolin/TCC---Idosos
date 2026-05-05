@@ -35,6 +35,10 @@
             <p>Complete a sequência com o número correto</p>
         </div>
 
+        <div class="instrucao-destaque">
+            <p>Instrução: Observe a sequência de números e clique no número que deve vir a seguir!</p>
+        </div>
+
         <div class="game-container">
             <div class="stats-bar">
                 <div class="stat-box">

@@ -11,8 +11,41 @@ document.addEventListener('DOMContentLoaded', function() {
             { left: 'Natal', right: 'Presente' },
             { left: 'Fogo', right: 'Queimado' },
             { left: 'Cão', right: 'Latido' },
-            { left: 'Gato', right: 'Miado' }
+            { left: 'Gato', right: 'Miado' },
+            { left: 'Carro', right: 'Rodas' },
+            { left: 'Avião', right: 'Asas' },
+            { left: 'Banana', right: 'Casca' },
+            { left: 'Laranja', right: 'Suco' },
+            { left: 'Café', right: 'Xícara' },
+            { left: 'Bola', right: 'Quicar' },
+            { left: 'Martelo', right: 'Prego' },
+            { left: 'Pincel', right: 'Tinta' },
+            { left: 'Livro', right: 'Leitura' },
+            { left: 'Violão', right: 'Corda' },
+            { left: 'Bicicleta', right: 'Pedal' },
+            { left: 'Relógio', right: 'Hora' },
+            { left: 'Copo', right: 'Bebida' },
+            { left: 'Sapato', right: 'Pé' },
+            { left: 'Chave', right: 'Fechadura' },
+            { left: 'Porta', right: 'Maçaneta' },
+            { left: 'Janela', right: 'Vidro' },
+            { left: 'Travesseiro', right: 'Cabeça' },
+            { left: 'Chinelo', right: 'Pé' },
+            { left: 'Talher', right: 'Garfo' },
+            { left: 'Prato', right: 'Comida' },
+            { left: 'Cadeira', right: 'Sentar' },
+            { left: 'Mesa', right: 'Jantar' },
+            { left: 'Telefone', right: 'Ligação' },
+            { left: 'Televisão', right: 'Programa' },
+            { left: 'Óculos', right: 'Visão' },
+            { left: 'Escova', right: 'Dentes' },
+            { left: 'Sabonete', right: 'Banho' },
+            { left: 'Toalha', right: 'Secar' },
+            { left: 'Vela', right: 'Luz' },
+            { left: 'Bússola', right: 'Norte' }
         ];
+
+        const correctSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
 
         let currentPairs = [];
         let selectedLeftCard = null;
@@ -100,6 +133,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectedLeftCard.classList.remove('selected');
                 selectedLeftCard.classList.add('matched');
                 card.classList.add('matched');
+                
+                correctSound.currentTime = 0;
+                correctSound.play();
                 
                 selectedLeftCard = null;
                 selectedLeftWord = null;
